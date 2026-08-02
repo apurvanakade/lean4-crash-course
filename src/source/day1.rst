@@ -49,54 +49,52 @@ Hence, in type theory we use ``→`` to denote implication.
 
 Negation 
 ----------
-In type theory, there is a special proposition ``false : Prop`` which has no proof (hence is *empty*).
-The negation of a proposition ``¬ P`` is the implication ``P → false``.
-Such a function exists if and only if ``P`` itself is empty (`empty function <https://en.wikipedia.org/wiki/Function_(mathematics)#empty_function>`_), hence ``P → false`` is inhabited if and only if ``P`` is empty which justifies using it as the definition of ``¬ P``.
+In type theory, there is a special proposition ``False : Prop`` which has no proof (hence is *empty*).
+The negation of a proposition ``¬ P`` is the implication ``P → False``.
+Such a function exists if and only if ``P`` itself is empty (`empty function <https://en.wikipedia.org/wiki/Function_(mathematics)#empty_function>`_), hence ``P → False`` is inhabited if and only if ``P`` is empty which justifies using it as the definition of ``¬ P``.
 
 
 **To summarize:**
   1. Proving a proposition ``P`` is equivalent to producing an inhabitant ``hp : P``. 
   2. Proving an implication ``P → Q`` is equivalent to producing a function ``f : P → Q``.
-  3. The negation, ``¬ P``, is defined as the implication ``P → false``.
+  3. The negation, ``¬ P``, is defined as the implication ``P → False``.
 
 Propositions in Lean 
 ---------------------
 In Lean, a proposition and its proof are written using the following syntax.
 
-.. code:: lean
+.. code:: lean4
 
-  theorem fermats_last_theorem 
-    (n : ℕ) 
-    (n_gt_2 : n > 2) 
-    : 
-    ¬ (∃ x y z : ℕ, (x^n + y^n = z^n) ∧ (x ≠ 0) ∧ (y ≠ 0) ∧ (z ≠ 0))
-  := 
-  begin 
-    sorry,
-  end
+  import Mathlib.Tactic
+
+  theorem fermats_last_theorem
+      (n : ℕ)
+      (n_gt_2 : n > 2) :
+      ¬ (∃ x y z : ℕ, (x ^ n + y ^ n = z ^ n) ∧ (x ≠ 0) ∧ (y ≠ 0) ∧ (z ≠ 0)) := by
+    sorry
 
 
-Let us parse the above statement. (Lean ignores multiple whitespaces, tabs, and new lines. 
+Let us parse the above statement. (Lean ignores multiple whitespaces, tabs, and new lines.
 You could theoretically write the entire code in a single line but then we can never be friends.)
 
-* ``fermats_last_theorem`` is the name of the theorem. 
-* ``(n : ℕ)`` and ``(n_gt_2 : n > 2)`` are the two *hypotheses*. 
+* ``import Mathlib.Tactic`` loads the mathlib4 library. It's what gives us notation like ``ℕ`` and every tactic we'll use, so most Lean files start with some ``import`` line — you can safely ignore it for now.
+* ``fermats_last_theorem`` is the name of the theorem.
+* ``(n : ℕ)`` and ``(n_gt_2 : n > 2)`` are the two *hypotheses*.
   The former says ``n`` is a natural number and the latter says that ``n_gt_2`` is a proof of ``n > 2``.
 * ``:`` is the delimiter between hypotheses and targets
 * ``¬ (∃ x y z : ℕ, (x^n + y^n = z^n) ∧ (x ≠ 0) ∧ (y ≠ 0) ∧ (z ≠ 0))`` is the *target* of the theorem.
-* ``:= begin ... end`` contains the proof. When you start your proof, Lean opens up a goal window  for you to keep track of hypotheses and targets. 
+* ``:= by ...`` contains the proof. When you start your proof, Lean opens up a goal window  for you to keep track of hypotheses and targets.
   **Your goal is to produce a term that has the type of the target**.
 
-  .. code:: 
+  .. code::
 
     -- example of Lean goal window
-    n : ℕ, -- hypothesis 1
+    n : ℕ -- hypothesis 1
     n_gt_2 : n > 2 -- hypothesis 2
-    ⊢ ¬∃ (x y z : ℕ), x ^ n + y ^ n = z ^ n ∧ x ≠ 0 ∧ y ≠ 0 ∧ z ≠ 0 -- target
+    ⊢ ¬∃ x y z : ℕ, x ^ n + y ^ n = z ^ n ∧ x ≠ 0 ∧ y ≠ 0 ∧ z ≠ 0 -- target
 
-* The commands you write between ``begin`` and ``end`` are called *tactics*. 
-  ``sorry,`` is an example of a tactic. 
-  **Very Important:** All tactics must end with a comma (,) .
+* The commands you write after ``by`` are called *tactics*, one per line.
+  ``sorry`` is an example of a tactic.
 
 Even though they are not explicitly displayed, 
 all the theorems in the Lean library are also hypotheses that you can use to close the goal. 
@@ -118,19 +116,19 @@ The first two tactics we'll learn are ``exact`` and ``intros``.
      - If 
        ``P`` is the target of the current goal 
        and ``hp`` is a term of type ``P``,  
-       then ``exact hp,`` will close the goal.
+       then ``exact hp`` will close the goal.
 
        Mathematically, this saying "this is *exactly* what we were required to prove".
 
    * - ``intro``
      - If the target of the current goal is a function ``P → Q``, 
-       then ``intro hp,`` will produce a hypothesis 
+       then ``intro hp`` will produce a hypothesis 
        ``hp : P`` and change the target to  ``Q``.
 
        Mathematically, this is saying that in order to define a function from ``P`` to ``Q``,
        we first need to choose an arbitrary element of ``P``.
 
-.. code:: lean
+.. code:: lean4
   :name: exact_intros_examples
 
   /--------------------------------------------------------------------------
@@ -139,39 +137,31 @@ The first two tactics we'll learn are ``exact`` and ``intros``.
     
     If ``P`` is the target of the current goal and 
     ``hp`` is a term of type ``P``, then  
-    ``exact hp,`` will close the goal.
+    ``exact hp`` will close the goal.
 
 
   ``intro``
 
     If the target of the current goal is a function ``P → Q``, then 
-    ``intro hp,`` will produce a hypothesis 
+    ``intro hp`` will produce a hypothesis 
     ``hp : P`` and change the target to  ``Q``.
 
-  Delete the ``sorry,`` below and replace them with a legitimate proof.
-       
+  Delete the ``sorry`` below and replace them with a legitimate proof.
+
   --------------------------------------------------------------------------/
-  
-  theorem tautology (P : Prop) (hp : P) : P :=
-  begin
-    sorry, 
-  end
 
-  theorem tautology' (P : Prop) : P → P :=
-  begin
-    sorry,
-  end
+  theorem tautology (P : Prop) (hp : P) : P := by
+    sorry
 
-  example (P Q : Prop): (P → (Q → P)) := 
-  begin 
-    sorry,
-  end 
+  theorem tautology' (P : Prop) : P → P := by
+    sorry
+
+  example (P Q : Prop) : (P → (Q → P)) := by
+    sorry
 
   -- Can you find two different ways of proving the following?
-  example (P Q : Prop) : ((Q → P) → (Q → P)) := 
-  begin 
-    sorry,
-  end 
+  example (P Q : Prop) : ((Q → P) → (Q → P)) := by
+    sorry
 
 The next two tactics are ``have`` and ``apply``.
 
@@ -184,14 +174,14 @@ The next two tactics are ``have`` and ``apply``.
      
        If ``f`` is a term of type ``P → Q`` and 
        ``hp`` is a term of type ``P``, then
-       ``have hq := f(hp),`` creates the hypothesis ``hq : Q`` .
+       ``have hq := f hp`` creates the hypothesis ``hq : Q`` .
      
    * - ``apply``
      - ``apply`` is used for backward reasoning. 
 
        If the target of the current goal is ``Q`` and 
        ``f`` is a term of type ``P → Q``, then 
-       ``apply f,`` changes target to ``P``.
+       ``apply f`` changes target to ``P``.
 
        Mathematically, this is equivalent to saying "because ``P`` implies ``Q``, to prove ``Q`` it suffices to prove ``P``".
 
@@ -199,7 +189,7 @@ Often these two tactics can be used interchangeably.
 Think of ``have`` as reasoning forward and ``apply`` as reasoning backward.
 When writing a big proof, you often want a healthy combination of the two that makes the proof readable.
 
-.. code:: lean 
+.. code:: lean4
   :name: have_apply_examples 
 
   /--------------------------------------------------------------------------
@@ -208,65 +198,55 @@ When writing a big proof, you often want a healthy combination of the two that m
     
     If ``f`` is a term of type ``P → Q`` and 
     ``hp`` is a term of type ``P``, then
-    ``have hq := f(hp),`` creates the hypothesis ``hq : Q`` .
+    ``have hq := f hp`` creates the hypothesis ``hq : Q`` .
 
 
   ``apply``
 
     If the target of the current goal is ``Q`` and 
     ``f`` is a term of type ``P → Q``, then 
-    ``apply f,`` changes target to ``P``.
+    ``apply f`` changes target to ``P``.
 
-  Delete the ``sorry,`` below and replace them with a legitimate proof.
+  Delete the ``sorry`` below and replace them with a legitimate proof.
 
   --------------------------------------------------------------------------/
 
-  example (P Q R : Prop) (hp : P) (f : P → Q) (g : Q → R) : R :=
-  begin
-    sorry,
-  end
+  example (P Q R : Prop) (hp : P) (f : P → Q) (g : Q → R) : R := by
+    sorry
 
-  example (P Q R S T U: Type)
-  (hpq : P → Q)
-  (hqr : Q → R)
-  (hqt : Q → T)
-  (hst : S → T)
-  (htu : T → U)
-  : P → U :=
-  begin
-    sorry,
-  end
+  example (P Q R S T U : Type)
+      (hpq : P → Q)
+      (hqr : Q → R)
+      (hqt : Q → T)
+      (hst : S → T)
+      (htu : T → U) :
+      P → U := by
+    sorry
 
-For the following exercises, recall that ``¬ P`` is defined as ``P → false``,
-``¬ (¬ P)`` is ``(P → false) → false``, and so on.
+For the following exercises, recall that ``¬ P`` is defined as ``P → False``,
+``¬ (¬ P)`` is ``(P → False) → False``, and so on.
 Here are some :doc:`hints <../hint_1_negation_exercises>` if you get stuck.
 
-.. code:: lean
+.. code:: lean4
 
   /--------------------------------------------------------------------------
 
   Recall that 
-    ``¬ P`` is ``P → false``,
-    ``¬ (¬ P)`` is ``(P → false) → false``, and so on.
+    ``¬ P`` is ``P → False``,
+    ``¬ (¬ P)`` is ``(P → False) → False``, and so on.
 
-  Delete the ``sorry,`` below and replace them with a legitimate proof.
+  Delete the ``sorry`` below and replace them with a legitimate proof.
 
   --------------------------------------------------------------------------/
 
-  theorem self_imp_not_not_self (P : Prop) : P → ¬ (¬ P) :=
-  begin
-    sorry,
-  end
+  theorem self_imp_not_not_self (P : Prop) : P → ¬ (¬ P) := by
+    sorry
 
-  theorem contrapositive (P Q : Prop) : (P → Q) → (¬Q → ¬P) :=
-  begin
-    sorry,
-  end
+  theorem contrapositive (P Q : Prop) : (P → Q) → (¬ Q → ¬ P) := by
+    sorry
 
-  example (P : Prop) : ¬ (¬ (¬ P)) → ¬ P :=
-  begin
-    sorry,
-  end
+  example (P : Prop) : ¬ (¬ (¬ P)) → ¬ P := by
+    sorry
 
 
 
@@ -276,7 +256,7 @@ Proof by contradiction
 You can prove exactly one of the converses of the above three using just ``exact``, ``intro``, ``have``, and ``apply``.
 Can you find which one?
 
-.. code:: lean
+.. code:: lean4
 
   /--------------------------------------------------------------------------
 
@@ -287,23 +267,17 @@ Can you find which one?
 
   --------------------------------------------------------------------------/
 
-  theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P:=
-  begin
-    sorry,
-  end
+  theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P := by
+    sorry
 
-  theorem contrapositive_converse (P Q : Prop) : (¬Q → ¬P) → (P → Q) :=
-  begin
-    sorry,
-  end
+  theorem contrapositive_converse (P Q : Prop) : (¬ Q → ¬ P) → (P → Q) := by
+    sorry
 
-  example (P : Prop) : ¬ P → ¬ ¬ ¬ P :=
-  begin
-    sorry,
-  end
+  example (P : Prop) : ¬ P → ¬ ¬ ¬ P := by
+    sorry
 
 This is because it is not true that ``¬ ¬ P = P`` *by definition*, after all, 
-``¬ ¬ P`` is ``(P → false) → false`` which is drastically different from ``P``.
+``¬ ¬ P`` is ``(P → False) → False`` which is drastically different from ``P``.
 There is an extra axiom called **the law of excluded middle** which says that 
 either ``P`` is inhabited or ``¬ P`` is inhabited (and there is no *middle* option) 
 and so ``P ↔ ¬ ¬ P``.
@@ -315,57 +289,55 @@ Lean provides us the following tactics to use it.
   :header-rows: 0
 
   * - ``exfalso``
-    - Changes the target of the current goal to ``false``.
+    - Changes the target of the current goal to ``False``.
       
       The name derives from `"ex falso, quodlibet" <https://en.wikipedia.org/wiki/Principle_of_explosion>`__ which translates to "from contradiction, anything". 
       You should use this tactic when there are contradictory hypotheses present. 
   
   * - ``by_cases``
-    - If ``P : Prop``, then ``by_cases P,`` creates two goals, 
-      the first with a hypothesis ``hp: P`` and second with a hypothesis ``hp: ¬ P``.
+    - If ``P : Prop``, then ``by_cases P`` creates two goals,
+      the first with a hypothesis ``hp : P`` and second with a hypothesis ``hp : ¬ P``.
 
       Mathematically, this is saying either ``P`` is true or ``P`` is false.
       ``by_cases`` is the most direct application of the law of excluded middle.
 
-  * - ``by_contradiction``
+  * - ``by_contra``
     - If the target of the current goal is  ``Q``,
-      then ``by_contradiction,`` changes the target to  ``false`` and 
+      then ``by_contra`` changes the target to  ``False`` and
       adds ``hnq : ¬ Q`` as a hypothesis.
 
-      Mathematically, this is proof by contradiction. 
-  
-  * - ``push_neg``
-    - ``push_neg,`` simplifies negations in the target. 
-    
-      For example, if the target of the current goal is ``¬ ¬ P``, then 
-      ``push_neg,`` simplifies it to ``P``. 
+      Mathematically, this is proof by contradiction.
 
-      You can also push negations across a hypothesis ``hp : P`` using ``push_neg at hp,``.
+  * - ``push_neg``
+    - ``push_neg`` simplifies negations in the target.
+
+      For example, if the target of the current goal is ``¬ ¬ P``, then
+      ``push_neg`` simplifies it to ``P``.
+
+      You can also push negations across a hypothesis ``hp : P`` using ``push_neg at hp``.
 
   * - ``contrapose!``
     - If the target of the current goal is  ``P → Q``,
-      then ``contrapose!,`` changes the target to  ``¬ Q → ¬ P``.
+      then ``contrapose!`` changes the target to  ``¬ Q → ¬ P``.
 
-      If the target of the current goal is ``Q`` 
+      If the target of the current goal is ``Q``
       and one of the hypotheses is ``hp : P``,
-      then ``contrapose! hp,`` changes the target to  ``¬ P`` 
+      then ``contrapose! hp`` changes the target to  ``¬ P``
       and changes the hypothesis to ``hp : ¬ Q``.
 
       Mathematically, this is replacing the target by its contrapositive.
 
 Even though the list is long, these tactics are almost all *obvious*.
 The only two slightly unusual tactics are ``exfalso`` and ``by_cases``.
-You'll see ``by_cases`` in action later. 
+You'll see ``by_cases`` in action later.
 For the following exercises, you only require ``exfalso``, ``push_neg``, and ``contrapose!``.
 
-.. code:: lean
+.. code:: lean4
 
-  import tactic
+  import Mathlib.Tactic
 
-  -- these two statements tell Lean to use the law of excluded middle as necessary
-  noncomputable theory
-  open_locale classical
-  
+  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
+  -- default, so no extra imports or options are needed to use it.
 
   --BEGIN--
 
@@ -374,49 +346,41 @@ For the following exercises, you only require ``exfalso``, ``push_neg``, and ``c
 
   ``exfalso``
 
-    Changes the target of the current goal to ``false``.
+    Changes the target of the current goal to ``False``.
 
   ``push_neg``
-    
-    ``push_neg,`` simplifies negations in the target. 
-    You can push negations across a hypothesis ``hp : P`` using 
-    ``push_neg at hp,``.
+
+    ``push_neg`` simplifies negations in the target.
+    You can push negations across a hypothesis ``hp : P`` using
+    ``push_neg at hp``.
 
 
   ``contrapose!``
 
     If the target of the current goal is  ``P → Q``,
-    then ``contrapose!,`` changes the target to  ``¬ Q → ¬ P``.
+    then ``contrapose!`` changes the target to  ``¬ Q → ¬ P``.
 
     If the target of the current goal is ``Q`` and
-    one of the hypotheses is ``hp : P``, then 
-    ``contrapose! hp,`` changes the target to  ``¬ P`` and
+    one of the hypotheses is ``hp : P``, then
+    ``contrapose! hp`` changes the target to  ``¬ P`` and
     changes the hypothesis to ``hp : ¬ Q``.
 
 
-  Delete the ``sorry,`` below and replace them with a legitimate proof.
+  Delete the ``sorry`` below and replace them with a legitimate proof.
 
   --------------------------------------------------------------------------/
 
-  theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P:=
-  begin
-    sorry,
-  end
+  theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P := by
+    sorry
 
-  theorem contrapositive_converse (P Q : Prop) : (¬Q → ¬P) → (P → Q) :=
-  begin
-    sorry,
-  end
+  theorem contrapositive_converse (P Q : Prop) : (¬ Q → ¬ P) → (P → Q) := by
+    sorry
 
-  example (P : Prop) : ¬ P → ¬ ¬ ¬ P :=
-  begin
-    sorry,
-  end
+  example (P : Prop) : ¬ P → ¬ ¬ ¬ P := by
+    sorry
 
-  theorem principle_of_explosion (P Q : Prop) : P → (¬ P → Q) :=
-  begin
-    sorry,
-  end
+  theorem principle_of_explosion (P Q : Prop) : P → (¬ P → Q) := by
+    sorry
 
   --END--
 

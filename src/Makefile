@@ -20,7 +20,7 @@ export PATH := $(VENVDIR)/bin:$(PATH)
 
 install-deps:
 	test -f $(VENVDIR)/bin/pip || python3 -m venv $(VENVDIR)
-	pip install git+https://github.com/pygments/pygments@master#egg=Pygments
+	pip install 'Pygments>=2.18' # ships a built-in `lean4` lexer
 	pip install 'wheel>=0.29' # needed for old ubuntu versions, https://github.com/pallets/markupsafe/issues/59
 	pip install sphinx
 .PHONY: help Makefile

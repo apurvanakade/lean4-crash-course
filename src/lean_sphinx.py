@@ -3,7 +3,7 @@ from docutils.parsers.rst import Directive
 from sphinx.builders import Builder
 from sphinx.directives.code import CodeBlock
 from sphinx.errors import SphinxError
-import os, os.path, fnmatch, subprocess
+import os, os.path, fnmatch, subprocess, shutil
 import codecs
 import urllib
 import re
@@ -22,13 +22,15 @@ except:
 class lean_code_goodies(nodes.General, nodes.Element): pass
 
 def mk_try_it_uri(code):
-    uri = 'https://leanprover-community.github.io/lean-web-editor/#code='
+    # The default project on live.lean-lang.org ("Latest Mathlib") is used
+    # when no `project=` fragment param is given, so it's omitted here.
+    uri = 'https://live.lean-lang.org/#code='
     uri += urlquote(code, safe='~()*!.\'')
     return uri
 
 def process_lean_nodes(app, doctree, fromdocname):
     for node in doctree.traverse(nodes.literal_block):
-        if node['language'] != 'lean': continue
+        if node['language'] != 'lean4': continue
 
         new_node = lean_code_goodies()
         new_node['full_code'] = node.rawsource
@@ -95,12 +97,25 @@ class LeanTestBuilder(Builder):
                 if fn not in self.written_files:
                     os.remove(fn)
 
-        proc = subprocess.Popen(['lean', '--make', self.outdir], stdout=subprocess.PIPE)
-        stdout, stderr = proc.communicate()
-        errors = '\n'.join(l for l in stdout.decode('utf-8').split('\n') if ': error:' in l)
-        if errors != '': raise SphinxError('\nlean exited with errors:\n{0}\n'.format(errors))
+        # Copy the extracted blocks into the Lake project so they're checked
+        # against Lean 4 + mathlib4 (via `lake build`) instead of a bare `lean`
+        # invocation, which can't resolve mathlib imports.
+        lean_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lean'))
+        check_dir = os.path.join(lean_dir, 'CrashCourse', 'Examples', 'RstBlocks')
+        if os.path.isdir(check_dir):
+            shutil.rmtree(check_dir)
+        os.makedirs(check_dir, exist_ok=True)
+        for fn in self.written_files:
+            shutil.copy(fn, os.path.join(check_dir, os.path.basename(fn)))
+
+        proc = subprocess.Popen(['lake', 'build'], cwd=lean_dir,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        stdout, _ = proc.communicate()
+        output = stdout.decode('utf-8')
+        errors = '\n'.join(l for l in output.split('\n') if 'error:' in l)
+        if errors != '': raise SphinxError('\nlake exited with errors:\n{0}\n'.format(errors))
         retcode = proc.wait()
-        if retcode: raise SphinxError('lean exited with error code {0}'.format(retcode))
+        if retcode: raise SphinxError('lake exited with error code {0}:\n{1}'.format(retcode, output))
 
     def prepare_writing(self, docnames): pass
 
