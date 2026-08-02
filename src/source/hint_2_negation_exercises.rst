@@ -7,8 +7,8 @@ If two of your hypotheses are ``hp : Q`` and ``hnp : ¬ Q``, then the term
 
 .. code:: 
 
-  hnp (hp)
-  
-has the type ``false``.
+  hnp hp
+
+has the type ``False``.
 
 Need more :doc:`hints <../hint_3_negation_exercises>`?

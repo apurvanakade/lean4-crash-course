@@ -5,9 +5,9 @@ Hint 2 for the barber paradox
 
 Try
 
-.. code:: 
-  
-    by_contradiction,
-    have b := a(barber),
-    cases b with b1 b2,
-    by_cases shaves barber barber,
+.. code::
+
+    by_contra a
+    have b := a barber
+    obtain ⟨b1, b2⟩ := b
+    by_cases h : shaves barber barber

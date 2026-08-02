@@ -5,9 +5,9 @@ Hint 2 for the math campers singing paradox
 
 Try 
 
-.. code:: 
-  
-  by_cases (∃ bob : camper, ¬ singing bob),
-  cases h with bob key,
-  use bob,
-  push_neg at h,
+.. code::
+
+  by_cases h : ∃ bob : camper, ¬ singing bob
+  obtain ⟨bob, key⟩ := h
+  use bob
+  push_neg at h
