@@ -1,0 +1,61 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Lean + mathlib4
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean
+          test: false
+          lint: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Sphinx build dependencies
+        run: pip install 'Pygments>=2.18' sphinx
+
+      - name: Compile-check every embedded Lean exercise
+        working-directory: src
+        run: python3 -msphinx -b leantest source build/leantest
+
+      - name: Build HTML site
+        working-directory: src
+        run: python3 -msphinx -b html source build/html
+
+      - name: Build PDF
+        continue-on-error: true
+        working-directory: src
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-fonts-recommended texlive-latex-extra latexmk
+          python3 -msphinx -M latexpdf source build
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/latex
+          cp -r src/build/html/. _site/
+          cp -r slides _site/slides
+          cp src/build/latex/*.pdf _site/latex/ 2>/dev/null || echo "no PDF built, skipping"
+
+      - name: Deploy to gh-pages
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site
+          publish_branch: gh-pages
