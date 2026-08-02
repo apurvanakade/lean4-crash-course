@@ -25,45 +25,37 @@ Terms can be interpreted as mathematical objects, functions, propositions, or pr
 The only two things Lean can do is *create* terms and *check* their types.
 By iterating these two operations, we can teach Lean to verify complex mathematical proofs.
 
-.. code-block:: lean
+.. code-block:: lean4
+
+  import Mathlib.Tactic
 
   def x := 2 + 2                                  -- a natural number
   def f (x : ℕ) := x + 3                          -- a function
   def easy_theorem_statement := 2 + 2 = 4         -- a proposition
   def fermats_last_theorem_statement              -- another proposition
-    :=
-    ∀ n : ℕ,
-    n > 2
-    →
-    ¬ (∃ x y z : ℕ, (x^n + y^n = z^n) ∧ (x ≠ 0) ∧ (y ≠ 0) ∧ (z ≠ 0))
+      :=
+    ∀ n : ℕ, n > 2 →
+    ¬ (∃ x y z : ℕ, (x ^ n + y ^ n = z ^ n) ∧ (x ≠ 0) ∧ (y ≠ 0) ∧ (z ≠ 0))
 
-  theorem
-  easy_proof : easy_theorem_statement             -- proof of easy_theorem
-  :=
-  begin
-    exact rfl,
-  end
+  theorem easy_proof : easy_theorem_statement := by  -- proof of easy_theorem
+    rfl
 
-  theorem 
-  hard_proof : fermats_last_theorem_statement     -- cheating!
-  :=
-  begin
-    sorry,
-  end
+  theorem hard_proof : fermats_last_theorem_statement := by  -- cheating!
+    sorry
 
   #check x
   #check f
   #check easy_theorem_statement
-  #check fermats_last_theorem_statement 
+  #check fermats_last_theorem_statement
   #check easy_proof
   #check hard_proof
 
 
-How to use these notes 
+How to use these notes
 =========================
 Every once in a while, you will see a code snippet like this:
 
-.. code-block:: lean
+.. code-block:: lean4
 
     #eval "Hello, World!"
 
@@ -120,7 +112,7 @@ Useful Links.
 .. _`Lecture videos from LFTCM 2020`: https://www.youtube.com/playlist?list=PLlF-CfQhukNlxexiNJErGJd2dte_J1t1N
 .. _Lean: https://leanprover.github.io/people/
 .. _mathlib: https://leanprover-community.github.io/
-.. _`Natural Number Game`: https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/
+.. _`Natural Number Game`: https://adam.math.hhu.de/#/g/leanprover-community/NNG4
 .. _`mathlib repository`: https://github.com/leanprover-community/mathlib
 .. _`Theorem Proving in Lean`: https://leanprover.github.io/theorem_proving_in_lean/
 .. _`Lean Zulip chat group`: https://leanprover.zulipchat.com/

@@ -131,24 +131,24 @@ The first two tactics we'll learn are ``exact`` and ``intros``.
 .. code:: lean4
   :name: exact_intros_examples
 
-  /--------------------------------------------------------------------------
-
-  ``exact``
-    
-    If ``P`` is the target of the current goal and 
-    ``hp`` is a term of type ``P``, then  
-    ``exact hp`` will close the goal.
-
-
-  ``intro``
-
-    If the target of the current goal is a function ``P → Q``, then 
-    ``intro hp`` will produce a hypothesis 
-    ``hp : P`` and change the target to  ``Q``.
-
-  Delete the ``sorry`` below and replace them with a legitimate proof.
-
-  --------------------------------------------------------------------------/
+  -- --------------------------------------------------------------------------
+  --
+  -- ``exact``
+  --
+  --   If ``P`` is the target of the current goal and 
+  --   ``hp`` is a term of type ``P``, then  
+  --   ``exact hp`` will close the goal.
+  --
+  --
+  -- ``intro``
+  --
+  --   If the target of the current goal is a function ``P → Q``, then 
+  --   ``intro hp`` will produce a hypothesis 
+  --   ``hp : P`` and change the target to  ``Q``.
+  --
+  -- Delete the ``sorry`` below and replace them with a legitimate proof.
+  --
+  -- --------------------------------------------------------------------------
 
   theorem tautology (P : Prop) (hp : P) : P := by
     sorry
@@ -192,24 +192,24 @@ When writing a big proof, you often want a healthy combination of the two that m
 .. code:: lean4
   :name: have_apply_examples 
 
-  /--------------------------------------------------------------------------
-
-  ``have``
-    
-    If ``f`` is a term of type ``P → Q`` and 
-    ``hp`` is a term of type ``P``, then
-    ``have hq := f hp`` creates the hypothesis ``hq : Q`` .
-
-
-  ``apply``
-
-    If the target of the current goal is ``Q`` and 
-    ``f`` is a term of type ``P → Q``, then 
-    ``apply f`` changes target to ``P``.
-
-  Delete the ``sorry`` below and replace them with a legitimate proof.
-
-  --------------------------------------------------------------------------/
+  -- --------------------------------------------------------------------------
+  --
+  -- ``have``
+  --
+  --   If ``f`` is a term of type ``P → Q`` and 
+  --   ``hp`` is a term of type ``P``, then
+  --   ``have hq := f hp`` creates the hypothesis ``hq : Q`` .
+  --
+  --
+  -- ``apply``
+  --
+  --   If the target of the current goal is ``Q`` and 
+  --   ``f`` is a term of type ``P → Q``, then 
+  --   ``apply f`` changes target to ``P``.
+  --
+  -- Delete the ``sorry`` below and replace them with a legitimate proof.
+  --
+  -- --------------------------------------------------------------------------
 
   example (P Q R : Prop) (hp : P) (f : P → Q) (g : Q → R) : R := by
     sorry
@@ -229,15 +229,15 @@ Here are some :doc:`hints <../hint_1_negation_exercises>` if you get stuck.
 
 .. code:: lean4
 
-  /--------------------------------------------------------------------------
-
-  Recall that 
-    ``¬ P`` is ``P → False``,
-    ``¬ (¬ P)`` is ``(P → False) → False``, and so on.
-
-  Delete the ``sorry`` below and replace them with a legitimate proof.
-
-  --------------------------------------------------------------------------/
+  -- --------------------------------------------------------------------------
+  --
+  -- Recall that 
+  --   ``¬ P`` is ``P → False``,
+  --   ``¬ (¬ P)`` is ``(P → False) → False``, and so on.
+  --
+  -- Delete the ``sorry`` below and replace them with a legitimate proof.
+  --
+  -- --------------------------------------------------------------------------
 
   theorem self_imp_not_not_self (P : Prop) : P → ¬ (¬ P) := by
     sorry
@@ -258,14 +258,14 @@ Can you find which one?
 
 .. code:: lean4
 
-  /--------------------------------------------------------------------------
-
-  You can prove exactly one of the following three using just 
-  ``exact``, ``intro``, ``have``, and ``apply``.
-  
-  Can you find which one?
-
-  --------------------------------------------------------------------------/
+  -- --------------------------------------------------------------------------
+  --
+  -- You can prove exactly one of the following three using just 
+  -- ``exact``, ``intro``, ``have``, and ``apply``.
+  --
+  -- Can you find which one?
+  --
+  -- --------------------------------------------------------------------------
 
   theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P := by
     sorry
@@ -342,33 +342,33 @@ For the following exercises, you only require ``exfalso``, ``push_neg``, and ``c
   --BEGIN--
 
 
-  /--------------------------------------------------------------------------
-
-  ``exfalso``
-
-    Changes the target of the current goal to ``False``.
-
-  ``push_neg``
-
-    ``push_neg`` simplifies negations in the target.
-    You can push negations across a hypothesis ``hp : P`` using
-    ``push_neg at hp``.
-
-
-  ``contrapose!``
-
-    If the target of the current goal is  ``P → Q``,
-    then ``contrapose!`` changes the target to  ``¬ Q → ¬ P``.
-
-    If the target of the current goal is ``Q`` and
-    one of the hypotheses is ``hp : P``, then
-    ``contrapose! hp`` changes the target to  ``¬ P`` and
-    changes the hypothesis to ``hp : ¬ Q``.
-
-
-  Delete the ``sorry`` below and replace them with a legitimate proof.
-
-  --------------------------------------------------------------------------/
+  -- --------------------------------------------------------------------------
+  --
+  -- ``exfalso``
+  --
+  --   Changes the target of the current goal to ``False``.
+  --
+  -- ``push_neg``
+  --
+  --   ``push_neg`` simplifies negations in the target.
+  --   You can push negations across a hypothesis ``hp : P`` using
+  --   ``push_neg at hp``.
+  --
+  --
+  -- ``contrapose!``
+  --
+  --   If the target of the current goal is  ``P → Q``,
+  --   then ``contrapose!`` changes the target to  ``¬ Q → ¬ P``.
+  --
+  --   If the target of the current goal is ``Q`` and
+  --   one of the hypotheses is ``hp : P``, then
+  --   ``contrapose! hp`` changes the target to  ``¬ P`` and
+  --   changes the hypothesis to ``hp : ¬ Q``.
+  --
+  --
+  -- Delete the ``sorry`` below and replace them with a legitimate proof.
+  --
+  -- --------------------------------------------------------------------------
 
   theorem not_not_self_imp_self (P : Prop) : ¬ ¬ P → P := by
     sorry

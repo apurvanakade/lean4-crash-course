@@ -19,7 +19,7 @@ Namespaces
 
 Lean provides us with the ability to group definitions into nested, hierarchical *namespaces*:
 
-.. code-block:: lean
+.. code-block:: lean4
 
   namespace vmcsp
     def tau := "TAU on M-Th from 1-3"
@@ -32,15 +32,15 @@ Lean provides us with the ability to group definitions into nested, hierarchical
 
   open vmcsp
 
-  #eval tau -- error
+  -- #eval tau  -- error: `tau` is now ambiguous between `_root_.tau` and `vmcsp.tau`
   #eval vmcsp.tau
 
-When we declare that we are working in the namespace ``vmscp``, every identifier we declare has a full name with prefix "``vmscp``". 
+When we declare that we are working in the namespace ``vmscp``, every identifier we declare has a full name with prefix "``vmscp``".
 Within the namespace, we can refer to identifiers by their shorter names, but once we end the namespace, we have to use the longer names.
 
-The ``open`` command brings the shorter names into the current context. Often, when we import a theory file, we will want to open one or more of the namespaces it contains, to have access to the short identifiers. 
-Further if ``x`` is a term of type ``nat`` and ``f`` is a term defined in namespace ``nat`` then ``nat.f x`` can be shortened to ``x.f``.
-Note that ``ℕ`` is just another notation for ``nat``.
+The ``open`` command brings the shorter names into the current context. Often, when we import a theory file, we will want to open one or more of the namespaces it contains, to have access to the short identifiers.
+Further if ``x`` is a term of type ``Nat`` and ``f`` is a term defined in namespace ``Nat`` then ``Nat.f x`` can be shortened to ``x.f``.
+Note that ``ℕ`` is just another notation for ``Nat``.
 
 Coercions 
 ===========
@@ -60,65 +60,46 @@ The tactic for getting rid of coercions is ``norm_cast`` which will reduce the a
   :header-rows: 0
 
   * - ``norm_cast``
-    - ``norm_cast,`` tries to clear out coercions.
+    - ``norm_cast`` tries to clear out coercions.
 
-      ``norm_cast at hp,`` tries to clear out coercions at the hypothesis ``hp``.
+      ``norm_cast at hp`` tries to clear out coercions at the hypothesis ``hp``.
 
 
-.. code:: lean 
+.. code:: lean4
 
-  import tactic data.nat.basic data.int.basic 
-  noncomputable theory 
-  open_locale classical 
+  import Mathlib.Tactic
 
-  theorem sqrt2_irrational_nat : 
-    ¬ ∃ (m n : ℕ),
-    2 * (m * m) = (n * n) ∧ 
-    m ≠ 0
-  :=
-  begin
-    sorry,
-  end
+  theorem sqrt2_irrational_nat :
+      ¬ ∃ (m n : ℕ), 2 * (m * m) = (n * n) ∧ m ≠ 0 := by
+    sorry
 
   -- Assume the above theorem
 
-  lemma num_2 : (2 : ℚ).num = 2 := 
-  begin 
-    ring,
-  end
+  lemma num_2 : (2 : ℚ).num = 2 := by
+    norm_num
 
-  lemma div_2 : (2 : ℚ).denom = 1 := 
-  begin 
-    ring,
-  end
+  lemma den_2 : (2 : ℚ).den = 1 := by
+    norm_num
 
-  /-
-  q.denom = denominator of q (valued in ℕ)
-  q.num = numerator of q (valued in ℤ)
-  
-  for integer m, 
-  m.nat_abs = absolute value of m (valued in ℕ)
+  -- q.den = denominator of q (valued in ℕ)
+  -- q.num = numerator of q (valued in ℤ)
+  --
+  -- for integer m,
+  -- m.natAbs = absolute value of m (valued in ℕ)
+  --
+  -- Rat.mul_self_den : ∀ (q : ℚ), (q * q).den = q.den * q.den
+  -- Rat.mul_self_num : ∀ (q : ℚ), (q * q).num = q.num * q.num
+  -- Int.natAbs_mul_self' : ∀ (a : ℤ), ↑(a.natAbs) * ↑(a.natAbs) = a * a
+  -- Rat.den_nz : ∀ (q : ℚ), q.den ≠ 0
 
-  rat.mul_self_denom : ∀ (q : ℚ), (q * q).denom = q.denom * q.denom
-  rat.mul_self_num : ∀ (q : ℚ), (q * q).num = q.num * q.num
-  int.nat_abs_mul_self' : ∀ (a : ℤ), ↑(a.nat_abs) * ↑(a.nat_abs) = a * a
-  rat.denom_ne_zero : ∀ (q : ℚ), q.denom ≠ 0
-  -/
+  -- Use ``simp at hp`` (or, interactively, ``simp? at hp``) to commute
+  -- products with coercions. See the goal window!
 
-  /-
-  Use ``squeeze_simp at hp,`` to commute products with coercions. 
-  See the goal window!
-  -/
-
-  theorem sqrt2_irrational : 
-  ¬ (∃ q : ℚ, 2 = q * q) 
-  :=
-  begin
-    by_contradiction,
-    cases a with q key,
-    have clear_denom := rat.eq_iff_mul_eq_mul.mp key,
-    sorry,
-  end
+  theorem sqrt2_irrational :
+      ¬ (∃ q : ℚ, 2 = q * q) := by
+    rintro ⟨q, key⟩
+    have clear_denom := Rat.eq_iff_mul_eq_mul.mp key
+    sorry
 
 Type classes
 ===========================
@@ -128,75 +109,74 @@ We can then declare particular elements of a type class to be instances.
 You can think of a type class as "template" for constructing particular instances.
 
 Consider the example of groups.
-A group is defined a type class with the following attributes. 
+A group is defined a type class with the following attributes.
 
-.. code:: 
+.. code::
 
-  structure group : Type u → Type u
+  structure Group : Type u → Type u
   fields:
-  group.mul : Π {α : Type u} [c : group α], α → α → α
-  group.mul_assoc : ∀ {α : Type u} [c : group α] (a b c_1 : α), a * b * c_1 = a * (b * c_1)
-  group.one : Π {α : Type u} [c : group α], α
-  group.one_mul : ∀ {α : Type u} [c : group α] (a : α), 1 * a = a
-  group.mul_one : ∀ {α : Type u} [c : group α] (a : α), a * 1 = a
-  group.inv : Π {α : Type u} [c : group α], α → α
-  group.mul_left_inv : ∀ {α : Type u} [c : group α] (a : α), a⁻¹ * a = 1
+  Group.mul : {α : Type u} → [c : Group α] → α → α → α
+  Group.mul_assoc : ∀ {α : Type u} [c : Group α] (a b c_1 : α), a * b * c_1 = a * (b * c_1)
+  Group.one : {α : Type u} → [c : Group α] → α
+  Group.one_mul : ∀ {α : Type u} [c : Group α] (a : α), 1 * a = a
+  Group.mul_one : ∀ {α : Type u} [c : Group α] (a : α), a * 1 = a
+  Group.inv : {α : Type u} → [c : Group α] → α → α
+  Group.mul_left_inv : ∀ {α : Type u} [c : Group α] (a : α), a⁻¹ * a = 1
 
-If you look at the `source code <https://github.com/leanprover-community/mathlib/blob/e52108d/src/algebra/group/defs.lean>`__ you'll see that the ``class group`` is built gradually by extending multiple classes.
+If you look at the `source code <https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Defs.lean>`__ you'll see that ``class Group`` is built gradually by extending multiple classes
+(the real hierarchy in mathlib4 has a few more intermediate steps than shown here, to support both additive and multiplicative notation, but the idea is the same).
 
-.. code:: 
-  
-  class has_one      (α : Type u) := (one : α)
-  -- a group has an identity element 
+.. code::
 
-  class has_mul      (α : Type u) := (mul : α → α → α)
-  -- a group has multiplication 
+  class One  (α : Type u) where
+    one : α
+  -- a group has an identity element
 
-  class has_inv      (α : Type u) := (inv : α → α)
+  class Mul  (α : Type u) where
+    mul : α → α → α
+  -- a group has multiplication
+
+  class Inv  (α : Type u) where
+    inv : α → α
   -- a group has an inverse function
 
-  class semigroup (G : Type u) extends has_mul G :=
-  (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
-  -- the multiplication is associative 
+  class Semigroup (G : Type u) extends Mul G where
+    mul_assoc : ∀ a b c : G, a * b * c = a * (b * c)
+  -- the multiplication is associative
 
-  class monoid (M : Type u) extends semigroup M, has_one M :=
-  (one_mul : ∀ a : M, 1 * a = a) (mul_one : ∀ a : M, a * 1 = a)
+  class Monoid (M : Type u) extends Semigroup M, One M where
+    one_mul : ∀ a : M, 1 * a = a
+    mul_one : ∀ a : M, a * 1 = a
   -- multiplication by one is trivial
 
-  class group (α : Type u) extends monoid α, has_inv α :=
-  (mul_left_inv : ∀ a : α, a⁻¹ * a = 1)
-  -- multiplication is associative 
+  class Group (α : Type u) extends Monoid α, Inv α where
+    mul_left_inv : ∀ a : α, a⁻¹ * a = 1
+  -- every element has an inverse
 
-To define an arbitrary group ``G`` we first create it as a type ``G : Type`` and then make it an instance of ``group`` using 
-``[group G]``.
-You can also prove that existing types are instances of ``group`` using the ``instance`` keyword.
-Type classes allow us to prove theorems in vast generalities. 
-For example, any theorem about groups can immediately be applied to integers once we show that integers are an instance of ``group``.
-If you look at `data.int.basic <https://github.com/leanprover-community/mathlib/blob/d1e63f3/src/data/int/basic.lean>`__ 
-you'll see that first fifty lines of code prove that ``ℤ`` is an instance of several type classes.
+To define an arbitrary group ``G`` we first create it as a type ``G : Type`` and then make it an instance of ``Group`` using
+``[Group G]``.
+You can also prove that existing types are instances of ``Group`` using the ``instance`` keyword.
+Type classes allow us to prove theorems in vast generalities.
+For example, any theorem about groups can immediately be applied to integers once we show that integers are an instance of ``Group``.
+If you look at `Mathlib.Algebra.Group.Int <https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Int.lean>`__
+you'll see the code that proves ``ℤ`` is an instance of several type classes.
 
-.. code:: lean 
+.. code:: lean4
 
-  import group_theory.order_of_element
-  import tactic
+  import Mathlib.GroupTheory.OrderOfElement
+  import Mathlib.Tactic
 
-  #print classes
-  #print instances inhabited
+  #print Group
 
-  class cyclic_group (G : Type*) extends group G :=
-  (has_generator:  ∃ g : G, ∀ x : G, ∃ n : ℤ, x = g^n)
+  class CyclicGroup (G : Type*) extends Group G where
+    has_generator : ∃ g : G, ∀ x : G, ∃ n : ℤ, x = g ^ n
 
-  /-
-  gpow_add : ∀ {G : Type u_1} (a : G) (m n : ℤ), a ^ (m + n) = a ^ m * a ^ n
-  add_comm : ∀ {G : Type u_1} (a b : G), a + b = b + a
-  -/
+  -- zpow_add : ∀ {G : Type u_1} [inst : Group G] (a : G) (m n : ℤ), a ^ (m + n) = a ^ m * a ^ n
 
   lemma mul_comm_of_cyclic
-    {G : Type*}
-    [hc: cyclic_group G]
-    (g : G) 
-  : ∀ a b : G, a * b = b * a :=
-  begin
-    have has_generator := hc.has_generator,
-    sorry,
-  end
+      {G : Type*}
+      [hc : CyclicGroup G]
+      (g : G) :
+      ∀ a b : G, a * b = b * a := by
+    have has_generator := hc.has_generator
+    sorry
