@@ -10,8 +10,10 @@
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/serif.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
+		<!-- Lean code is pre-highlighted with Pygments (see ../_static/pygments.css);
+		     this theme is only used for the plain highlight.js fallback. -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../_static/pygments.css">
 
     <script src="plugin/highlight/highlight.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
@@ -90,11 +92,10 @@ It's ok to pretend that a type is a set and terms are its elements. <!-- .elemen
 - <!-- .element: class="fragment" data-fragment-index="2" --> There is a special type called Prop whose inhabitants are propositions.
 - <!-- .element: class="fragment" data-fragment-index="3" --> A proposition is itself a types whose inhabitants are its proofs!!
 
-```lean
-P : Prop   /- P is a proposition -/
-hp : P     /- hp is a proof of P -/
-```
-<!-- .element: class="fragment" data-fragment-index="4" --> 
+<div class="highlight"><pre><span></span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="w">   </span><span class="c1">-- P is a proposition</span>
+<span class="n">hp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w">     </span><span class="c1">-- hp is a proof of P</span>
+</pre></div>
+<!-- .element: class="fragment" data-fragment-index="4" -->
 
 ==
 
