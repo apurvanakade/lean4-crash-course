@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Keep this file up to date.** Whenever a change alters something this file describes (build/deploy process,
+repo layout, tooling, conventions), update the relevant section in the same commit rather than letting it go
+stale.
+
 ## Repository overview
 
 This repo (despite its name) contains **"Lean at MC2020"**, a Lean 3 (not Lean 4) crash course written for
