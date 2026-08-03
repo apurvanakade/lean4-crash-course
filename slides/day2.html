@@ -10,8 +10,10 @@
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/serif.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
+		<!-- Lean code is pre-highlighted with Pygments (see ../_static/pygments.css);
+		     this theme is only used for the plain highlight.js fallback. -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../_static/pygments.css">
 
     <script src="plugin/highlight/highlight.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
@@ -64,19 +66,15 @@
 					<section>
 						<h2>Proofs as functions</h2>
 						Consider
-						<pre><code data-trim data-noescape>
-						theorem tautology (P : Prop) : P → P :=
-						begin
-						  intro hp,
-						  exact hp,
-						end
-						</code></pre>
+<div class="highlight"><pre><span></span><span class="kn">theorem</span><span class="w"> </span><span class="n">tautology</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">intro</span><span class="w"> </span><span class="n">hp</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">hp</span>
+</pre></div>
 						<ul>
 							<li class="fragment">
 								Once all the goals are accomplished, Lean constructs a <em>proof term</em>
-								<pre><code data-trim data-noescape>
-								tautology : ∀ P : Prop, P → P
-								</code></pre>
+<div class="highlight"><pre><span></span><span class="n">tautology</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">,</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">P</span>
+</pre></div>
 							</li>
 						</ul>
 					</section>
@@ -84,9 +82,8 @@
 						<h2>Proofs as functions</h2>
 						<ul>
 							<li class="fragment">In type theory, the "forall operator" <code>∀</code> is a generalized function</li>
-								<pre class="fragment"><code data-trim data-noescape>
-									tautology : (P : Prop) → (P → P)
-								</code></pre>
+<div class="highlight fragment"><pre><span></span><span class="n">tautology</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">P</span><span class="o">)</span>
+</pre></div>
 							<li class="fragment">
 								This isn't exactly a function as the codomain depends on the input <code>P</code>.
 							</li>
@@ -98,66 +95,38 @@
 					<section>
 						<h2>Proofs as functions</h2>
 						<p>Once constructed we can use proof terms later in the proof. </p>
-						<pre class="fragment">
-						<code data-trim data-noescape>
-							tautology : (P : Prop) → (P → P)
-						</code>
-						</pre>
-						<pre class="fragment">
-						<code data-trim data-noescape>
-						example (P Q : Prop) : (P → Q) → (P → Q) :=
-						begin
-						  sorry,
-						end
-						</code></pre>
+<div class="highlight fragment"><pre><span></span><span class="n">tautology</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">P</span><span class="o">)</span>
+</pre></div>
+<div class="highlight fragment"><pre><span></span><span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
 					</section>
 					<section>
 						<h2>Proofs as functions</h2>
 						<p>Once constructed we can use proof terms later in the proof. </p>
-						<pre>
-						<code data-trim data-noescape>
-							tautology : (P : Prop) → (P → P)
-						</code>
-						</pre>
-						<pre>
-						<code data-trim data-noescape>
-						example (P Q : Prop) : (P → Q) → (P → Q) :=
-						begin
-						  exact tautology (P → Q),
-						end
-						</code></pre>
+<div class="highlight"><pre><span></span><span class="n">tautology</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">P</span><span class="o">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">tautology</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span>
+</pre></div>
 					</section>
 					<section>
 						<h2>Proofs as functions</h2>
 						<p>Once constructed we can use proof terms later in the proof. </p>
-						<pre class="fragment">
-						<code data-trim data-noescape>
-							self_imp_not_not_self : (P : Prop) → (P → ¬ ¬P)
-						</code>
-						</pre>
-						<pre class="fragment">
-						<code data-trim data-noescape>
-						example (P : Prop) : ¬ P → ¬ ¬ ¬ P :=
-						begin
-						  sorry,
-						end
-						</code></pre>
+<div class="highlight fragment"><pre><span></span><span class="n">self_imp_not_not_self</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="n">P</span><span class="o">)</span>
+</pre></div>
+<div class="highlight fragment"><pre><span></span><span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
 					</section>
 					<section>
 						<h2>Proofs as functions</h2>
 						<p>Once constructed we can use proof terms later in the proof. </p>
-						<pre>
-						<code data-trim data-noescape>
-							self_imp_not_not_self : (P : Prop) → (P → ¬ ¬P)
-						</code>
-						</pre>
-						<pre>
-						<code data-trim data-noescape>
-						example (P : Prop) : ¬ P → ¬ ¬ ¬ P :=
-						begin
-						  exact self_imp_not_not_self (¬ P),
-						end
-						</code></pre>
+<div class="highlight"><pre><span></span><span class="n">self_imp_not_not_self</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="n">P</span><span class="o">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="bp">¬</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">self_imp_not_not_self</span><span class="w"> </span><span class="o">(</span><span class="bp">¬</span><span class="w"> </span><span class="n">P</span><span class="o">)</span>
+</pre></div>
 					</section>
 				</section>
 			</div>

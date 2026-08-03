@@ -1,29 +1,29 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="ascii" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>5. Bits &amp; Pieces &#8212; Lean at MC 2020 0.1 documentation</title>
-    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
-    <script src="static/jquery.js"></script>
-    <script src="static/underscore.js"></script>
-    <script src="static/doctools.js"></script>
-    <script src="static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="shortcut icon" href="static/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=c1284d73" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Pretty Symbols in Lean" href="symbols.html" />
     <link rel="prev" title="4. Sqrt 2 is irrational" href="day4.html" />
    
-  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
   
@@ -35,200 +35,198 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="bits-pieces">
-<span id="day5"></span><h1><span class="section-number">5. </span>Bits &amp; Pieces<a class="headerlink" href="#bits-pieces" title="Permalink to this headline">&#182;</a></h1>
-<div class="section" id="namespaces">
-<h2><span class="section-number">5.1. </span>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">&#182;</a></h2>
+  <section id="bits-pieces">
+<span id="day5"></span><h1><span class="section-number">5. </span>Bits &amp; Pieces<a class="headerlink" href="#bits-pieces" title="Link to this heading">&#182;</a></h1>
+<section id="namespaces">
+<h2><span class="section-number">5.1. </span>Namespaces<a class="headerlink" href="#namespaces" title="Link to this heading">&#182;</a></h2>
 <p>Lean provides us with the ability to group definitions into nested, hierarchical <em>namespaces</em>:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=namespace%20vmcsp%0A%20%20def%20tau%20%3A%3D%20%22TAU%20on%20M-Th%20from%201-3%22%0A%20%20%23eval%20tau%0Aend%20vmcsp%0A%0Adef%20tau%20%3A%3D%20%22no%20TAU%20on%20F%22%0A%23eval%20tau%0A%23eval%20vmcsp.tau%0A%0Aopen%20vmcsp%0A%0A%23eval%20tau%20--%20error%0A%23eval%20vmcsp.tau" target="_blank" tryitfile="../examples/day5/unnamed_22.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">vmcsp</span>
-  <span class="n">def</span> <span class="n">tau</span> <span class="o">:=</span> <span class="s2">&quot;TAU on M-Th from 1-3&quot;</span>
-  <span class="bp">#</span><span class="kn">eval</span> <span class="n">tau</span>
-<span class="kn">end</span> <span class="n">vmcsp</span>
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=namespace%20vmcsp%0A%20%20def%20tau%20%3A%3D%20%22TAU%20on%20M-Th%20from%201-3%22%0A%20%20%23eval%20tau%0Aend%20vmcsp%0A%0Adef%20tau%20%3A%3D%20%22no%20TAU%20on%20F%22%0A%23eval%20tau%0A%23eval%20vmcsp.tau%0A%0Aopen%20vmcsp%0A%0A--%20%23eval%20tau%20%20--%20error%3A%20%60tau%60%20is%20now%20ambiguous%20between%20%60_root_.tau%60%20and%20%60vmcsp.tau%60%0A%23eval%20vmcsp.tau" target="_blank" tryitfile="../examples/day5/unnamed_12.lean">
+try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span><span class="w"> </span><span class="n">vmcsp</span>
+<span class="w">  </span><span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;TAU on M-Th from 1-3&quot;</span>
+<span class="w">  </span><span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">tau</span>
+<span class="kn">end</span><span class="w"> </span><span class="n">vmcsp</span>
 
-<span class="n">def</span> <span class="n">tau</span> <span class="o">:=</span> <span class="s2">&quot;no TAU on F&quot;</span>
-<span class="bp">#</span><span class="kn">eval</span> <span class="n">tau</span>
-<span class="bp">#</span><span class="kn">eval</span> <span class="n">vmcsp</span><span class="bp">.</span><span class="n">tau</span>
+<span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;no TAU on F&quot;</span>
+<span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">tau</span>
+<span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">vmcsp</span><span class="bp">.</span><span class="n">tau</span>
 
-<span class="kn">open</span> <span class="n">vmcsp</span>
+<span class="kn">open</span><span class="w"> </span><span class="n">vmcsp</span>
 
-<span class="bp">#</span><span class="kn">eval</span> <span class="n">tau</span> <span class="c1">-- error</span>
-<span class="bp">#</span><span class="kn">eval</span> <span class="n">vmcsp</span><span class="bp">.</span><span class="n">tau</span>
+<span class="c1">-- #eval tau  -- error: `tau` is now ambiguous between `_root_.tau` and `vmcsp.tau`</span>
+<span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">vmcsp</span><span class="bp">.</span><span class="n">tau</span>
 </pre></div>
 </div>
-</div><p>When we declare that we are working in the namespace <code class="docutils literal notranslate"><span class="pre">vmscp</span></code>, every identifier we declare has a full name with prefix &#8220;<code class="docutils literal notranslate"><span class="pre">vmscp</span></code>&#8221;.
+</div><p>When we declare that we are working in the namespace <code class="docutils literal notranslate"><span class="pre">vmcsp</span></code>, every identifier we declare has a full name with prefix &#8220;<code class="docutils literal notranslate"><span class="pre">vmcsp</span></code>&#8221;.
 Within the namespace, we can refer to identifiers by their shorter names, but once we end the namespace, we have to use the longer names.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">open</span></code> command brings the shorter names into the current context. Often, when we import a theory file, we will want to open one or more of the namespaces it contains, to have access to the short identifiers.
-Further if <code class="docutils literal notranslate"><span class="pre">x</span></code> is a term of type <code class="docutils literal notranslate"><span class="pre">nat</span></code> and <code class="docutils literal notranslate"><span class="pre">f</span></code> is a term defined in namespace <code class="docutils literal notranslate"><span class="pre">nat</span></code> then <code class="docutils literal notranslate"><span class="pre">nat.f</span> <span class="pre">x</span></code> can be shortened to <code class="docutils literal notranslate"><span class="pre">x.f</span></code>.
-Note that <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> is just another notation for <code class="docutils literal notranslate"><span class="pre">nat</span></code>.</p>
-</div>
-<div class="section" id="coercions">
-<h2><span class="section-number">5.2. </span>Coercions<a class="headerlink" href="#coercions" title="Permalink to this headline">&#182;</a></h2>
+Further, if <code class="docutils literal notranslate"><span class="pre">x</span></code> is a term of type <code class="docutils literal notranslate"><span class="pre">Nat</span></code> and <code class="docutils literal notranslate"><span class="pre">f</span></code> is a term defined in namespace <code class="docutils literal notranslate"><span class="pre">Nat</span></code> then <code class="docutils literal notranslate"><span class="pre">Nat.f</span> <span class="pre">x</span></code> can be shortened to <code class="docutils literal notranslate"><span class="pre">x.f</span></code>.
+Note that <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> is just another notation for <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.</p>
+</section>
+<section id="coercions">
+<h2><span class="section-number">5.2. </span>Coercions<a class="headerlink" href="#coercions" title="Link to this heading">&#182;</a></h2>
 <p>In type theory every term has a type and two terms of different types cannot be equal to each other.
 This makes it impossible to write statements like <code class="docutils literal notranslate"><span class="pre">|m|^2</span> <span class="pre">=</span> <span class="pre">m^2</span></code> where <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">:</span> <span class="pre">&#8484;</span></code> and <code class="docutils literal notranslate"><span class="pre">|m|</span> <span class="pre">:</span> <span class="pre">&#8469;</span></code> is the absolute value of <code class="docutils literal notranslate"><span class="pre">m</span></code>.
 But in math, we do want this statement to be true!
-The round about way to deal with this is through <em>coercions</em>.
-Lean will coerce the above equality to live entirely in integers as, <code class="docutils literal notranslate"><span class="pre">&#8593;|m|^2</span> <span class="pre">=</span> <span class="pre">m^2</span></code>.
+The roundabout way to deal with this is through <em>coercions</em>.
+Lean will coerce the above equality to live entirely in integers as <code class="docutils literal notranslate"><span class="pre">&#8593;|m|^2</span> <span class="pre">=</span> <span class="pre">m^2</span></code>.
 This is done using an injective function <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8484;</span></code>.</p>
 <p>Sometimes it is possible (and necessary) to get rid of the coercions.
 For example, say we start out with <code class="docutils literal notranslate"><span class="pre">&#8593;|m|^2</span> <span class="pre">=</span> <span class="pre">m^2</span></code> and eventually reduce it to <code class="docutils literal notranslate"><span class="pre">&#8593;|m|^2</span> <span class="pre">=</span> <span class="pre">&#8593;1</span></code>.
 The tactic for getting rid of coercions is <code class="docutils literal notranslate"><span class="pre">norm_cast</span></code> which will reduce the above expression to <code class="docutils literal notranslate"><span class="pre">|m|^2</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
-<table class="colwidths-given docutils align-default">
+<table class="docutils align-default">
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">norm_cast,</span></code> tries to clear out coercions.</p>
-<p><code class="docutils literal notranslate"><span class="pre">norm_cast</span> <span class="pre">at</span> <span class="pre">hp,</span></code> tries to clear out coercions at the hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span></code>.</p>
+<td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code> tries to clear out coercions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">norm_cast</span> <span class="pre">at</span> <span class="pre">hp</span></code> tries to clear out coercions at the hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span></code>.</p>
 </td>
 </tr>
 </tbody>
 </table>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20tactic%20data.nat.basic%20data.int.basic%0Anoncomputable%20theory%0Aopen_locale%20classical%0A%0Atheorem%20sqrt2_irrational_nat%20%3A%0A%20%20%C2%AC%20%E2%88%83%20(m%20n%20%3A%20%E2%84%95)%2C%0A%20%202%20*%20(m%20*%20m)%20%3D%20(n%20*%20n)%20%E2%88%A7%0A%20%20m%20%E2%89%A0%200%0A%3A%3D%0Abegin%0A%20%20sorry%2C%0Aend%0A%0A--%20Assume%20the%20above%20theorem%0A%0Alemma%20num_2%20%3A%20(2%20%3A%20%E2%84%9A).num%20%3D%202%20%3A%3D%0Abegin%0A%20%20ring%2C%0Aend%0A%0Alemma%20div_2%20%3A%20(2%20%3A%20%E2%84%9A).denom%20%3D%201%20%3A%3D%0Abegin%0A%20%20ring%2C%0Aend%0A%0A%2F-%0Aq.denom%20%3D%20denominator%20of%20q%20(valued%20in%20%E2%84%95)%0Aq.num%20%3D%20numerator%20of%20q%20(valued%20in%20%E2%84%A4)%0A%0Afor%20integer%20m%2C%0Am.nat_abs%20%3D%20absolute%20value%20of%20m%20(valued%20in%20%E2%84%95)%0A%0Arat.mul_self_denom%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20(q%20*%20q).denom%20%3D%20q.denom%20*%20q.denom%0Arat.mul_self_num%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20(q%20*%20q).num%20%3D%20q.num%20*%20q.num%0Aint.nat_abs_mul_self'%20%3A%20%E2%88%80%20(a%20%3A%20%E2%84%A4)%2C%20%E2%86%91(a.nat_abs)%20*%20%E2%86%91(a.nat_abs)%20%3D%20a%20*%20a%0Arat.denom_ne_zero%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20q.denom%20%E2%89%A0%200%0A-%2F%0A%0A%2F-%0AUse%20%60%60squeeze_simp%20at%20hp%2C%60%60%20to%20commute%20products%20with%20coercions.%0ASee%20the%20goal%20window!%0A-%2F%0A%0Atheorem%20sqrt2_irrational%20%3A%0A%C2%AC%20(%E2%88%83%20q%20%3A%20%E2%84%9A%2C%202%20%3D%20q%20*%20q)%0A%3A%3D%0Abegin%0A%20%20by_contradiction%2C%0A%20%20cases%20a%20with%20q%20key%2C%0A%20%20have%20clear_denom%20%3A%3D%20rat.eq_iff_mul_eq_mul.mp%20key%2C%0A%20%20sorry%2C%0Aend" target="_blank" tryitfile="../examples/day5/unnamed_68.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
-<span class="n">noncomputable</span> <span class="n">theory</span>
-<span class="n">open_locale</span> <span class="n">classical</span>
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Atheorem%20sqrt2_irrational_nat%20%3A%0A%20%20%20%20%C2%AC%20%E2%88%83%20(m%20n%20%3A%20%E2%84%95)%2C%202%20*%20(m%20*%20m)%20%3D%20(n%20*%20n)%20%E2%88%A7%20m%20%E2%89%A0%200%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20Assume%20the%20above%20theorem%0A%0Alemma%20num_2%20%3A%20(2%20%3A%20%E2%84%9A).num%20%3D%202%20%3A%3D%20by%0A%20%20norm_num%0A%0Alemma%20den_2%20%3A%20(2%20%3A%20%E2%84%9A).den%20%3D%201%20%3A%3D%20by%0A%20%20norm_num%0A%0A--%20q.den%20%3D%20denominator%20of%20q%20(valued%20in%20%E2%84%95)%0A--%20q.num%20%3D%20numerator%20of%20q%20(valued%20in%20%E2%84%A4)%0A--%0A--%20for%20integer%20m%2C%0A--%20m.natAbs%20%3D%20absolute%20value%20of%20m%20(valued%20in%20%E2%84%95)%0A--%0A--%20Rat.mul_self_den%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20(q%20*%20q).den%20%3D%20q.den%20*%20q.den%0A--%20Rat.mul_self_num%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20(q%20*%20q).num%20%3D%20q.num%20*%20q.num%0A--%20Int.natAbs_mul_self'%20%3A%20%E2%88%80%20(a%20%3A%20%E2%84%A4)%2C%20%E2%86%91(a.natAbs)%20*%20%E2%86%91(a.natAbs)%20%3D%20a%20*%20a%0A--%20Rat.den_nz%20%3A%20%E2%88%80%20(q%20%3A%20%E2%84%9A)%2C%20q.den%20%E2%89%A0%200%0A%0A--%20Use%20%60%60simp%20at%20hp%60%60%20(or%2C%20interactively%2C%20%60%60simp%3F%20at%20hp%60%60)%20to%20commute%0A--%20products%20with%20coercions.%20See%20the%20goal%20window!%0A%0Atheorem%20sqrt2_irrational%20%3A%0A%20%20%20%20%C2%AC%20(%E2%88%83%20q%20%3A%20%E2%84%9A%2C%202%20%3D%20q%20*%20q)%20%3A%3D%20by%0A%20%20rintro%20%E2%9F%A8q%2C%20key%E2%9F%A9%0A%20%20have%20clear_denom%20%3A%3D%20Rat.eq_iff_mul_eq_mul.mp%20key%0A%20%20sorry" target="_blank" tryitfile="../examples/day5/unnamed_58.lean">
+try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
 
-<span class="kn">theorem</span> <span class="n">sqrt2_irrational_nat</span> <span class="o">:</span>
-  <span class="bp">&#172;</span> <span class="bp">&#8707;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">&#8469;</span><span class="o">),</span>
-  <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8743;</span>
-  <span class="n">m</span> <span class="bp">&#8800;</span> <span class="mi">0</span>
-<span class="o">:=</span>
-<span class="k">begin</span>
-  <span class="n">sorry</span><span class="o">,</span>
-<span class="kn">end</span>
+<span class="kn">theorem</span><span class="w"> </span><span class="n">sqrt2_irrational_nat</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#172;</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="o">(</span><span class="n">m</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">),</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">m</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">m</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
 
 <span class="c1">-- Assume the above theorem</span>
 
-<span class="kn">lemma</span> <span class="n">num_2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">&#8474;</span><span class="o">)</span><span class="bp">.</span><span class="n">num</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
-<span class="k">begin</span>
-  <span class="n">ring</span><span class="o">,</span>
-<span class="kn">end</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">num_2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8474;</span><span class="o">)</span><span class="bp">.</span><span class="n">num</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">norm_num</span>
 
-<span class="kn">lemma</span> <span class="n">div_2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">&#8474;</span><span class="o">)</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
-<span class="k">begin</span>
-  <span class="n">ring</span><span class="o">,</span>
-<span class="kn">end</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">den_2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8474;</span><span class="o">)</span><span class="bp">.</span><span class="n">den</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">norm_num</span>
 
-<span class="c">/-</span><span class="cm"></span>
-<span class="cm">q.denom = denominator of q (valued in &#8469;)</span>
-<span class="cm">q.num = numerator of q (valued in &#8484;)</span>
+<span class="c1">-- q.den = denominator of q (valued in &#8469;)</span>
+<span class="c1">-- q.num = numerator of q (valued in &#8484;)</span>
+<span class="c1">--</span>
+<span class="c1">-- for integer m,</span>
+<span class="c1">-- m.natAbs = absolute value of m (valued in &#8469;)</span>
+<span class="c1">--</span>
+<span class="c1">-- Rat.mul_self_den : &#8704; (q : &#8474;), (q * q).den = q.den * q.den</span>
+<span class="c1">-- Rat.mul_self_num : &#8704; (q : &#8474;), (q * q).num = q.num * q.num</span>
+<span class="c1">-- Int.natAbs_mul_self&#39; : &#8704; (a : &#8484;), &#8593;(a.natAbs) * &#8593;(a.natAbs) = a * a</span>
+<span class="c1">-- Rat.den_nz : &#8704; (q : &#8474;), q.den &#8800; 0</span>
 
-<span class="cm">for integer m,</span>
-<span class="cm">m.nat_abs = absolute value of m (valued in &#8469;)</span>
+<span class="c1">-- Use ``simp at hp`` (or, interactively, ``simp? at hp``) to commute</span>
+<span class="c1">-- products with coercions. See the goal window!</span>
 
-<span class="cm">rat.mul_self_denom : &#8704; (q : &#8474;), (q * q).denom = q.denom * q.denom</span>
-<span class="cm">rat.mul_self_num : &#8704; (q : &#8474;), (q * q).num = q.num * q.num</span>
-<span class="cm">int.nat_abs_mul_self&#39; : &#8704; (a : &#8484;), &#8593;(a.nat_abs) * &#8593;(a.nat_abs) = a * a</span>
-<span class="cm">rat.denom_ne_zero : &#8704; (q : &#8474;), q.denom &#8800; 0</span>
-<span class="cm">-/</span>
-
-<span class="c">/-</span><span class="cm"></span>
-<span class="cm">Use ``squeeze_simp at hp,`` to commute products with coercions.</span>
-<span class="cm">See the goal window!</span>
-<span class="cm">-/</span>
-
-<span class="kn">theorem</span> <span class="n">sqrt2_irrational</span> <span class="o">:</span>
-<span class="bp">&#172;</span> <span class="o">(</span><span class="bp">&#8707;</span> <span class="n">q</span> <span class="o">:</span> <span class="n">&#8474;</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">q</span> <span class="bp">*</span> <span class="n">q</span><span class="o">)</span>
-<span class="o">:=</span>
-<span class="k">begin</span>
-  <span class="n">by_contradiction</span><span class="o">,</span>
-  <span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">q</span> <span class="n">key</span><span class="o">,</span>
-  <span class="k">have</span> <span class="n">clear_denom</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">eq_iff_mul_eq_mul</span><span class="bp">.</span><span class="n">mp</span> <span class="n">key</span><span class="o">,</span>
-  <span class="n">sorry</span><span class="o">,</span>
-<span class="kn">end</span>
+<span class="kn">theorem</span><span class="w"> </span><span class="n">sqrt2_irrational</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#172;</span><span class="w"> </span><span class="o">(</span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8474;</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">q</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="n">rintro</span><span class="w"> </span><span class="bp">&#10216;</span><span class="n">q</span><span class="o">,</span><span class="w"> </span><span class="n">key</span><span class="bp">&#10217;</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">clear_denom</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Rat</span><span class="bp">.</span><span class="n">eq_iff_mul_eq_mul</span><span class="bp">.</span><span class="n">mp</span><span class="w"> </span><span class="n">key</span>
+<span class="w">  </span><span class="gr">sorry</span>
 </pre></div>
 </div>
-</div></div>
-<div class="section" id="type-classes">
-<h2><span class="section-number">5.3. </span>Type classes<a class="headerlink" href="#type-classes" title="Permalink to this headline">&#182;</a></h2>
+</div></section>
+<section id="type-classes">
+<h2><span class="section-number">5.3. </span>Type classes<a class="headerlink" href="#type-classes" title="Link to this heading">&#182;</a></h2>
 <p>Type classes are used to construct complex mathematical structures.
 Any family of types can be marked as a type class.
 We can then declare particular elements of a type class to be instances.
 You can think of a type class as &#8220;template&#8221; for constructing particular instances.</p>
 <p>Consider the example of groups.
-A group is defined a type class with the following attributes.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>structure group : Type u &#8594; Type u
+A group is defined as a type class with the following attributes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>structure Group : Type u &#8594; Type u
 fields:
-group.mul : &#928; {&#945; : Type u} [c : group &#945;], &#945; &#8594; &#945; &#8594; &#945;
-group.mul_assoc : &#8704; {&#945; : Type u} [c : group &#945;] (a b c_1 : &#945;), a * b * c_1 = a * (b * c_1)
-group.one : &#928; {&#945; : Type u} [c : group &#945;], &#945;
-group.one_mul : &#8704; {&#945; : Type u} [c : group &#945;] (a : &#945;), 1 * a = a
-group.mul_one : &#8704; {&#945; : Type u} [c : group &#945;] (a : &#945;), a * 1 = a
-group.inv : &#928; {&#945; : Type u} [c : group &#945;], &#945; &#8594; &#945;
-group.mul_left_inv : &#8704; {&#945; : Type u} [c : group &#945;] (a : &#945;), a&#8315;&#185; * a = 1
+Group.mul : {&#945; : Type u} &#8594; [c : Group &#945;] &#8594; &#945; &#8594; &#945; &#8594; &#945;
+Group.mul_assoc : &#8704; {&#945; : Type u} [c : Group &#945;] (a b c_1 : &#945;), a * b * c_1 = a * (b * c_1)
+Group.one : {&#945; : Type u} &#8594; [c : Group &#945;] &#8594; &#945;
+Group.one_mul : &#8704; {&#945; : Type u} [c : Group &#945;] (a : &#945;), 1 * a = a
+Group.mul_one : &#8704; {&#945; : Type u} [c : Group &#945;] (a : &#945;), a * 1 = a
+Group.inv : {&#945; : Type u} &#8594; [c : Group &#945;] &#8594; &#945; &#8594; &#945;
+Group.inv_mul_cancel : &#8704; {&#945; : Type u} [c : Group &#945;] (a : &#945;), a&#8315;&#185; * a = 1
 </pre></div>
 </div>
-<p>If you look at the <a class="reference external" href="https://github.com/leanprover-community/mathlib/blob/e52108d/src/algebra/group/defs.lean">source code</a> you&#8217;ll see that the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">group</span></code> is built gradually by extending multiple classes.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>class has_one      (&#945; : Type u) := (one : &#945;)
+<p>If you look at the <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Defs.lean">source code</a> you&#8217;ll see that <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Group</span></code> is built gradually by extending multiple classes
+(the real hierarchy in mathlib4 has a few more intermediate steps than shown here, to support both additive and multiplicative notation, but the idea is the same).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>class One  (&#945; : Type u) where
+  one : &#945;
 -- a group has an identity element
 
-class has_mul      (&#945; : Type u) := (mul : &#945; &#8594; &#945; &#8594; &#945;)
+class Mul  (&#945; : Type u) where
+  mul : &#945; &#8594; &#945; &#8594; &#945;
 -- a group has multiplication
 
-class has_inv      (&#945; : Type u) := (inv : &#945; &#8594; &#945;)
+class Inv  (&#945; : Type u) where
+  inv : &#945; &#8594; &#945;
 -- a group has an inverse function
 
-class semigroup (G : Type u) extends has_mul G :=
-(mul_assoc : &#8704; a b c : G, a * b * c = a * (b * c))
+class Semigroup (G : Type u) extends Mul G where
+  mul_assoc : &#8704; a b c : G, a * b * c = a * (b * c)
 -- the multiplication is associative
 
-class monoid (M : Type u) extends semigroup M, has_one M :=
-(one_mul : &#8704; a : M, 1 * a = a) (mul_one : &#8704; a : M, a * 1 = a)
+class Monoid (M : Type u) extends Semigroup M, One M where
+  one_mul : &#8704; a : M, 1 * a = a
+  mul_one : &#8704; a : M, a * 1 = a
 -- multiplication by one is trivial
 
-class group (&#945; : Type u) extends monoid &#945;, has_inv &#945; :=
-(mul_left_inv : &#8704; a : &#945;, a&#8315;&#185; * a = 1)
--- multiplication is associative
+class Group (&#945; : Type u) extends Monoid &#945;, Inv &#945; where
+  inv_mul_cancel : &#8704; a : &#945;, a&#8315;&#185; * a = 1
+-- every element has an inverse
 </pre></div>
 </div>
-<p>To define an arbitrary group <code class="docutils literal notranslate"><span class="pre">G</span></code> we first create it as a type <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">:</span> <span class="pre">Type</span></code> and then make it an instance of <code class="docutils literal notranslate"><span class="pre">group</span></code> using
-<code class="docutils literal notranslate"><span class="pre">[group</span> <span class="pre">G]</span></code>.
-You can also prove that existing types are instances of <code class="docutils literal notranslate"><span class="pre">group</span></code> using the <code class="docutils literal notranslate"><span class="pre">instance</span></code> keyword.
-Type classes allow us to prove theorems in vast generalities.
-For example, any theorem about groups can immediately be applied to integers once we show that integers are an instance of <code class="docutils literal notranslate"><span class="pre">group</span></code>.
-If you look at <a class="reference external" href="https://github.com/leanprover-community/mathlib/blob/d1e63f3/src/data/int/basic.lean">data.int.basic</a>
-you&#8217;ll see that first fifty lines of code prove that <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> is an instance of several type classes.</p>
+<p>To define an arbitrary group <code class="docutils literal notranslate"><span class="pre">G</span></code> we first create it as a type <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">:</span> <span class="pre">Type</span></code> and then assume it is a group using
+<code class="docutils literal notranslate"><span class="pre">[Group</span> <span class="pre">G]</span></code>.
+You can also prove that existing types are instances of <code class="docutils literal notranslate"><span class="pre">Group</span></code> using the <code class="docutils literal notranslate"><span class="pre">instance</span></code> keyword.
+Type classes allow us to prove theorems in great generality.
+For example, any theorem about groups can immediately be applied to integers once we show that integers are an instance of <code class="docutils literal notranslate"><span class="pre">Group</span></code>.
+If you look at <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Int.lean">Mathlib.Algebra.Group.Int</a>
+you&#8217;ll see the code that proves <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> is an instance of several type classes.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20group_theory.order_of_element%0Aimport%20tactic%0A%0A%23print%20classes%0A%23print%20instances%20inhabited%0A%0Aclass%20cyclic_group%20(G%20%3A%20Type*)%20extends%20group%20G%20%3A%3D%0A(has_generator%3A%20%20%E2%88%83%20g%20%3A%20G%2C%20%E2%88%80%20x%20%3A%20G%2C%20%E2%88%83%20n%20%3A%20%E2%84%A4%2C%20x%20%3D%20g%5En)%0A%0A%2F-%0Agpow_add%20%3A%20%E2%88%80%20%7BG%20%3A%20Type%20u_1%7D%20(a%20%3A%20G)%20(m%20n%20%3A%20%E2%84%A4)%2C%20a%20%5E%20(m%20%2B%20n)%20%3D%20a%20%5E%20m%20*%20a%20%5E%20n%0Aadd_comm%20%3A%20%E2%88%80%20%7BG%20%3A%20Type%20u_1%7D%20(a%20b%20%3A%20G)%2C%20a%20%2B%20b%20%3D%20b%20%2B%20a%0A-%2F%0A%0Alemma%20mul_comm_of_cyclic%0A%20%20%7BG%20%3A%20Type*%7D%0A%20%20%5Bhc%3A%20cyclic_group%20G%5D%0A%20%20(g%20%3A%20G)%0A%3A%20%E2%88%80%20a%20b%20%3A%20G%2C%20a%20*%20b%20%3D%20b%20*%20a%20%3A%3D%0Abegin%0A%20%20have%20has_generator%20%3A%3D%20hc.has_generator%2C%0A%20%20sorry%2C%0Aend" target="_blank" tryitfile="../examples/day5/unnamed_178.lean">
-try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span>import group_theory.order_of_element
-import tactic
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.GroupTheory.OrderOfElement%0Aimport%20Mathlib.Tactic%0A%0A%23print%20Group%0A%0Aclass%20CyclicGroup%20(G%20%3A%20Type*)%20extends%20Group%20G%20where%0A%20%20has_generator%20%3A%20%E2%88%83%20g%20%3A%20G%2C%20%E2%88%80%20x%20%3A%20G%2C%20%E2%88%83%20n%20%3A%20%E2%84%A4%2C%20x%20%3D%20g%20%5E%20n%0A%0A--%20zpow_add%20%3A%20%E2%88%80%20%7BG%20%3A%20Type%20u_1%7D%20%5Binst%20%3A%20Group%20G%5D%20(a%20%3A%20G)%20(m%20n%20%3A%20%E2%84%A4)%2C%20a%20%5E%20(m%20%2B%20n)%20%3D%20a%20%5E%20m%20*%20a%20%5E%20n%0A%0Alemma%20mul_comm_of_cyclic%0A%20%20%20%20%7BG%20%3A%20Type*%7D%0A%20%20%20%20%5Bhc%20%3A%20CyclicGroup%20G%5D%0A%20%20%20%20(g%20%3A%20G)%20%3A%0A%20%20%20%20%E2%88%80%20a%20b%20%3A%20G%2C%20a%20*%20b%20%3D%20b%20*%20a%20%3A%3D%20by%0A%20%20have%20has_generator%20%3A%3D%20hc.has_generator%0A%20%20sorry" target="_blank" tryitfile="../examples/day5/unnamed_154.lean">
+try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">GroupTheory</span><span class="bp">.</span><span class="n">OrderOfElement</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
 
-#print classes
-#print instances inhabited
+<span class="bp">#</span><span class="n">print</span><span class="w"> </span><span class="n">Group</span>
 
-class cyclic_group (G : Type*) extends group G :=
-(has_generator:  &#8707; g : G, &#8704; x : G, &#8707; n : &#8484;, x = g^n)
+<span class="kn">class</span><span class="w"> </span><span class="n">CyclicGroup</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="kn">extends</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="kn">where</span>
+<span class="w">  </span><span class="n">has_generator</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span>
 
-/-
-gpow_add : &#8704; {G : Type u_1} (a : G) (m n : &#8484;), a ^ (m + n) = a ^ m * a ^ n
-add_comm : &#8704; {G : Type u_1} (a b : G), a + b = b + a
--/
+<span class="c1">-- zpow_add : &#8704; {G : Type u_1} [inst : Group G] (a : G) (m n : &#8484;), a ^ (m + n) = a ^ m * a ^ n</span>
 
-lemma mul_comm_of_cyclic
-  {G : Type*}
-  [hc: cyclic_group G]
-  (g : G)
-: &#8704; a b : G, a * b = b * a :=
-begin
-  have has_generator := hc.has_generator,
-  sorry,
-end
+<span class="kn">lemma</span><span class="w"> </span><span class="n">mul_comm_of_cyclic</span>
+<span class="w">    </span><span class="o">{</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="w">    </span><span class="o">[</span><span class="n">hc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">CyclicGroup</span><span class="w"> </span><span class="n">G</span><span class="o">]</span>
+<span class="w">    </span><span class="o">(</span><span class="n">g</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">has_generator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">hc</span><span class="bp">.</span><span class="n">has_generator</span>
+<span class="w">  </span><span class="gr">sorry</span>
 </pre></div>
 </div>
-</div></div>
-</div>
+</div></section>
+<section id="final-remarks">
+<h2><span class="section-number">5.4. </span>Final remarks<a class="headerlink" href="#final-remarks" title="Link to this heading">&#182;</a></h2>
+<p>That&#8217;s a wrap! Over the last five days you went from wrangling <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8594;</span> <span class="pre">Q</span></code> with <code class="docutils literal notranslate"><span class="pre">intro</span></code> and <code class="docutils literal notranslate"><span class="pre">exact</span></code> to
+building type classes and proving that there are infinitely many primes and that <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> is
+irrational. That is genuinely research-level formalization, and you did it in a week.</p>
+<p>The tactics you practiced &#8212; <code class="docutils literal notranslate"><span class="pre">intro</span></code>, <code class="docutils literal notranslate"><span class="pre">have</span></code>, <code class="docutils literal notranslate"><span class="pre">obtain</span></code>, <code class="docutils literal notranslate"><span class="pre">rw</span></code>, <code class="docutils literal notranslate"><span class="pre">norm_num</span></code>, and friends &#8212; are
+exactly the tactics used to formalize serious mathematics in <a class="reference external" href="https://leanprover-community.github.io/">mathlib</a>,
+a rapidly growing, community-maintained library that by now covers a huge swath of undergraduate and
+graduate mathematics.</p>
+<p>If you want to keep going:</p>
+<ol class="arabic simple">
+<li><p>Finish the <a class="reference external" href="https://adam.math.hhu.de/#/g/leanprover-community/NNG4">Natural Number Game</a> if you haven&#8217;t already.</p></li>
+<li><p>Work through <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a> for a more systematic treatment of the theory behind what we did.</p></li>
+<li><p>Pick a theorem you like and try to formalize it. <a class="reference external" href="https://leanprover-community.github.io/100.html">100 theorems in Lean</a> is a good source of inspiration, and the <a class="reference external" href="https://github.com/leanprover-community/mathlib4">mathlib4 repository</a> is a good place to look for the building blocks you&#8217;ll need.</p></li>
+<li><p>Stick around on the <a class="reference external" href="https://leanprover.zulipchat.com/">Lean Zulip chat group</a> &#8212; people there are very welcoming to newcomers, and it&#8217;s the best way to find out what the community is working on.</p></li>
+</ol>
+<p>Thanks for spending the week with us, and good luck with your future proofs!</p>
+</section>
+</section>
 
 
           </div>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">Lean at MC 2020</a></h1>
 
@@ -252,6 +250,7 @@ end
 <li class="toctree-l2"><a class="reference internal" href="#namespaces">5.1. Namespaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coercions">5.2. Coercions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-classes">5.3. Type classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#final-remarks">5.4. Final remarks</a></li>
 </ul>
 </li>
 </ul>
@@ -264,7 +263,7 @@ end
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="latex/lean_at_mc2020.pdf">PDF version</a></li>
+    <li class="toctree-l1"><a href="../latex/lean_at_mc2020.pdf">PDF version</a></li>
     
     <li class="toctree-l1"><a href="https://leanprover-community.github.io/lean-web-editor/">Lean Live Editor</a></li>
     
@@ -274,29 +273,29 @@ end
     
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Apurva Nakade, Jalex Stark.
+      &#169;2020, Apurva Nakade, Jalex Stark.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="sources/day5.rst.txt"
+      <a href="_sources/day5.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
