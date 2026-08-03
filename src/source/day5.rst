@@ -187,7 +187,7 @@ graduate mathematics.
 If you want to keep going:
 
 #. Finish the `Natural Number Game <https://adam.math.hhu.de/#/g/leanprover-community/NNG4>`__ if you haven't already.
-#. Work through `Theorem Proving in Lean <https://leanprover.github.io/theorem_proving_in_lean/>`__ for a more systematic treatment of the theory behind what we did.
+#. Work through `Theorem Proving in Lean 4 <https://leanprover.github.io/theorem_proving_in_lean4/>`__ for a more systematic treatment of the theory behind what we did.
 #. Pick a theorem you like and try to formalize it. `100 theorems in Lean <https://leanprover-community.github.io/100.html>`__ is a good source of inspiration, and the `mathlib4 repository <https://github.com/leanprover-community/mathlib4>`__ is a good place to look for the building blocks you'll need.
 #. Stick around on the `Lean Zulip chat group <https://leanprover.zulipchat.com/>`__ --- people there are very welcoming to newcomers, and it's the best way to find out what the community is working on.
 
