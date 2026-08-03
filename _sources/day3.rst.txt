@@ -4,7 +4,7 @@
 Infinitely Many Primes
 ***********************
 
-Today we will prove that there are infinitely many primes using `mathlib library <https://leanprover-community.github.io/mathlib_docs/>`__. Our focus will be on how to *use* the library to prove more complicated theorems. Remember to always **save your work**.
+Today we will prove that there are infinitely many primes using `mathlib library <https://leanprover-community.github.io/mathlib4_docs/>`__. Our focus will be on how to *use* the library to prove more complicated theorems. Remember to always **save your work**.
 
 Equality 
 ===========
@@ -233,7 +233,7 @@ Final remarks
 =================
 It would be great if there was a one-to-one correspondence between "hand-written proofs" and proofs in Lean. But that is far from the case. When we write proofs we leave out a lot of details without even realizing it and expect the reader to be intelligent enough to fill them in. This is both a bug and feature. On the one hand this makes proofs readable. On the other hand too many "obviously true" arguments make proofs undecipherable and often wrong.
 
-Unlike human readers, computers are pretty dumb (as of writing these notes). They can only do what you tell them to do and you cannot expect them to "fill in the details". But it is humanly impossible to teach a computer every single trivial fact about, say the natural numbers. The `Lean math library <https://leanprover-community.github.io/mathlib_docs/>`__ contains a lot of trivial theorems but this collection is far from comprehensive.
+Unlike human readers, computers are pretty dumb (as of writing these notes). They can only do what you tell them to do and you cannot expect them to "fill in the details". But it is humanly impossible to teach a computer every single trivial fact about, say the natural numbers. The `Lean math library <https://leanprover-community.github.io/mathlib4_docs/>`__ contains a lot of trivial theorems but this collection is far from comprehensive.
 So theorem proving in Lean often involves the following steps:
 
 * Scan the library to see which definitions and theorems might be useful.
