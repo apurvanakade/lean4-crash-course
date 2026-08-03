@@ -95,6 +95,7 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
+    'show_relbar_bottom': True,
     'logo_name': True,
     'font_family': 'Times New Roman, Times, serif',
     'head_font_family': 'Times New Roman, Times, serif',
