@@ -4,16 +4,12 @@
 Infinitely Many Primes
 ***********************
 
-.. todo:: 
-
-  Proof-read this file, clean the language and fix any typos.
-
 Today we will prove that there are infinitely many primes using `mathlib library <https://leanprover-community.github.io/mathlib_docs/>`__. Our focus will be on how to *use* the library to prove more complicated theorems. Remember to always **save your work**.
 
 Equality 
 ===========
 So far we have not seen how to deal with propositions of the form ``P = Q``, for example, ``1 + 2 + ... + n = n(n + 1)/2``. Proving these propositions by hand requires messing around with the axioms of type theory.
-The standard trick is to make the LHS (almost) equal or to the RHS and then use one of the simplifiers (``norm_num``, ``ring``, ``linarith``, or ``simp``) to close the goal. *Using* equalities on the other hand is very easy. The rewrite tactic (usually shortened to ``rw``) let's you replace the left hand side of an equality with the right hand side.
+The standard trick is to make the LHS (almost) equal or to the RHS and then use one of the simplifiers (``norm_num``, ``ring``, ``linarith``, or ``simp``) to close the goal. *Using* equalities on the other hand is very easy. The rewrite tactic (usually shortened to ``rw``) lets you replace the left hand side of an equality with the right hand side.
 
 .. list-table:: 
   :widths: 10 90
@@ -184,7 +180,7 @@ We will choose this prime to be smallest non-trivial factor of ``n! + 1``.
 We'll need the following definitions and theorems from the library.
 
 **Primes**
-  * ``m ∣ n := ∃ k : ℕ, m = n * k``
+  * ``m ∣ n := ∃ k : ℕ, n = m * k``
   * ``p.Prime :=  2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)``
   * ``Nat.Prime.one_lt : p.Prime → 1 < p``
 
@@ -215,7 +211,7 @@ You should take your time, check the goal window at every step, and sketch out t
 
   -- dvd_sub_one : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1)
   --
-  -- m ∣ n := ∃ k : ℕ, m = n * k
+  -- m ∣ n := ∃ k : ℕ, n = m * k
   -- p.Prime :=  2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
   -- Nat.Prime.one_lt : p.Prime → 1 < p
   --
@@ -238,7 +234,7 @@ Final remarks
 It would be great if there was a one-to-one correspondence between "hand-written proofs" and proofs in Lean. But that is far from the case. When we write proofs we leave out a lot of details without even realizing it and expect the reader to be intelligent enough to fill them in. This is both a bug and feature. On the one hand this makes proofs readable. On the other hand too many "obviously true" arguments make proofs undecipherable and often wrong.
 
 Unlike human readers, computers are pretty dumb (as of writing these notes). They can only do what you tell them to do and you cannot expect them to "fill in the details". But it is humanly impossible to teach a computer every single trivial fact about, say the natural numbers. The `Lean math library <https://leanprover-community.github.io/mathlib_docs/>`__ contains a lot of trivial theorems but this collection is far from comprehensive.
-So theorem proving is Lean often involves the following steps:
+So theorem proving in Lean often involves the following steps:
 
 * Scan the library to see which definitions and theorems might be useful.
 

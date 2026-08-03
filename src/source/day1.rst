@@ -4,10 +4,6 @@
 Logic in Lean - Part 1
 ************************
 
-.. todo:: 
-
-  Proof-read this file, clean the language and fix any typos.
-
 Today's mission, should you choose to accept it, is to understand the philosophy of type theory (in Lean).
 Don't try to memorize anything, that will happen automatically. 
 Instead, try to r̶e̶a̶l̶i̶z̶e̶ ̶t̶h̶a̶t̶ ̶t̶h̶e̶r̶e̶ ̶i̶s̶ ̶n̶o̶ ̶s̶p̶o̶o̶n̶ do as many exercises as you can. 
@@ -106,7 +102,7 @@ We'll start learning tactics by proving implications in Lean.
 In the following sections, there are tables describing what a tactic does. 
 Solve the following exercises to see the tactics in action.
 
-The first two tactics we'll learn are ``exact`` and ``intros``. 
+The first two tactics we'll learn are ``exact`` and ``intro``.
 
 .. list-table:: 
    :widths: 20 80

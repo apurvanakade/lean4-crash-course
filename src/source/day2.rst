@@ -4,11 +4,6 @@
 Logic in Lean - Part 2
 ***************************
 
-.. todo:: 
-
-  Proof-read this file, clean the language and fix any typos.
-
-
 Your mission today is to wrap up the remaining bits of logic and move on to doing some "actual math".
 Remember to **always save your work**. 
 You might find the :doc:`Glossary of tactics<../tactics>` page and the :doc:`Pretty symbols<../symbols>` page useful.
@@ -21,12 +16,12 @@ Behind the scenes
 **A note on brackets:** 
 It is not uncommon to compose half a dozen functions in Lean. 
 The brackets get really messy and unwieldy. 
-As such, Lean will often drop the brackets by following the following conventions.
+As such, Lean will often drop the brackets by following these conventions.
 
 * The function ``P → Q → R → S`` stands for ``P → (Q → (R → S))``.
 * The expression ``a + b + c + d`` stands for ``((a + b) + c) + d``.
 
-An easy way to remember this is that, arrows are bracketed on the right and binary operators on the left.
+An easy way to remember this is that arrows are bracketed on the right and binary operators on the left.
 
 Proof irrelevance 
 -------------------
@@ -44,7 +39,7 @@ For example, ``0 : ℕ ≠ 1 : ℕ``.
 Proofs as functions 
 --------------------
 
-Every time you successfully construct a proof of a theorem say 
+Every time you successfully construct a proof of a theorem, say
 
 .. code::
 
@@ -58,17 +53,17 @@ Lean constructs a *proof term* ``tautology : ∀ P : Prop, P → P``
 In type theory, the *for all* quantifier, ``∀``, is a generalized function, called a `dependent function <https://en.wikipedia.org/wiki/Dependent_type>`__.
 For all practical purposes, we can think of ``tautology`` as having the type ``(P : Prop) → (P → P)``.
 Note that this is not a function in the classical sense of the word because the codomain ``(P → P)`` *depends* on the input variable ``P``.
-If ``Q : Prop``, then ``tautology(Q)`` is a term of type  ``Q → Q``.
+If ``Q : Prop``, then ``tautology Q`` is a term of type ``Q → Q``.
 
-Consider a theorem with multiple hypothesis, say 
+Consider a theorem with multiple hypotheses, say
 
 .. code::
 
   theorem hello_world (hp : P) (hq : Q) (hr : R) : S
 
 Once we provide a proof of it, Lean will create a proof term
-``hello_world : (hp:P) → (hq:Q) → (hr:R) → S``.
-So that if we have terms ``hp' : P``, ``hq' : Q``, ``hr' : R``
+``hello_world : (hp : P) → (hq : Q) → (hr : R) → S``.
+So if we have terms ``hp' : P``, ``hq' : Q``, ``hr' : R``
 then ``hello_world hp' hq' hr'`` (note the convenient lack of brackets) will be a term of type ``S``.
 
 
@@ -191,7 +186,7 @@ Similarly for ``P ∨ Q``, with a subtle change (see below).
 
 Quantifiers 
 ============== 
-As mentioned it the introduction the *for all* quantifier, ``∀``, is a generalization of a function.
+As mentioned in the introduction, the *for all* quantifier, ``∀``, is a generalization of a function.
 As such the tactics for dealing with ``∀`` are the same as those for ``→``. 
 
 .. list-table:: 
@@ -312,8 +307,8 @@ We say that ``x`` is *related* to ``y`` if ``r x y`` is inhabited.
 
 * ``r`` is reflexive if ``∀ x : X``, ``x`` is related to itself.
 * ``r`` is symmetric if ``∀ x y : X``, ``x`` is related to ``y`` implies ``y`` is related to ``x``.
-* ``r`` is transitive if ``∀ x y z : X``, ``x`` is related to ``y`` and ``y`` is related to ``x`` implies ``z`` is related to ``z``.
-* ``r`` is connected if for all ``x : X`` there is a ``y : Y`` such that ``x`` is related to ``y``.
+* ``r`` is transitive if ``∀ x y z : X``, ``x`` is related to ``y`` and ``y`` is related to ``z`` implies ``x`` is related to ``z``.
+* ``r`` is connected if for all ``x : X`` there is a ``y : X`` such that ``x`` is related to ``y``.
 
 Show that if a relation is symmetric, transitive, and connected,
 then it is also reflexive.
@@ -340,7 +335,7 @@ In mathlib, divisibility for natural numbers is defined as the following *propos
 
 .. code::
 
-  a ∣ b := (∃ k : ℕ, a = b * k)
+  a ∣ b := (∃ k : ℕ, b = a * k)
 
 For example, ``2 | 4`` will be a proposition ``∃ k : ℕ, 4 = 2 * k``.
 **Very important.** The statement ``2 | 4`` is not saying that "2 divides 4 *is true*".
@@ -428,7 +423,7 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
     sorry
 
   -- you will need the definition
-  -- a ∣ b := (∃ k : ℕ, a = b * k)
+  -- a ∣ b := (∃ k : ℕ, b = a * k)
   example (m a b : ℕ) : m + a ∣ m ^ 2 + (a + b) * m + a * b := by
     sorry
 

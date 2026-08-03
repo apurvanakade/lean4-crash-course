@@ -4,14 +4,6 @@
 Introduction
 *****************
 
-.. todo:: 
-
-  Clean up the .lean files in the solutions folder and make them match with the problems in the notes.
-
-.. todo:: 
-
-  Proof-read this file, clean the language and fix any typos.
-
 What is Lean?
 ===============
 `Lean <https://leanprover.github.io/about/>`__ is an open source proof-checker and a proof-assistant. 
@@ -22,7 +14,7 @@ Lean is built on top of a formal system called type theory.
 In type theory, the basic notions are "terms" and "types" --- compare to "elements" and "sets" in set theory.
 Every term has a type, and types are just a special kind of term.
 Terms can be interpreted as mathematical objects, functions, propositions, or proofs.
-The only two things Lean can do is *create* terms and *check* their types.
+The only two things Lean can do are *create* terms and *check* their types.
 By iterating these two operations, we can teach Lean to verify complex mathematical proofs.
 
 .. code-block:: lean4
@@ -76,7 +68,7 @@ It is recommended that you simultaneously attempt at least one of the following 
 #. Play the `Natural Number Game`_.
 #. Read `Theorem Proving in Lean`_.
 
-The `Natural Number Game`_ is a fun (and highly addictive!) game that proves same basic properties of natural numbers in Lean.
+The `Natural Number Game`_ is a fun (and highly addictive!) game that proves some basic properties of natural numbers in Lean.
 `Theorem Proving in Lean`_ is a comprehensive online book that aims to cover all the theorem proving aspects of Lean in great detail. 
 It is still under active development as of August 2020.
 
@@ -86,14 +78,14 @@ You can also join Kevin Buzzard's `Discord server <https://t.co/DSz6mbw4Oc?amp=1
 You're highly encouraged to join one or both of these channels.
 
 
-Acknowledgments.
+Acknowledgments
 ===================
 These notes are developed by `Apurva Nakade <https://apurvanakade.github.io>`__ and `Jalex Stark <https://jalexstark.com/>`__ 
 with a lot of help from Mathcamp campers and Mathcamp staff Joanna and Maya (thanks!).
 Large chunks of these notes are taken from various learning resources available on the `leanprover-community website <https://leanprover-community.github.io/learn.html>`__.
 
 
-Useful Links.
+Useful Links
 ==================
 #. `Formalizing 100 theorems <http://www.cs.ru.nl/~freek/100/index.html>`__
 #. `Formalizing 100 theorems in Lean <https://leanprover-community.github.io/100.html>`__
@@ -109,10 +101,6 @@ Useful Links.
 
 .. _`The Mechanization of Mathematics`: https://www.ams.org/journals/notices/201806/rnoti-p681.pdf
 .. _`The Future of Mathematics`: https://www.youtube.com/watch?v=Dp-mQ3HxgDE
-.. _`Lecture videos from LFTCM 2020`: https://www.youtube.com/playlist?list=PLlF-CfQhukNlxexiNJErGJd2dte_J1t1N
-.. _Lean: https://leanprover.github.io/people/
-.. _mathlib: https://leanprover-community.github.io/
 .. _`Natural Number Game`: https://adam.math.hhu.de/#/g/leanprover-community/NNG4
-.. _`mathlib repository`: https://github.com/leanprover-community/mathlib
 .. _`Theorem Proving in Lean`: https://leanprover.github.io/theorem_proving_in_lean/
 .. _`Lean Zulip chat group`: https://leanprover.zulipchat.com/

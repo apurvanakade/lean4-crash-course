@@ -4,11 +4,6 @@
 Sqrt 2 is irrational
 **************************
 
-.. todo:: 
-
-  Proof-read this file, clean the language and fix any typos.
-
-
 Today we will teach Lean that :math:`\sqrt{2}` is irrational.
 Let us start by reviewing some concepts we encountered yesterday.
 
@@ -31,7 +26,7 @@ An argument is made implicit by using curly brackets ``{`` and ``}`` instead of 
   theorem Nat.minFac_prime {n : ℕ} (hne1 : n ≠ 1) : (Nat.minFac n).Prime := ...
 
 Sometimes the notation is ambiguous and Lean is unable to infer the implicit arguments.
-In such a case, you can force all the arguments to become explicit by putting an ``@`` symbol in from on the theorem. For example,
+In such a case, you can force all the arguments to become explicit by putting an ``@`` symbol in front of the theorem. For example,
 
 .. code::
 
@@ -62,14 +57,14 @@ For this we'll use
 
 .. code::
 
-  have ten_ne_zero : 10 ≠ 1
+  have ten_ne_one : 10 ≠ 1
 
 which will open up a goal with target ``10 ≠ 1``.
 If on the other hand, you have another hypothesis, say ``f : P →  (10 ≠ 1)`` and a term ``hp : P``, then
 
 .. code::
 
-  have ten_ne_zero := f hp
+  have ten_ne_one := f hp
 
 will immediately create a term of type ``10 ≠ 1``. More generally, remember that 
 
@@ -88,17 +83,17 @@ We will show that there do not exist non-zero natural numbers ``m`` and ``n`` su
 
 The crux of the proof is very easy. 
 You simply have to start with the assumption that ``m`` and ``n`` are coprime *without any loss of generality* and derive a contradiction.
-But proving that *without a loss of generality* is a valid argument requires quite a bit of effort. 
+But proving that *without loss of generality* is a valid argument requires quite a bit of effort.
 This proof is broken down into several parts. 
 The first two parts prove ``(*)`` assuming that ``m`` and ``n`` are coprime.
 The rest of the parts prove the *without loss of generality* part.
 
-For this problem you'll need the following definitions.
+For this problem, you'll need the following definitions.
 
   * ``m.gcd n : ℕ`` is the gcd of ``m`` and ``n``.
   * ``m.Coprime n`` is defined to be the proposition ``m.gcd n = 1``.
 
-The descriptions of the library theorems that you'll be needing are included as comments. 
+The descriptions of the library theorems you'll need are included as comments.
 Have fun!
 
 Lemmas for proving (*) assuming m and n are coprime.
