@@ -47,8 +47,10 @@ highlighting):
 make install-deps
 ```
 
-To publish, the generated `src/build/html` output needs to be copied onto the `gh-pages` branch (there is no
-automated CI/deploy script in this repo — this has historically been a manual step).
+Publishing to `gh-pages` is automated via [.github/workflows/publish.yml](.github/workflows/publish.yml): on every
+push to `master`, CI runs `leantest`, builds the HTML site (and a PDF, best-effort), assembles it with `slides/`
+into `_site/`, and deploys that to the `gh-pages` branch using `peaceiris/actions-gh-pages`. No manual copy step
+is needed.
 
 There are two extra custom Sphinx builders defined in `lean_sphinx.py`, invoked the same way as `html`:
 
