@@ -74,13 +74,13 @@ Proof by contradiction
 
       Mathematically, this is proof by contradiction.
 
-  * - ``push Not``
-    - ``push Not`` simplifies negations in the target.
+  * - ``push_neg``
+    - ``push_neg`` simplifies negations in the target.
 
       For example, if the target of the current goal is ``¬ ¬ P``, then
-      ``push Not`` simplifies it to ``P``.
+      ``push_neg`` simplifies it to ``P``.
 
-      You can also push negations across a hypothesis ``hp : P`` using ``push Not at hp``.
+      You can also push negations across a hypothesis ``hp : P`` using ``push_neg at hp``.
 
   * - ``contrapose!``
     - If the target of the current goal is  ``P → Q``,

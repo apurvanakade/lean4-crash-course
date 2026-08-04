@@ -10,4 +10,4 @@ Try
   by_cases h : ∃ bob : camper, ¬ singing bob
   obtain ⟨bob, key⟩ := h
   use bob
-  push Not at h
+  push_neg at h
