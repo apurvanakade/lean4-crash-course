@@ -113,11 +113,11 @@ adds <code class="docutils literal notranslate"><span class="pre">hnq</span> <sp
 <p>Mathematically, this is proof by contradiction.</p>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">push_neg</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">push_neg</span></code> simplifies negations in the target.</p>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code> simplifies negations in the target.</p>
 <p>For example, if the target of the current goal is <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">&#172;</span> <span class="pre">P</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">push_neg</span></code> simplifies it to <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p>
-<p>You can also push negations across a hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> using <code class="docutils literal notranslate"><span class="pre">push_neg</span> <span class="pre">at</span> <span class="pre">hp</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code> simplifies it to <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p>
+<p>You can also push negations across a hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> using <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span> <span class="pre">at</span> <span class="pre">hp</span></code>.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">contrapose!</span></code></p></td>
