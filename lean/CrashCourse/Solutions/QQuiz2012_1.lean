@@ -16,8 +16,12 @@ lemma frog_explicit_formula (f : Frog) :
     ∀ n, f.location n = n * f.step_size := by
   intro n
   induction n with
-  | zero => rw [f.location_zero]; norm_num
-  | succ d hd => rw [f.step, hd]; ring
+  | zero =>
+    -- At time `0` the frog is at `0`, and `0 = 0 * step_size`.
+    rw [f.location_zero]; norm_num
+  | succ d hd =>
+    -- `f.location (d + 1) = f.location d + step_size`; substitute the induction hypothesis `hd`.
+    rw [f.step, hd]; ring
 
 -- We can define a frog just by giving its step size
 def frogOfStepSize (step_size : ℕ) : Frog where
@@ -29,9 +33,12 @@ def frogOfStepSize (step_size : ℕ) : Frog where
 -- and every frog can be defined in this way
 lemma frog_eq_frog_of_step_size (f : Frog) :
     f = frogOfStepSize f.step_size := by
+  -- Two frogs are equal iff they agree at every time `n` (and have the same step size).
   ext n
-  · rw [frog_explicit_formula]; simp [frogOfStepSize]
-  · simp [frogOfStepSize]
+  · -- Positions agree, by the explicit formula proved above.
+    rw [frog_explicit_formula]; simp [frogOfStepSize]
+  · -- Step sizes agree trivially, by definition of `frogOfStepSize`.
+    simp [frogOfStepSize]
 
 lemma catch_the_frog :
     -- Show that there is a way to check one lily pad each second
@@ -41,9 +48,14 @@ lemma catch_the_frog :
     -- you'll eventually catch it.
     ∃ catch_time > 0,
     strategy catch_time = (frogOfStepSize step_size).location catch_time := by
+  -- Strategy: at time `n`, check lily pad `n * (n - 1)`.
   use fun n => n * (n - 1)
+  -- Fix an arbitrary step size `k`.
   intro k
+  -- We claim the frog is caught at time `k + 1`.
   use k + 1
   constructor
-  · omega
-  · simp [frogOfStepSize]
+  · -- `k + 1 > 0` trivially.
+    omega
+  · -- At time `k + 1`, both the strategy and the frog are at `k * (k + 1)`.
+    simp [frogOfStepSize]
