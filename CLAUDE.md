@@ -22,7 +22,7 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
 - `src/source/*.rst` — the course content, one file per day (`day1.rst` … `day5.rst`) plus standalone
   `introduction.rst`, `symbols.rst`, `tactics.rst`, and per-exercise `hint_*.rst` files.
 - `src/source/conf.py` — Sphinx config; registers the custom `lean_sphinx` extension and the navbar links
-  (PDF, Lean Live Editor, Lean Documentation).
+  (PDF, Solutions on GitHub, Lean Live Editor, Lean Documentation).
 - `src/lean_sphinx.py` — custom Sphinx extension/builder for this project (see below).
 - `src/Makefile`, `src/html-make.sh` — build entry points.
 - `lean/` — a Lake package (`lakefile.toml`, `lean-toolchain` pinned to `leanprover/lean4:v4.32.2`) depending on
@@ -32,6 +32,11 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
     `code-block:: lean4` snippets; gitignored, do not hand-edit.
 
 ## Building the docs
+
+**Always build locally before reporting a change to `src/` (`.rst` files, `conf.py`, `lean_sphinx.py`, or the
+publish workflow) as done.** Run `make clean html` (and `make latexpdf` if the change could affect the PDF) from
+`src/`, so the user can check real output rather than take a diff on faith. Report warnings/errors, and open the
+built `build/html/index.html` (and PDF, if built) for the user to inspect.
 
 From `lean/` (first, and whenever mathlib4/Lean code changes):
 

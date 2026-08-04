@@ -102,6 +102,7 @@ html_theme_options = {
     'code_bg': 'white',
     'code_font_size': '10pt',
     'extra_nav_links': {'PDF version':'latex/lean_at_mc2020.pdf',
+                        'Solutions on GitHub': 'https://github.com/apurvanakade/lean4-crash-course/tree/master/lean/CrashCourse/Solutions',
                         'Lean Live Editor': 'https://live.lean-lang.org/',
                         'Lean Documentation': 'https://leanprover-community.github.io/mathlib4_docs/',
                         'Leanprover Community':'https://leanprover-community.github.io/'},
