@@ -70,8 +70,11 @@ In Lean, a proposition and its proof are written using the following syntax.
     sorry
 
 
-Let us parse the above statement. (Lean ignores multiple whitespaces, tabs, and new lines.
-You could theoretically write the entire code in a single line but then we can never be friends.)
+Let us parse the above statement. (Unlike the hypotheses and target, which Lean happily lets you
+spread across as many lines as you like, the proof itself is whitespace-sensitive: once you're
+inside a ``by`` block, each tactic goes on its own line, and how far a line is indented determines
+which proof (or sub-proof) it belongs to. We'll see why this matters once our proofs have more
+than one tactic in them.)
 
 * ``import Mathlib.Tactic`` loads the mathlib4 library. It's what gives us notation like ``ℕ`` and every tactic we'll use, so most Lean files start with some ``import`` line — you can safely ignore it for now.
 * ``fermats_last_theorem`` is the name of the theorem.
