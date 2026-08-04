@@ -225,7 +225,7 @@ You should take your time, check the goal window at every step, and sketch out t
   -- Nat.minFac_dvd : ∀ (n : ℕ), Nat.minFac n ∣ n
 
   theorem exists_infinite_primes (n : ℕ) : ∃ p, Nat.Prime p ∧ p ≥ n := by
-    set p := (Nat.factorial n + 1).minFac
+    set p := Nat.minFac (Nat.factorial n + 1) with hp_def
     sorry
 
 
