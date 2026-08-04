@@ -335,9 +335,6 @@ For the following exercises, you only require ``exfalso``, ``push Not``, and ``c
 
   import Mathlib.Tactic
 
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
-
   --BEGIN--
 
 
