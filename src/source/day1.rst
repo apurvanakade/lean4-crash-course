@@ -307,13 +307,13 @@ Lean provides us the following tactics to use it.
 
       Mathematically, this is proof by contradiction.
 
-  * - ``push_neg``
-    - ``push_neg`` simplifies negations in the target.
+  * - ``push Not``
+    - ``push Not`` simplifies negations in the target.
 
       For example, if the target of the current goal is ``¬ ¬ P``, then
-      ``push_neg`` simplifies it to ``P``.
+      ``push Not`` simplifies it to ``P``.
 
-      You can also push negations across a hypothesis ``hp : P`` using ``push_neg at hp``.
+      You can also push negations across a hypothesis ``hp : P`` using ``push Not at hp``.
 
   * - ``contrapose!``
     - If the target of the current goal is  ``P → Q``,
@@ -329,7 +329,7 @@ Lean provides us the following tactics to use it.
 Even though the list is long, these tactics are almost all *obvious*.
 The only two slightly unusual tactics are ``exfalso`` and ``by_cases``.
 You'll see ``by_cases`` in action later.
-For the following exercises, you only require ``exfalso``, ``push_neg``, and ``contrapose!``.
+For the following exercises, you only require ``exfalso``, ``push Not``, and ``contrapose!``.
 
 .. code:: lean4
 
@@ -347,11 +347,11 @@ For the following exercises, you only require ``exfalso``, ``push_neg``, and ``c
   --
   --   Changes the target of the current goal to ``False``.
   --
-  -- ``push_neg``
+  -- ``push Not``
   --
-  --   ``push_neg`` simplifies negations in the target.
+  --   ``push Not`` simplifies negations in the target.
   --   You can push negations across a hypothesis ``hp : P`` using
-  --   ``push_neg at hp``.
+  --   ``push Not at hp``.
   --
   --
   -- ``contrapose!``
