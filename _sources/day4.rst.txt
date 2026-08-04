@@ -102,9 +102,6 @@ Lemmas for proving (*) assuming m and n are coprime.
 
   import Mathlib.Tactic
 
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
-
   --BEGIN--
   -- Nat.Prime.dvd_of_dvd_pow : p.Prime → p ∣ m ^ n → p ∣ m
   lemma two_dvd_of_two_dvd_sq {k : ℕ}
@@ -134,9 +131,6 @@ Prove (*) assuming m and n are coprime.
 .. code:: lean4
 
   import Mathlib.Tactic
-
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
 
   lemma two_dvd_of_two_dvd_sq {k : ℕ}
       (hk : 2 ∣ k ^ 2) :
@@ -178,9 +172,6 @@ Lemmas for proving (*) assuming m ≠ 0
 
   import Mathlib.Tactic
 
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
-
   theorem sqrt2_irrational' :
       ¬ ∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m.Coprime n := by
     sorry
@@ -216,9 +207,6 @@ Prove (*) assuming m ≠ 0
 .. code:: lean4
 
   import Mathlib.Tactic
-
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
 
   theorem sqrt2_irrational' :
       ¬ ∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m.Coprime n := by

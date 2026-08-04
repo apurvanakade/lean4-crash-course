@@ -203,9 +203,6 @@ You should take your time, check the goal window at every step, and sketch out t
 
   import Mathlib.Tactic
 
-  -- Lean 4 / mathlib4 uses classical logic (the law of excluded middle) by
-  -- default, so no extra imports or options are needed to use it.
-
   theorem dvd_sub_one {p a : ℕ} : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1) := by
     sorry
 
