@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Additional Problems for Practice &#8212; Lean at MC 2020 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=c1284d73" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pretty Symbols in Lean" href="symbols.html" />
+    <link rel="prev" title="5. Bits &amp; Pieces" href="day5.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="additional-problems-for-practice">
+<span id="additional-problems"></span><h1>Additional Problems for Practice<a class="headerlink" href="#additional-problems-for-practice" title="Link to this heading">&#182;</a></h1>
+<p>The five days above are the whole course, but here are a few extra problems that never made it into
+the schedule. They&#8217;re independent of each other and of the daily material, so pick whichever looks fun.
+Full worked solutions are linked in the sidebar under &#8220;Solutions on GitHub&#8221;.</p>
+<section id="induction-recursion-practice">
+<h2>Induction &amp; recursion practice<a class="headerlink" href="#induction-recursion-practice" title="Link to this heading">&#182;</a></h2>
+<section id="a-rewriting-puzzle">
+<h3>A rewriting puzzle<a class="headerlink" href="#a-rewriting-puzzle" title="Link to this heading">&#182;</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(p : \mathbb{N} \to \mathrm{Prop}\)</span>, and suppose <span class="math notranslate nohighlight">\(p(n)\)</span> holds for some fixed <span class="math notranslate nohighlight">\(n\)</span>.
+Suppose further that <span class="math notranslate nohighlight">\(p(m) \iff p(m+8)\)</span> and <span class="math notranslate nohighlight">\(p(m+3) \iff p(m)\)</span> for every <span class="math notranslate nohighlight">\(m \in \mathbb{N}\)</span>.
+Show that <span class="math notranslate nohighlight">\(p(n+1)\)</span> holds.</p>
+<div id="rw-puzzle" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Aexample%0A%20%20%20%20(p%20%3A%20%E2%84%95%20%E2%86%92%20Prop)%20(n%20%3A%20%E2%84%95)%20(hn%20%3A%20p%20n)%0A%20%20%20%20(h8%20%3A%20%E2%88%80%20n%2C%20p%20n%20%E2%86%94%20p%20(n%20%2B%208))%0A%20%20%20%20(h3%20%3A%20%E2%88%80%20n%2C%20p%20(n%20%2B%203)%20%E2%86%94%20p%20n)%20%3A%0A%20%20%20%20p%20(n%20%2B%201)%20%3A%3D%20by%0A%20%20sorry" id="rw-puzzle" target="_blank" tryitfile="../examples/additional_problems/rw_puzzle.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="rw-puzzle"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">example</span>
+<span class="w">    </span><span class="o">(</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hn</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">h8</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">8</span><span class="o">))</span>
+<span class="w">    </span><span class="o">(</span><span class="n">h3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="two-small-types">
+<h3>Two small types<a class="headerlink" href="#two-small-types" title="Link to this heading">&#182;</a></h3>
+<p>Show that the type with no elements is not the type with one element, i.e. <span class="math notranslate nohighlight">\(\mathrm{Fin}\,0 \ne \mathrm{Fin}\,1\)</span>.</p>
+<div id="fin-zero-ne-one" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Aexample%20%3A%20Fin%200%20%E2%89%A0%20Fin%201%20%3A%3D%20by%0A%20%20sorry" id="fin-zero-ne-one" target="_blank" tryitfile="../examples/additional_problems/fin_zero_ne_one.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="fin-zero-ne-one"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="reflexivity-from-symmetry-and-transitivity">
+<h3>Reflexivity from symmetry and transitivity<a class="headerlink" href="#reflexivity-from-symmetry-and-transitivity" title="Link to this heading">&#182;</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(r\)</span> be a relation on <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> that is symmetric and transitive, and suppose every
+<span class="math notranslate nohighlight">\(x \in \mathbb{N}\)</span> is <span class="math notranslate nohighlight">\(r\)</span>-related to <em>some</em> <span class="math notranslate nohighlight">\(y\)</span> (i.e. <span class="math notranslate nohighlight">\(r\)</span> is <em>serial</em>).
+Show that <span class="math notranslate nohighlight">\(r\)</span> must in fact be reflexive.</p>
+<div id="reflexive-of-symmetric-and-transitive" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Atheorem%20reflexive_of_symmetric_and_transitive%20(r%20%3A%20%E2%84%95%20%E2%86%92%20%E2%84%95%20%E2%86%92%20Prop)%0A%20%20%20%20(h_symm%20%3A%20Std.Symm%20r)%20(h_trans%20%3A%20IsTrans%20%E2%84%95%20r)%0A%20%20%20%20(h_connected%20%3A%20%E2%88%80%20x%2C%20%E2%88%83%20y%2C%20r%20x%20y)%20%3A%0A%20%20%20%20Std.Refl%20r%20where%0A%20%20refl%20x%20%3A%3D%20by%0A%20%20%20%20sorry" id="reflexive-of-symmetric-and-transitive" target="_blank" tryitfile="../examples/additional_problems/reflexive_of_symmetric_and_transitive.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="reflexive-of-symmetric-and-transitive"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">theorem</span><span class="w"> </span><span class="n">reflexive_of_symmetric_and_transitive</span><span class="w"> </span><span class="o">(</span><span class="n">r</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">h_symm</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Std</span><span class="bp">.</span><span class="n">Symm</span><span class="w"> </span><span class="n">r</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h_trans</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">IsTrans</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="n">r</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">h_connected</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">y</span><span class="o">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="n">Std</span><span class="bp">.</span><span class="n">Refl</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="kn">where</span>
+<span class="w">  </span><span class="n">refl</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">    </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="every-number-is-even-or-odd">
+<h3>Every number is even or odd<a class="headerlink" href="#every-number-is-even-or-odd" title="Link to this heading">&#182;</a></h3>
+<p>Show that every <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> can be written as <span class="math notranslate nohighlight">\(2k\)</span> or <span class="math notranslate nohighlight">\(2k+1\)</span> for some <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<div id="even-or-odd" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Alemma%20even_or_odd%20(n%20%3A%20%E2%84%95)%20%3A%0A%20%20%20%20(%E2%88%83%20k%2C%20n%20%3D%202%20*%20k)%20%E2%88%A8%20%E2%88%83%20k%2C%20n%20%3D%202%20*%20k%20%2B%201%20%3A%3D%20by%0A%20%20sorry" id="even-or-odd" target="_blank" tryitfile="../examples/additional_problems/even_or_odd.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="even-or-odd"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">lemma</span><span class="w"> </span><span class="n">even_or_odd</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">k</span><span class="o">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">k</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8744;</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">k</span><span class="o">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="induction-in-both-directions">
+<h3>Induction in both directions<a class="headerlink" href="#induction-in-both-directions" title="Link to this heading">&#182;</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(p : \mathbb{Z} \to \mathrm{Prop}\)</span> satisfy <span class="math notranslate nohighlight">\(p(n) \Rightarrow p(n+1)\)</span> and
+<span class="math notranslate nohighlight">\(p(n) \Rightarrow p(n-1)\)</span> for every <span class="math notranslate nohighlight">\(n \in \mathbb{Z}\)</span>.
+Show that <span class="math notranslate nohighlight">\(p\)</span> holds everywhere on <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> if and only if it holds at <span class="math notranslate nohighlight">\(0\)</span>.
+(Ordinary induction on <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> only walks in one direction &#8212; here you have to walk outward
+from <span class="math notranslate nohighlight">\(0\)</span> in both directions.)</p>
+<div id="two-sided-induction" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Aexample%0A%20%20%20%20(p%20%3A%20%E2%84%A4%20%E2%86%92%20Prop)%0A%20%20%20%20(p_succ%20%3A%20%E2%88%80%20n%2C%20p%20n%20%E2%86%92%20p%20(n%20%2B%201))%0A%20%20%20%20(p_pred%20%3A%20%E2%88%80%20n%2C%20p%20n%20%E2%86%92%20p%20(n%20-%201))%20%3A%0A%20%20%20%20(%E2%88%80%20n%2C%20p%20n)%20%E2%86%94%20p%200%20%3A%3D%20by%0A%20%20sorry" id="two-sided-induction" target="_blank" tryitfile="../examples/additional_problems/two_sided_induction.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="two-sided-induction"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">example</span>
+<span class="w">    </span><span class="o">(</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">p_succ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">))</span>
+<span class="w">    </span><span class="o">(</span><span class="n">p_pred</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">1</span><span class="o">))</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="gauss-s-formula">
+<h3>Gauss&#8217;s formula<a class="headerlink" href="#gauss-s-formula" title="Link to this heading">&#182;</a></h3>
+<p>Define <span class="math notranslate nohighlight">\(f : \mathbb{N} \to \mathbb{N}\)</span> recursively by <span class="math notranslate nohighlight">\(f(0) = 0\)</span> and <span class="math notranslate nohighlight">\(f(n+1) = (n+1) + f(n)\)</span>,
+so that <span class="math notranslate nohighlight">\(f(n) = 0 + 1 + \cdots + n\)</span>. Show <span class="math notranslate nohighlight">\(f(1) = 1\)</span> and, more generally,
+<span class="math notranslate nohighlight">\(2f(n) = n(n+1)\)</span> for every <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div id="gauss-formula" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--%20landing%20in%20%E2%84%95%20recursion%20(rather%20than%20subtraction)%20avoids%20the%20perils%20of%20nat%20subtraction%0Adef%20f%20%3A%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%20%20%7C%200%20%3D%3E%200%0A%20%20%7C%20(n%20%2B%201)%20%3D%3E%20n%20%2B%201%20%2B%20f%20n%0A%0Aexample%20%3A%20f%201%20%3D%201%20%3A%3D%20by%0A%20%20sorry%0A%0Aexample%20(n%20%3A%20%E2%84%95)%20%3A%202%20*%20f%20n%20%3D%20n%20*%20(n%20%2B%201)%20%3A%3D%20by%0A%20%20sorry" id="gauss-formula" target="_blank" tryitfile="../examples/additional_problems/gauss_formula.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="gauss-formula"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="c1">-- landing in &#8469; recursion (rather than subtraction) avoids the perils of nat subtraction</span>
+<span class="kn">def</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8469;</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">n</span>
+
+<span class="kn">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="telescoping-sums">
+<h3>Telescoping sums<a class="headerlink" href="#telescoping-sums" title="Link to this heading">&#182;</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(R\)</span> be a commutative ring, <span class="math notranslate nohighlight">\(a \in R\)</span>, and <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span>. Show</p>
+<div class="math notranslate nohighlight">
+\[(1 - a) \sum_{k=0}^{n-1} a^k = 1 - a^n.\]</div>
+<p>Prove it twice: once by finding the matching lemma already in mathlib, and once &#8220;by hand&#8221; by induction on <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div id="telescoping-sum" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Avariable%20%7BR%20%3A%20Type*%7D%20%5BCommRing%20R%5D%0A%0A--%20find%20the%20matching%20lemma%20in%20mathlib%0Aexample%20(n%20%3A%20%E2%84%95)%20(a%20%3A%20R)%20%3A%0A%20%20%20%20(1%20-%20a)%20*%20%E2%88%91%20k%20%E2%88%88%20Finset.range%20n%2C%20a%20%5E%20k%20%3D%201%20-%20a%20%5E%20n%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20now%20redo%20it%20%22by%20hand%22%2C%20by%20induction%20on%20n%0Aexample%20(n%20%3A%20%E2%84%95)%20(a%20%3A%20R)%20%3A%0A%20%20%20%20(1%20-%20a)%20*%20%E2%88%91%20k%20%E2%88%88%20Finset.range%20n%2C%20a%20%5E%20k%20%3D%201%20-%20a%20%5E%20n%20%3A%3D%20by%0A%20%20sorry" id="telescoping-sum" target="_blank" tryitfile="../examples/additional_problems/telescoping_sum.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="telescoping-sum"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">variable</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">CommRing</span><span class="w"> </span><span class="n">R</span><span class="o">]</span>
+
+<span class="c1">-- find the matching lemma in mathlib</span>
+<span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="bp">&#8721;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">Finset</span><span class="bp">.</span><span class="n">range</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- now redo it &quot;by hand&quot;, by induction on n</span>
+<span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="bp">&#8721;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">Finset</span><span class="bp">.</span><span class="n">range</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+</section>
+<section id="primes-parity-practice">
+<h2>Primes &amp; parity practice<a class="headerlink" href="#primes-parity-practice" title="Link to this heading">&#182;</a></h2>
+<section id="triple-negation">
+<h3>Triple negation<a class="headerlink" href="#triple-negation" title="Link to this heading">&#182;</a></h3>
+<p>For any proposition <span class="math notranslate nohighlight">\(P\)</span>, show <span class="math notranslate nohighlight">\(\lnot \lnot \lnot P \to \lnot P\)</span>.</p>
+<div id="id1" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Aexample%20(P%20%3A%20Prop)%20%3A%20%C2%AC%20%C2%AC%20%C2%AC%20P%20%E2%86%92%20%C2%AC%20P%20%3A%3D%20by%0A%20%20sorry" id="id1" target="_blank" tryitfile="../examples/additional_problems/triple_negation.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="id1"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="primes-are-two-or-odd">
+<h3>Primes are two or odd<a class="headerlink" href="#primes-are-two-or-odd" title="Link to this heading">&#182;</a></h3>
+<p>Show that every prime <span class="math notranslate nohighlight">\(p\)</span> satisfies <span class="math notranslate nohighlight">\(p = 2\)</span> or <span class="math notranslate nohighlight">\(p\)</span> is odd.
+(There is a lemma in mathlib that says exactly this &#8212; see if you can find it.)</p>
+<div id="prime-two-or-odd" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Aexample%20(p%20%3A%20%E2%84%95)%20%3A%20p.Prime%20%E2%86%92%20p%20%3D%202%20%E2%88%A8%20p%20%25%202%20%3D%201%20%3A%3D%20by%0A%20%20sorry" id="prime-two-or-odd" target="_blank" tryitfile="../examples/additional_problems/prime_two_or_odd.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="prime-two-or-odd"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="bp">.</span><span class="n">Prime</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">&#8744;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+<section id="consecutive-primes-and-their-sum">
+<h3>Consecutive primes and their sum<a class="headerlink" href="#consecutive-primes-and-their-sum" title="Link to this heading">&#182;</a></h3>
+<p>Call two primes <span class="math notranslate nohighlight">\(p &lt; q\)</span> <em>consecutive</em> if no prime lies strictly between them. Work up to showing:
+if <span class="math notranslate nohighlight">\(p &lt; q\)</span> are consecutive primes, neither equal to <span class="math notranslate nohighlight">\(2\)</span>, then <span class="math notranslate nohighlight">\(p + q\)</span> factors as a
+product of <em>three</em> numbers each greater than <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>Build the proof in stages:</p>
+<ol class="loweralpha simple">
+<li><p>An even prime must equal <span class="math notranslate nohighlight">\(2\)</span>.</p></li>
+<li><p>A sum of two odd numbers is even.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(b &lt; bc\)</span>, then <span class="math notranslate nohighlight">\(c &gt; 1\)</span>.</p></li>
+<li><p>A composite number <span class="math notranslate nohighlight">\(k \ge 2\)</span> splits as <span class="math notranslate nohighlight">\(k = ab\)</span> for some <span class="math notranslate nohighlight">\(1 &lt; a, b &lt; k\)</span>.</p></li>
+<li><p>Put it together: since <span class="math notranslate nohighlight">\(p, q \ne 2\)</span> are prime, they&#8217;re both odd, so <span class="math notranslate nohighlight">\(p + q = 2k\)</span> is even
+for some <span class="math notranslate nohighlight">\(k\)</span> strictly between <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>; since <span class="math notranslate nohighlight">\(k\)</span> can&#8217;t be prime, it
+splits as <span class="math notranslate nohighlight">\(k = bc\)</span> with <span class="math notranslate nohighlight">\(b, c &gt; 1\)</span>, giving <span class="math notranslate nohighlight">\(p + q = 2 \cdot b \cdot c\)</span>.</p></li>
+</ol>
+<div id="three-fac-of-sum-consecutive-primes" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--%20(a)%20an%20even%20prime%20must%20be%202%0Alemma%20eq_two_of_even_prime%20%7Bp%20%3A%20%E2%84%95%7D%20(hp%20%3A%20p.Prime)%20(h_even%20%3A%20Even%20p)%20%3A%20p%20%3D%202%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(b)%20a%20sum%20of%20two%20odd%20numbers%20is%20even%0Alemma%20even_of_odd_add_odd%0A%20%20%20%20%7Ba%20b%20%3A%20%E2%84%95%7D%20(ha%20%3A%20%C2%AC%20Even%20a)%20(hb%20%3A%20%C2%AC%20Even%20b)%20%3A%0A%20%20%20%20Even%20(a%20%2B%20b)%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(c)%20if%20b%20%3C%20b%20*%20c%2C%20then%20c%20is%20at%20least%202%0Alemma%20one_lt_of_nontrivial_factor%0A%20%20%20%20%7Bb%20c%20%3A%20%E2%84%95%7D%20(hb%20%3A%20b%20%3C%20b%20*%20c)%20%3A%0A%20%20%20%201%20%3C%20c%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(d)%20a%20composite%20k%20%E2%89%A5%202%20splits%20as%20a%20product%20of%20two%20smaller%20factors%2C%20each%20%3E%201%0Alemma%20nontrivial_product_of_not_prime%0A%20%20%20%20%7Bk%20%3A%20%E2%84%95%7D%20(hk%20%3A%20%C2%AC%20k.Prime)%20(two_le_k%20%3A%202%20%E2%89%A4%20k)%20%3A%0A%20%20%20%20%E2%88%83%20a%20b%2C%20a%20%3C%20k%20%E2%88%A7%20b%20%3C%20k%20%E2%88%A7%201%20%3C%20a%20%E2%88%A7%201%20%3C%20b%20%E2%88%A7%20a%20*%20b%20%3D%20k%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(e)%20the%20main%20theorem%0Atheorem%20three_fac_of_sum_consecutive_primes%0A%20%20%20%20%7Bp%20q%20%3A%20%E2%84%95%7D%20(hp%20%3A%20p.Prime)%20(hq%20%3A%20q.Prime)%20(hpq%20%3A%20p%20%3C%20q)%0A%20%20%20%20(p_ne_2%20%3A%20p%20%E2%89%A0%202)%20(q_ne_2%20%3A%20q%20%E2%89%A0%202)%0A%20%20%20%20(consecutive%20%3A%20%E2%88%80%20k%2C%20p%20%3C%20k%20%E2%86%92%20k%20%3C%20q%20%E2%86%92%20%C2%AC%20k.Prime)%20%3A%0A%20%20%20%20%E2%88%83%20a%20b%20c%2C%20p%20%2B%20q%20%3D%20a%20*%20b%20*%20c%20%E2%88%A7%20a%20%3E%201%20%E2%88%A7%20b%20%3E%201%20%E2%88%A7%20c%20%3E%201%20%3A%3D%20by%0A%20%20sorry" id="three-fac-of-sum-consecutive-primes" target="_blank" tryitfile="../examples/additional_problems/three_fac_of_sum_consecutive_primes.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="three-fac-of-sum-consecutive-primes"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="c1">-- (a) an even prime must be 2</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">eq_two_of_even_prime</span><span class="w"> </span><span class="o">{</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="bp">.</span><span class="n">Prime</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h_even</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Even</span><span class="w"> </span><span class="n">p</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (b) a sum of two odd numbers is even</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">even_of_odd_add_odd</span>
+<span class="w">    </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">ha</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">Even</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hb</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">Even</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="n">Even</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (c) if b &lt; b * c, then c is at least 2</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">one_lt_of_nontrivial_factor</span>
+<span class="w">    </span><span class="o">{</span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hb</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (d) a composite k &#8805; 2 splits as a product of two smaller factors, each &gt; 1</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">nontrivial_product_of_not_prime</span>
+<span class="w">    </span><span class="o">{</span><span class="n">k</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hk</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">k</span><span class="bp">.</span><span class="n">Prime</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">two_le_k</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">k</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (e) the main theorem</span>
+<span class="kn">theorem</span><span class="w"> </span><span class="n">three_fac_of_sum_consecutive_primes</span>
+<span class="w">    </span><span class="o">{</span><span class="n">p</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="bp">.</span><span class="n">Prime</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hq</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">q</span><span class="bp">.</span><span class="n">Prime</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hpq</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">q</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">p_ne_2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">q_ne_2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span>
+<span class="w">    </span><span class="o">(</span><span class="n">consecutive</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">k</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="bp">&#172;</span><span class="w"> </span><span class="n">k</span><span class="bp">.</span><span class="n">Prime</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="o">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+</section>
+<section id="the-frog-problem">
+<h2>The frog problem<a class="headerlink" href="#the-frog-problem" title="Link to this heading">&#182;</a></h2>
+<p>This one is the first problem from Mathcamp&#8217;s 2012 qualifying quiz, formalized.</p>
+<p>A <em>frog</em> lives on the lily pads numbered <span class="math notranslate nohighlight">\(0, 1, 2, \dots\)</span> (the natural numbers). It starts on pad
+<span class="math notranslate nohighlight">\(0\)</span> at time <span class="math notranslate nohighlight">\(0\)</span>, and it has some fixed step size <span class="math notranslate nohighlight">\(s \in \mathbb{N}\)</span>: every second, it
+jumps <span class="math notranslate nohighlight">\(s\)</span> pads to the right.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{location}(0) = 0 \qquad \mathrm{location}(n+1) = \mathrm{location}(n) + s\]</div>
+<p>Work through the following:</p>
+<ol class="loweralpha simple">
+<li><p>Show that a frog with step size <span class="math notranslate nohighlight">\(s\)</span> is at position <span class="math notranslate nohighlight">\(n \cdot s\)</span> at time <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>For every step size <span class="math notranslate nohighlight">\(s\)</span> there is a frog that takes steps of size <span class="math notranslate nohighlight">\(s\)</span> &#8212; construct it.</p></li>
+<li><p>Conversely, every frog is <em>the</em> frog of its step size (a frog is determined entirely by its step size).</p></li>
+<li><p><strong>The quiz problem.</strong> You get to check exactly one lily pad each second, without knowing the frog&#8217;s
+step size in advance. Show that there is a strategy (a choice of which pad to check at each time
+<span class="math notranslate nohighlight">\(n\)</span>) that is guaranteed to eventually catch the frog &#8212; i.e. to check the very pad the frog is
+on at that moment &#8212; no matter what step size the frog turns out to have.</p></li>
+</ol>
+<div id="frog-problem" style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A%40%5Bext%5D%0Astructure%20Frog%20where%0A%20%20--%20A%20frog%20hangs%20out%20on%20the%20natural%20number%20line%20of%20lily%20pads%0A%20%20location%20%3A%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%20%20--%20At%20time%200%2C%20it%20sits%20on%20location%200%0A%20%20location_zero%20%3A%20location%200%20%3D%200%0A%20%20--%20For%20some%20fixed%20step%20size%2C%0A%20%20step_size%20%3A%20%E2%84%95%0A%20%20--%20the%20frog%20jumps%20%60step_size%60%20units%20to%20the%20right%20each%20second%0A%20%20step%20%3A%20%E2%88%80%20n%2C%20location%20(n%20%2B%201)%20%3D%20location%20n%20%2B%20step_size%0A%0A--%20(a)%0Alemma%20frog_explicit_formula%20(f%20%3A%20Frog)%20%3A%0A%20%20%20%20%E2%88%80%20n%2C%20f.location%20n%20%3D%20n%20*%20f.step_size%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(b)%0Adef%20frogOfStepSize%20(step_size%20%3A%20%E2%84%95)%20%3A%20Frog%20where%0A%20%20location%20%3A%3D%20fun%20n%20%3D%3E%20n%20*%20step_size%0A%20%20location_zero%20%3A%3D%20by%20sorry%0A%20%20step_size%20%3A%3D%20step_size%0A%20%20step%20%3A%3D%20by%20sorry%0A%0A--%20(c)%0Alemma%20frog_eq_frog_of_step_size%20(f%20%3A%20Frog)%20%3A%0A%20%20%20%20f%20%3D%20frogOfStepSize%20f.step_size%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20(d)%20the%20quiz%20problem%0Alemma%20catch_the_frog%20%3A%0A%20%20%20%20%E2%88%83%20(strategy%20%3A%20%E2%84%95%20%E2%86%92%20%E2%84%95)%2C%0A%20%20%20%20--%20no%20matter%20how%20fast%20the%20frog%20travels%2C%0A%20%20%20%20%E2%88%80%20step_size%2C%0A%20%20%20%20--%20you'll%20eventually%20catch%20it%0A%20%20%20%20%E2%88%83%20catch_time%20%3E%200%2C%0A%20%20%20%20strategy%20catch_time%20%3D%20(frogOfStepSize%20step_size).location%20catch_time%20%3A%3D%20by%0A%20%20sorry" id="frog-problem" target="_blank" tryitfile="../examples/additional_problems/frog_problem.lean">
+try it!</a></div><div class="highlight-lean4 notranslate" id="frog-problem"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
+
+<span class="kd">@[</span><span class="n">ext</span><span class="kd">]</span>
+<span class="kn">structure</span><span class="w"> </span><span class="n">Frog</span><span class="w"> </span><span class="kn">where</span>
+<span class="w">  </span><span class="c1">-- A frog hangs out on the natural number line of lily pads</span>
+<span class="w">  </span><span class="n">location</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8469;</span>
+<span class="w">  </span><span class="c1">-- At time 0, it sits on location 0</span>
+<span class="w">  </span><span class="n">location_zero</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="c1">-- For some fixed step size,</span>
+<span class="w">  </span><span class="n">step_size</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span>
+<span class="w">  </span><span class="c1">-- the frog jumps `step_size` units to the right each second</span>
+<span class="w">  </span><span class="n">step</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">step_size</span>
+
+<span class="c1">-- (a)</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">frog_explicit_formula</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Frog</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">f</span><span class="bp">.</span><span class="n">location</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">f</span><span class="bp">.</span><span class="n">step_size</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (b)</span>
+<span class="kn">def</span><span class="w"> </span><span class="n">frogOfStepSize</span><span class="w"> </span><span class="o">(</span><span class="n">step_size</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Frog</span><span class="w"> </span><span class="kn">where</span>
+<span class="w">  </span><span class="n">location</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">step_size</span>
+<span class="w">  </span><span class="n">location_zero</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="gr">sorry</span>
+<span class="w">  </span><span class="n">step_size</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">step_size</span>
+<span class="w">  </span><span class="n">step</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="gr">sorry</span>
+
+<span class="c1">-- (c)</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">frog_eq_frog_of_step_size</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Frog</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">frogOfStepSize</span><span class="w"> </span><span class="n">f</span><span class="bp">.</span><span class="n">step_size</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+
+<span class="c1">-- (d) the quiz problem</span>
+<span class="kn">lemma</span><span class="w"> </span><span class="n">catch_the_frog</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="bp">&#8707;</span><span class="w"> </span><span class="o">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">),</span>
+<span class="w">    </span><span class="c1">-- no matter how fast the frog travels,</span>
+<span class="w">    </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">step_size</span><span class="o">,</span>
+<span class="w">    </span><span class="c1">-- you&#39;ll eventually catch it</span>
+<span class="w">    </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">catch_time</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="o">,</span>
+<span class="w">    </span><span class="n">strategy</span><span class="w"> </span><span class="n">catch_time</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">frogOfStepSize</span><span class="w"> </span><span class="n">step_size</span><span class="o">)</span><span class="bp">.</span><span class="n">location</span><span class="w"> </span><span class="n">catch_time</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</pre></div>
+</div>
+</div></section>
+</section>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="day5.html" title="Previous document"><span class="section-number">5. </span>Bits &amp; Pieces</a>
+        </li>
+        <li>
+          <a href="symbols.html" title="Next document">Pretty Symbols in Lean</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Lean at MC 2020</a></h1>
+
+
+
+
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="day1.html">1. Logic in Lean - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2.html">2. Logic in Lean - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day3.html">3. Infinitely Many Primes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day4.html">4. Sqrt 2 is irrational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day5.html">5. Bits &amp; Pieces</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Additional Problems for Practice</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Pretty Symbols in Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tactics.html">Glossary of tactics</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="latex/lean_at_mc2020.pdf">PDF version</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/apurvanakade/lean4-crash-course/tree/master/lean/CrashCourse/Solutions">Solutions on GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://live.lean-lang.org/">Lean Live Editor</a></li>
+    
+    <li class="toctree-l1"><a href="https://leanprover-community.github.io/mathlib4_docs/">Lean Documentation</a></li>
+    
+    <li class="toctree-l1"><a href="https://leanprover-community.github.io/">Leanprover Community</a></li>
+    
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2020, Apurva Nakade, Jalex Stark.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/additional_problems.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
