@@ -232,12 +232,12 @@ jumps :math:`s` pads to the right.
 
   \mathrm{location}(0) = 0 \qquad \mathrm{location}(n+1) = \mathrm{location}(n) + s
 
+For every step size :math:`s`, ``frogOfStepSize s`` below is *the* frog that takes steps of size :math:`s`.
 Work through the following:
 
 (a) Show that a frog with step size :math:`s` is at position :math:`n \cdot s` at time :math:`n`.
-(b) For every step size :math:`s` there is a frog that takes steps of size :math:`s` --- construct it.
-(c) Conversely, every frog is *the* frog of its step size (a frog is determined entirely by its step size).
-(d) **The quiz problem.** You get to check exactly one lily pad each second, without knowing the frog's
+(b) Every frog is *the* frog of its step size (a frog is determined entirely by its step size).
+(c) **The quiz problem.** You get to check exactly one lily pad each second, without knowing the frog's
     step size in advance. Show that there is a strategy (a choice of which pad to check at each time
     :math:`n`) that is guaranteed to eventually catch the frog --- i.e. to check the very pad the frog is
     on at that moment --- no matter what step size the frog turns out to have.
@@ -263,19 +263,19 @@ Work through the following:
       ∀ n, f.location n = n * f.step_size := by
     sorry
 
-  -- (b)
+  -- the frog that takes steps of size `step_size`
   def frogOfStepSize (step_size : ℕ) : Frog where
     location := fun n => n * step_size
-    location_zero := by sorry
+    location_zero := by simp
     step_size := step_size
-    step := by sorry
+    step := by intro n; ring
 
-  -- (c)
+  -- (b)
   lemma frog_eq_frog_of_step_size (f : Frog) :
       f = frogOfStepSize f.step_size := by
     sorry
 
-  -- (d) the quiz problem
+  -- (c) the quiz problem
   lemma catch_the_frog :
       ∃ (strategy : ℕ → ℕ),
       -- no matter how fast the frog travels,
