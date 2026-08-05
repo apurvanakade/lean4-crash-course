@@ -13,7 +13,7 @@ lemma two_dvd_of_two_dvd_sq' {m n : ℕ} (hmn : 2 * m ^ 2 = n ^ 2) : 2 ∣ n := 
 
 example (a b c : ℕ) (hc : 0 < c) (h : c * a = c * b) : a = b := by
   -- Cancel the common nonzero factor `c` on both sides.
-  rwa [Nat.mul_right_inj (by omega : c ≠ 0)] at h
+  rwa [Nat.mul_right_inj hc.ne'] at h
 
 lemma two_dvd_of_two_dvd_sq'' {m n : ℕ} (hmn : 2 * m ^ 2 = n ^ 2) : 2 ∣ m := by
   -- Reduce to showing `2 ∣ m ^ 2`.
@@ -77,7 +77,7 @@ lemma wlog_nonzero {m n : ℕ} (hm : m ≠ 0) (hmn : 2 * m ^ 2 = n ^ 2) : n ≠ 
 lemma gcd_ne_zero {m n : ℕ} (hm : m ≠ 0) (_hn : n ≠ 0) : Nat.gcd m n ≠ 0 := by
   -- `gcd m n > 0` whenever `m > 0`.
   have := Nat.gcd_pos_of_pos_left n (Nat.pos_of_ne_zero hm)
-  omega
+  exact this.ne'
 
 lemma ne_zero_of_mul_ne_zero {m k m' : ℕ}
     (hm : m ≠ 0)
@@ -136,7 +136,7 @@ lemma not_coprime_of_common_factor {m n k : ℕ}
   rw [hcop] at hdvd
   -- A divisor of `1` is at most `1`, contradicting `1 < k`.
   have := Nat.le_of_dvd (by norm_num) hdvd
-  omega
+  exact absurd (hk.trans_le this) (lt_irrefl 1)
 
 lemma sqrt2_irrational_aux {m n : ℕ} (hm : m ≠ 0) (hmn : 2 * m ^ 2 = n ^ 2) : False := by
   -- Replace `m, n` with the coprime reduced pair `m', n'` satisfying the same equation.

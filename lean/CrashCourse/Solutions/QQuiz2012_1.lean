@@ -56,6 +56,6 @@ lemma catch_the_frog :
   use k + 1
   constructor
   · -- `k + 1 > 0` trivially.
-    omega
+    exact Nat.succ_pos k
   · -- At time `k + 1`, both the strategy and the frog are at `k * (k + 1)`.
     simp [frogOfStepSize]
