@@ -18,6 +18,11 @@ Lean at MC 2020
 .. toctree::
    :maxdepth: 1
 
+   additional_problems
+
+.. toctree::
+   :maxdepth: 1
+
    symbols
    tactics
 
