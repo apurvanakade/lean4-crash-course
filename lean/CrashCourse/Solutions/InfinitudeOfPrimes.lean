@@ -11,8 +11,7 @@ theorem exists_infinite_primes (n : ℕ) : ∃ p, p ≥ n ∧ p.Prime := by
   use p
   constructor
   · -- Suppose, for contradiction, that `p < n`.
-    by_contra h
-    push Not at h
+    by_contra! h
     -- Then `p ≤ n`, so `p` divides `n!` (it's one of the factors `1, 2, ..., n`).
     have hp1 : p ∣ Nat.factorial n := Nat.dvd_factorial pp.pos h.le
     -- `p` divides `n! + 1` too, since `p` was defined as a factor of `n! + 1`.
