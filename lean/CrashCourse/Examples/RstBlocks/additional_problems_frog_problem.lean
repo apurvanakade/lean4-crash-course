@@ -16,19 +16,19 @@ lemma frog_explicit_formula (f : Frog) :
     ∀ n, f.location n = n * f.step_size := by
   sorry
 
--- (b)
+-- the frog that takes steps of size `step_size`
 def frogOfStepSize (step_size : ℕ) : Frog where
   location := fun n => n * step_size
-  location_zero := by sorry
+  location_zero := by simp
   step_size := step_size
-  step := by sorry
+  step := by intro n; ring
 
--- (c)
+-- (b)
 lemma frog_eq_frog_of_step_size (f : Frog) :
     f = frogOfStepSize f.step_size := by
   sorry
 
--- (d) the quiz problem
+-- (c) the quiz problem
 lemma catch_the_frog :
     ∃ (strategy : ℕ → ℕ),
     -- no matter how fast the frog travels,
