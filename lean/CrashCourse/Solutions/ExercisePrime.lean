@@ -58,7 +58,7 @@ lemma nontrivial_product_of_not_prime
   -- Unpack the divisibility `a ∣ k` as `k = a * b` for some `b`.
   obtain ⟨b, hb⟩ := ha_dvd
   -- Substituting `k = a * b` into `a < k` gives `a < a * b`.
-  have hab : a < a * b := by rw [← hb]; exact ha_lt
+  have hab : a < a * b := by omega
   -- From `a < a * b`, `b` must be greater than `1`.
   have hb2 : 1 < b := one_lt_of_nontrivial_factor hab
   -- And `b < k`, since `b < a * b = k` (as `a ≥ 2`).
@@ -80,12 +80,9 @@ theorem three_fac_of_sum_consecutive_primes
     · contrapose! q_ne_2; exact eq_two_of_even_prime hq q_ne_2
   -- So `p + q = k + k` for some `k`, i.e. `p + q = 2 * k`.
   obtain ⟨k, hk⟩ := h1
-  -- `k` lies strictly between `p` and `q`: from `p + q = k + k` and `p < q`.
-  have hpk : p < k := by linarith
-  have hkq : k < q := by linarith
-  -- So `k` can't be prime.
-  have hk' : ¬ k.Prime := consecutive k hpk hkq
-  have h2k : 2 ≤ k := by have := hp.two_le; linarith
+  -- `k` lies strictly between `p` and `q`, so it can't be prime.
+  have hk' : ¬ k.Prime := consecutive k (by omega) (by omega)
+  have h2k : 2 ≤ k := by have := hp.two_le; omega
   -- A non-prime `k ≥ 2` splits as a nontrivial product `b * c`.
   obtain ⟨b, c, hbk, hck, hb1, hc1, hbc⟩ := nontrivial_product_of_not_prime hk' h2k
   -- `2, b, c` are the witnesses we need.
