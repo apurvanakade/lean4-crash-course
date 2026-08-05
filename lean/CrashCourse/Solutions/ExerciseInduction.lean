@@ -1,6 +1,6 @@
 import Mathlib.Tactic
 
--- a rw puzzle?
+-- Deduce `p (n + 1)` from `p n`, using the two `iff`s `h8` and `h3`.
 example
     (p : ℕ → Prop) (n : ℕ) (hn : p n)
     (h8 : ∀ n, p n ↔ p (n + 8))
@@ -26,7 +26,7 @@ example : Fin 0 ≠ Fin 1 := by
   obtain ⟨k, _⟩ := this
   exact k.elim0
 
--- when i started i thought this would be a rw puzzle, but it's not
+-- A relation that's symmetric, transitive, and serial (every element relates to something) is reflexive.
 theorem reflexive_of_symmetric_and_transitive (r : ℕ → ℕ → Prop)
     (h_symm : Std.Symm r) (h_trans : IsTrans ℕ r)
     (h_connected : ∀ x, ∃ y, r x y) :
@@ -51,7 +51,8 @@ lemma even_or_odd (n : ℕ) :
     · -- If `d = 2 * k + 1`, then `d + 1 = 2 * (k + 1)` is even.
       left; exact ⟨k + 1, by rw [hk]; ring⟩
 
--- I don't think I can do this without coercions
+-- Two-sided induction on ℤ, splitting into the nonnegative and negative
+-- cases via `Int.ofNat`/`Int.negSucc`.
 example
     (p : ℤ → Prop)
     (p_succ : ∀ n, p n → p (n + 1))
