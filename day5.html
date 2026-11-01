@@ -43,11 +43,11 @@
 <div style="position: relative">
 <div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=namespace%20vmcsp%0A%20%20def%20tau%20%3A%3D%20%22TAU%20on%20M-Th%20from%201-3%22%0A%20%20%23eval%20tau%0Aend%20vmcsp%0A%0Adef%20tau%20%3A%3D%20%22no%20TAU%20on%20F%22%0A%23eval%20tau%0A%23eval%20vmcsp.tau%0A%0Aopen%20vmcsp%0A%0A--%20%23eval%20tau%20%20--%20error%3A%20%60tau%60%20is%20now%20ambiguous%20between%20%60_root_.tau%60%20and%20%60vmcsp.tau%60%0A%23eval%20vmcsp.tau" target="_blank" tryitfile="../examples/day5/unnamed_12.lean">
 try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span><span class="w"> </span><span class="n">vmcsp</span>
-<span class="w">  </span><span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;TAU on M-Th from 1-3&quot;</span>
+<span class="w">  </span><span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"TAU on M-Th from 1-3"</span>
 <span class="w">  </span><span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">tau</span>
 <span class="kn">end</span><span class="w"> </span><span class="n">vmcsp</span>
 
-<span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;no TAU on F&quot;</span>
+<span class="kn">def</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"no TAU on F"</span>
 <span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">tau</span>
 <span class="bp">#</span><span class="n">eval</span><span class="w"> </span><span class="n">vmcsp</span><span class="bp">.</span><span class="n">tau</span>
 
@@ -111,7 +111,7 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 <span class="c1">--</span>
 <span class="c1">-- Rat.mul_self_den : &#8704; (q : &#8474;), (q * q).den = q.den * q.den</span>
 <span class="c1">-- Rat.mul_self_num : &#8704; (q : &#8474;), (q * q).num = q.num * q.num</span>
-<span class="c1">-- Int.natAbs_mul_self&#39; : &#8704; (a : &#8484;), &#8593;(a.natAbs) * &#8593;(a.natAbs) = a * a</span>
+<span class="c1">-- Int.natAbs_mul_self' : &#8704; (a : &#8484;), &#8593;(a.natAbs) * &#8593;(a.natAbs) = a * a</span>
 <span class="c1">-- Rat.den_nz : &#8704; (q : &#8474;), q.den &#8800; 0</span>
 
 <span class="c1">-- Use ``simp at hp`` (or, interactively, ``simp? at hp``) to commute</span>
@@ -311,7 +311,7 @@ graduate mathematics.</p>
       &#169;2020, Apurva Nakade, Jalex Stark.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |

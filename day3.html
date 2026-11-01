@@ -91,7 +91,7 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 
 <span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span>
 <span class="w">    </span><span class="o">(</span><span class="n">hyp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
-<span class="w">    </span><span class="o">(</span><span class="n">hyp&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">d</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="n">hyp'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">d</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">d</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 
@@ -100,7 +100,7 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 
 <span class="kn">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8469;</span><span class="o">)</span>
 <span class="w">    </span><span class="o">(</span><span class="n">hyp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">d</span><span class="o">)</span>
-<span class="w">    </span><span class="o">(</span><span class="n">hyp&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="n">hyp'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 </pre></div>
@@ -187,11 +187,11 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 <span class="c1">--   ``have hp : P`` creates a new goal with target ``P`` and</span>
 <span class="c1">--   adds ``hp : P`` as a hypothesis to the original goal.</span>
 <span class="c1">--</span>
-<span class="c1">-- You&#39;ll need the following theorem from the library:</span>
+<span class="c1">-- You'll need the following theorem from the library:</span>
 <span class="c1">--</span>
-<span class="c1">-- Nat.dvd_sub&#39; : k &#8739; m &#8594; k &#8739; n &#8594; k &#8739; m - n</span>
+<span class="c1">-- Nat.dvd_sub' : k &#8739; m &#8594; k &#8739; n &#8594; k &#8739; m - n</span>
 <span class="c1">--</span>
-<span class="c1">--    (Note that you don&#39;t need to provide m n k as inputs to dvd_sub&#39;.</span>
+<span class="c1">--    (Note that you don't need to provide m n k as inputs to dvd_sub'.</span>
 <span class="c1">--    Lean can infer these from the rest of the expression.</span>
 <span class="c1">--    More on this tomorrow.)</span>
 <span class="c1">--</span>
@@ -366,7 +366,7 @@ So theorem proving in Lean often involves the following steps:</p>
       &#169;2020, Apurva Nakade, Jalex Stark.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
