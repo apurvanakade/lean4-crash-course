@@ -294,7 +294,7 @@ Lean provides us the following tactics to use it.
       You should use this tactic when there are contradictory hypotheses present. 
   
   * - ``by_cases``
-    - If ``P : Prop``, then ``by_cases P`` creates two goals,
+    - If ``P : Prop``, then ``by_cases hp : P`` creates two goals,
       the first with a hypothesis ``hp : P`` and second with a hypothesis ``hp : ¬ P``.
 
       Mathematically, this is saying either ``P`` is true or ``P`` is false.
@@ -391,9 +391,9 @@ Once you define a term ``x : ℕ``, a computer can immediately check that all th
 are valid manipulations of natural numbers (so you don't accidentally divide by 0 [#f1]_ , for example).
 
 Unfortunately, this also means that the term ``1 : ℕ`` is different from the term ``1 : ℤ``.
-In Lean, if you do ``(1 : ℕ - 2 : ℕ)`` you get ``0 : ℕ`` but if you do ``(1 : ℤ - 2 : ℤ)`` you get ``-1 : ℤ``,
+In Lean, if you do ``(1 : ℕ) - 2`` you get ``0 : ℕ`` but if you do ``(1 : ℤ) - 2`` you get ``-1 : ℤ``,
 that's because natural numbers and subtraction are not buddies.
-Another issue is that ``1 : ℕ = 1 : ℤ`` is not a valid statement in type theory.
+Another issue is that ``(1 : ℕ) = (1 : ℤ)`` is not a valid statement in type theory.
 This is not the end of the world though. 
 Lean allows you to *coerce* ``1 : ℕ`` to ``1 : ℤ`` if you want subtraction to work properly, 
 or ``1 : ℕ`` to ``1 : ℚ`` if you want division to work properly.

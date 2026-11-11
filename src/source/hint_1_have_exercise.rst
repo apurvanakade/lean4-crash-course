@@ -7,6 +7,9 @@ Try
 
 .. code::
 
-  have h_le : a ≤ a + 1
+  intro h1 h2
+  have h3 := Nat.dvd_sub h2 h1
+
+and look at the type of ``h3`` in the goal window.
 
 Need more :doc:`hints <../hint_2_have_exercise>`? 

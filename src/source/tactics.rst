@@ -61,7 +61,7 @@ Proof by contradiction
       You should use this tactic when there are contradictory hypotheses present.
 
   * - ``by_cases``
-    - If ``P : Prop``, then ``by_cases P`` creates two goals,
+    - If ``P : Prop``, then ``by_cases hp : P`` creates two goals,
       the first with a hypothesis ``hp : P`` and second with a hypothesis ``hp : ¬ P``.
 
       Mathematically, this is saying either ``P`` is true or ``P`` is false.
@@ -117,9 +117,6 @@ And / Or
     - ``constructor`` is a general tactic that breaks a complicated goal into simpler ones.
 
       If the target of the current goal is ``P ∧ Q``, then
-      ``constructor`` breaks up the goal into two goals with targets ``P`` and ``Q``.
-
-      If the target of the current goal is ``P × Q``, then
       ``constructor`` breaks up the goal into two goals with targets ``P`` and ``Q``.
 
       If the target of the current goal is ``P ↔ Q``, then
@@ -213,6 +210,13 @@ Equality
         ``rw [← f] at hr`` searches for ``Q`` in the expression ``R`` and replaces it with ``P``.
 
       Mathematically, this is saying because ``P = Q``, we can replace ``P`` with ``Q`` (or the other way around).
+
+  * - ``set``
+    - ``set x := e with hx`` introduces a new name ``x`` for the expression ``e``,
+      replaces every ``e`` in the target and the hypotheses with ``x``,
+      and adds the hypothesis ``hx : x = e``.
+
+      Mathematically, this is saying "let ``x`` denote ``e``".
 
   * - ``norm_cast``
     - ``norm_cast`` tries to clear out coercions between types (e.g. ``ℕ → ℤ`` or ``ℕ → ℚ``).

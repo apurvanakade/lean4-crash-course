@@ -157,9 +157,9 @@ This is **not** the vertical line on your keyboard.
   --
   -- You'll need the following theorem from the library:
   --
-  -- Nat.dvd_sub' : k ∣ m → k ∣ n → k ∣ m - n
+  -- Nat.dvd_sub : k ∣ m → k ∣ n → k ∣ m - n
   --
-  --    (Note that you don't need to provide m n k as inputs to dvd_sub'.
+  --    (Note that you don't need to provide m n k as inputs to dvd_sub.
   --    Lean can infer these from the rest of the expression.
   --    More on this tomorrow.)
   --
@@ -181,7 +181,7 @@ We'll need the following definitions and theorems from the library.
 
 **Primes**
   * ``m ∣ n := ∃ k : ℕ, n = m * k``
-  * ``p.Prime :=  2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)``
+  * ``Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)``
   * ``Nat.Prime.one_lt : p.Prime → 1 < p``
 
 **Factorials**
@@ -199,6 +199,24 @@ Check out `Mathlib.Data.Nat.Prime.Basic <https://leanprover-community.github.io/
 The exercise below is very open-ended.
 You should take your time, check the goal window at every step, and sketch out the proof on paper whenever you get lost.
 
+Expressions like ``Nat.minFac (Nat.factorial n + 1)`` get tedious to read (and type) over and over again.
+On paper, you would say "let ``p`` be the smallest factor of ``n! + 1``" and use ``p`` from then on.
+The ``set`` tactic lets you do exactly the same thing in Lean.
+
+.. list-table::
+  :widths: 10 90
+  :header-rows: 0
+
+  * - ``set``
+    - ``set x := e with hx`` introduces a new name ``x`` for the expression ``e``,
+      replaces every ``e`` in the target and the hypotheses with ``x``,
+      and adds the hypothesis ``hx : x = e``.
+
+      Mathematically, this is saying "let ``x`` denote ``e``".
+
+We've already started the proof below with a ``set`` for you.
+Whenever you need to remember what ``p`` actually is, use ``hp_def`` (for example, ``rw [hp_def]``).
+
 .. code:: lean4
 
   import Mathlib.Tactic
@@ -209,7 +227,7 @@ You should take your time, check the goal window at every step, and sketch out t
   -- dvd_sub_one : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1)
   --
   -- m ∣ n := ∃ k : ℕ, n = m * k
-  -- p.Prime :=  2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
+  -- Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
   -- Nat.Prime.one_lt : p.Prime → 1 < p
   --
   -- n ! := Nat.factorial n
@@ -222,6 +240,8 @@ You should take your time, check the goal window at every step, and sketch out t
   -- Nat.minFac_dvd : ∀ (n : ℕ), Nat.minFac n ∣ n
 
   theorem exists_infinite_primes (n : ℕ) : ∃ p, Nat.Prime p ∧ p ≥ n := by
+    -- ``p`` now stands for ``Nat.minFac (Nat.factorial n + 1)``,
+    -- and ``hp_def : p = Nat.minFac (Nat.factorial n + 1)``
     set p := Nat.minFac (Nat.factorial n + 1) with hp_def
     sorry
 
