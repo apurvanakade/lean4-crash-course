@@ -100,7 +100,7 @@ You should use this tactic when there are contradictory hypotheses present.</p>
 </td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">by_cases</span></code></p></td>
-<td><p>If <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">Prop</span></code>, then <code class="docutils literal notranslate"><span class="pre">by_cases</span> <span class="pre">P</span></code> creates two goals,
+<td><p>If <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">Prop</span></code>, then <code class="docutils literal notranslate"><span class="pre">by_cases</span> <span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> creates two goals,
 the first with a hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> and second with a hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">P</span></code>.</p>
 <p>Mathematically, this is saying either <code class="docutils literal notranslate"><span class="pre">P</span></code> is true or <code class="docutils literal notranslate"><span class="pre">P</span></code> is false.
 <code class="docutils literal notranslate"><span class="pre">by_cases</span></code> is the most direct application of the law of excluded middle.</p>
@@ -154,8 +154,6 @@ and changes the hypothesis to <code class="docutils literal notranslate"><span c
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">constructor</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">constructor</span></code> is a general tactic that breaks a complicated goal into simpler ones.</p>
 <p>If the target of the current goal is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8743;</span> <span class="pre">Q</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">constructor</span></code> breaks up the goal into two goals with targets <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
-<p>If the target of the current goal is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#215;</span> <span class="pre">Q</span></code>, then
 <code class="docutils literal notranslate"><span class="pre">constructor</span></code> breaks up the goal into two goals with targets <code class="docutils literal notranslate"><span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
 <p>If the target of the current goal is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8596;</span> <span class="pre">Q</span></code>, then
 <code class="docutils literal notranslate"><span class="pre">constructor</span></code> breaks up the goal into two goals with targets <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8594;</span> <span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span> <span class="pre">&#8594;</span> <span class="pre">P</span></code>.</p>
@@ -264,7 +262,14 @@ You should only ever use <code class="docutils literal notranslate"><span class=
 <p>Mathematically, this is saying because <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">Q</span></code>, we can replace <code class="docutils literal notranslate"><span class="pre">P</span></code> with <code class="docutils literal notranslate"><span class="pre">Q</span></code> (or the other way around).</p>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">x</span> <span class="pre">:=</span> <span class="pre">e</span> <span class="pre">with</span> <span class="pre">hx</span></code> introduces a new name <code class="docutils literal notranslate"><span class="pre">x</span></code> for the expression <code class="docutils literal notranslate"><span class="pre">e</span></code>,
+replaces every <code class="docutils literal notranslate"><span class="pre">e</span></code> in the target and the hypotheses with <code class="docutils literal notranslate"><span class="pre">x</span></code>,
+and adds the hypothesis <code class="docutils literal notranslate"><span class="pre">hx</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e</span></code>.</p>
+<p>Mathematically, this is saying &#8220;let <code class="docutils literal notranslate"><span class="pre">x</span></code> denote <code class="docutils literal notranslate"><span class="pre">e</span></code>&#8221;.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code> tries to clear out coercions between types (e.g. <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8484;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8474;</span></code>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">norm_cast</span> <span class="pre">at</span> <span class="pre">hp</span></code> tries to clear out coercions in the hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span></code>.</p>
 </td>

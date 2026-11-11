@@ -119,9 +119,6 @@ Similarly for ``P ∨ Q``, with a subtle change (see below).
       If the target of the current goal is ``P ∧ Q``, then
       ``constructor`` breaks up the goal into two goals with targets ``P`` and ``Q``.
 
-      If the target of the current goal is ``P × Q``, then
-      ``constructor`` breaks up the goal into two goals with targets ``P`` and ``Q``.
-
       If the target of the current goal is ``P ↔ Q``, then
       ``constructor`` breaks up the goal into two goals with targets ``P → Q`` and ``Q → P``.
 
@@ -240,7 +237,7 @@ Here are some :doc:`hints <../hint_1_barber_paradox>` if you get stuck.
   --
   -- ``by_cases``
   --
-  --   If ``P`` is a proposition, then ``by_cases P`` creates two goals,
+  --   If ``P`` is a proposition, then ``by_cases hp : P`` creates two goals,
   --     the first with a hypothesis ``hp : P`` and
   --     second with a hypothesis ``hp : ¬ P``.
   --
@@ -280,7 +277,7 @@ then everyone in the lounge is singing.
   --
   -- ``by_cases``
   --
-  --   If ``P`` is a proposition, then ``by_cases P`` creates two goals,
+  --   If ``P`` is a proposition, then ``by_cases hp : P`` creates two goals,
   --     the first with a hypothesis ``hp : P`` and
   --     second with a hypothesis ``hp : ¬ P``.
   --
@@ -422,7 +419,7 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
     sorry
 
 
-  #print Nat.Prime
+  #check Nat.prime_def
   example : Nat.Prime 101 := by
     sorry
 

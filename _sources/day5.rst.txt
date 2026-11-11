@@ -148,7 +148,7 @@ To define an arbitrary group ``G`` we first create it as a type ``G : Type`` and
 You can also prove that existing types are instances of ``Group`` using the ``instance`` keyword.
 Type classes allow us to prove theorems in great generality.
 For example, any theorem about groups can immediately be applied to integers once we show that integers are an instance of ``Group``.
-If you look at `Mathlib.Algebra.Group.Int <https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Int.lean>`__
+If you look at `Mathlib.Algebra.Group.Int.Defs <https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Int/Defs.lean>`__
 you'll see the code that proves ``ℤ`` is an instance of several type classes.
 
 .. code:: lean4

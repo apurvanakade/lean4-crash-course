@@ -35,9 +35,11 @@
   <section id="hint-1-for-the-have-exercise">
 <span id="hint-1-have-exercise"></span><h1>Hint 1 for the have exercise<a class="headerlink" href="#hint-1-for-the-have-exercise" title="Link to this heading">&#182;</a></h1>
 <p>Try</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>have h_le : a &#8804; a + 1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">intro</span> <span class="n">h1</span> <span class="n">h2</span>
+<span class="n">have</span> <span class="n">h3</span> <span class="o">:=</span> <span class="n">Nat</span><span class="o">.</span><span class="n">dvd_sub</span> <span class="n">h2</span> <span class="n">h1</span>
 </pre></div>
 </div>
+<p>and look at the type of <code class="docutils literal notranslate"><span class="pre">h3</span></code> in the goal window.</p>
 <p>Need more <a class="reference internal" href="hint_2_have_exercise.html"><span class="doc">hints</span></a>?</p>
 </section>
 
