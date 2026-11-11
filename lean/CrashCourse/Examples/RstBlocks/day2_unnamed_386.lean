@@ -32,7 +32,7 @@ example : 101 ∣ 2020 := by
   sorry
 
 
-#print Nat.Prime
+#check Nat.prime_def
 example : Nat.Prime 101 := by
   sorry
 

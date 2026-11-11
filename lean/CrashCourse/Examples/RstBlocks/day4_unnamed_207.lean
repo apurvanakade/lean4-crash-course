@@ -23,8 +23,8 @@ lemma cancellation_lemma {k m n : ℕ}
 
 --BEGIN--
 
--- Nat.gcd_pos_of_pos_left : 0 < m → 0 < Nat.gcd m n
--- Nat.gcd_pos_of_pos_right : 0 < n → 0 < Nat.gcd m n
+-- Nat.gcd_pos_of_pos_left : ∀ (n : ℕ), 0 < m → 0 < Nat.gcd m n
+-- Nat.gcd_pos_of_pos_right : ∀ (m : ℕ), 0 < n → 0 < Nat.gcd m n
 -- Nat.exists_coprime : ∀ (m n : ℕ), ∃ m' n', m'.Coprime n' ∧ m = m' * m.gcd n ∧ n = n' * m.gcd n
 
 theorem wlog_coprime :

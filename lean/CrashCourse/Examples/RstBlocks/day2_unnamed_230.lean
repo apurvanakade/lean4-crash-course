@@ -6,7 +6,7 @@ import Mathlib.Tactic
 --
 -- ``by_cases``
 --
---   If ``P`` is a proposition, then ``by_cases P`` creates two goals,
+--   If ``P`` is a proposition, then ``by_cases hp : P`` creates two goals,
 --     the first with a hypothesis ``hp : P`` and
 --     second with a hypothesis ``hp : ¬ P``.
 --

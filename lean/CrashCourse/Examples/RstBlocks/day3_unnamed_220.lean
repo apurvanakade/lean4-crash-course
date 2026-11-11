@@ -6,7 +6,7 @@ theorem dvd_sub_one {p a : ℕ} : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1) := b
 -- dvd_sub_one : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1)
 --
 -- m ∣ n := ∃ k : ℕ, n = m * k
--- p.Prime :=  2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
+-- Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
 -- Nat.Prime.one_lt : p.Prime → 1 < p
 --
 -- n ! := Nat.factorial n
@@ -19,5 +19,7 @@ theorem dvd_sub_one {p a : ℕ} : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1) := b
 -- Nat.minFac_dvd : ∀ (n : ℕ), Nat.minFac n ∣ n
 
 theorem exists_infinite_primes (n : ℕ) : ∃ p, Nat.Prime p ∧ p ≥ n := by
+  -- ``p`` now stands for ``Nat.minFac (Nat.factorial n + 1)``,
+  -- and ``hp_def : p = Nat.minFac (Nat.factorial n + 1)``
   set p := Nat.minFac (Nat.factorial n + 1) with hp_def
   sorry

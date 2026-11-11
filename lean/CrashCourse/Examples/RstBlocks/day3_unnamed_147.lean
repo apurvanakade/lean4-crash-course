@@ -9,9 +9,9 @@ import Mathlib.Tactic
 --
 -- You'll need the following theorem from the library:
 --
--- Nat.dvd_sub' : k ∣ m → k ∣ n → k ∣ m - n
+-- Nat.dvd_sub : k ∣ m → k ∣ n → k ∣ m - n
 --
---    (Note that you don't need to provide m n k as inputs to dvd_sub'.
+--    (Note that you don't need to provide m n k as inputs to dvd_sub.
 --    Lean can infer these from the rest of the expression.
 --    More on this tomorrow.)
 --
