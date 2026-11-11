@@ -41,7 +41,9 @@ example : Nat.Prime 101 := by
 example (m a b : ℕ) : m + a ∣ m ^ 2 + (a + b) * m + a * b := by
   sorry
 
--- try ``unfold Nat.Prime at hp`` to get started
+-- ``Nat.prime_def`` is a proof of ``Nat.Prime p ↔ (2 ≤ p ∧ ...)``.
+-- Its first component ``Nat.prime_def.1`` is the ``→`` direction,
+-- so try ``have h := Nat.prime_def.1 hp`` to get started
 example (p : ℕ) (hp : Nat.Prime p) : ¬ (p = 1) := by
   sorry
 

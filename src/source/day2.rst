@@ -341,15 +341,19 @@ For example, ``2 | 4`` will be a proposition ``∃ k : ℕ, 4 = 2 * k``.
 **Very important.** The statement ``2 | 4`` is not saying that "2 divides 4 *is true*".
 It is simply a proposition that requires a proof.
 
-Similarly, the mathlib library also contains the following definition of ``prime``.
+Similarly, the mathlib library also contains a definition of ``prime``.
+In mathlib, ``Nat.Prime p`` is defined as ``Irreducible p``,
+a general notion of primality that makes sense in many number systems, not just ``ℕ``.
+Fortunately, mathlib also proves that this is equivalent to the definition you are used to
+(see `Nat.prime_def <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Nat/Prime/Defs.html#Nat.prime_def>`__):
 
 .. code::
 
-    def Nat.Prime (p : ℕ) : Prop
-    :=
-      2 ≤ p                                       -- p is at least 2
-      ∧                                           -- and
-      ∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p            -- if m divides p, then m = 1 or m = p.
+    theorem Nat.prime_def {p : ℕ} :
+      Nat.Prime p ↔
+        2 ≤ p                                     -- p is at least 2
+        ∧                                         -- and
+        ∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p          -- if m divides p, then m = 1 or m = p.
 
 Same as with divisibility, for every natural number ``n``,
 ``Nat.Prime n`` is a *proposition*.
@@ -427,7 +431,9 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
   example (m a b : ℕ) : m + a ∣ m ^ 2 + (a + b) * m + a * b := by
     sorry
 
-  -- try ``unfold Nat.Prime at hp`` to get started
+  -- ``Nat.prime_def`` is a proof of ``Nat.Prime p ↔ (2 ≤ p ∧ ...)``.
+  -- Its first component ``Nat.prime_def.1`` is the ``→`` direction,
+  -- so try ``have h := Nat.prime_def.1 hp`` to get started
   example (p : ℕ) (hp : Nat.Prime p) : ¬ (p = 1) := by
     sorry
 
