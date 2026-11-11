@@ -20,7 +20,7 @@
 example (P Q R : Prop) (hp : P) (f : P → Q) (g : Q → R) : R := by
   sorry
 
-example (P Q R S T U : Type)
+example (P Q R S T U : Prop)
     (hpq : P → Q)
     (hqr : Q → R)
     (hqt : Q → T)
