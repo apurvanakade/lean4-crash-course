@@ -14,7 +14,7 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
 
 - `master` — the actual source: Lean exercises embedded in `.rst` course notes, a Lake package that
   compile-checks them, and the Sphinx build tooling.
-- `gh-pages` — build output only (generated HTML, `slides/`, `static/`, `_static`, `latex/`). Do not hand-edit
+- `gh-pages` — build output only (generated HTML, `slides/`, `static/`, `_static`). Do not hand-edit
   generated files here; regenerate them from `master` instead.
 
 ## Repo layout (master branch)
@@ -22,7 +22,7 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
 - `src/source/*.rst` — the course content, one file per day (`day1.rst` … `day5.rst`) plus standalone
   `introduction.rst`, `symbols.rst`, `tactics.rst`, and per-exercise `hint_*.rst` files.
 - `src/source/conf.py` — Sphinx config; registers the custom `lean_sphinx` extension and the navbar links
-  (PDF, Solutions on GitHub, Lean Live Editor, Lean Documentation).
+  (Solutions on GitHub, Lean Live Editor, Lean Documentation).
 - `src/lean_sphinx.py` — custom Sphinx extension/builder for this project (see below).
 - `src/Makefile`, `src/html-make.sh` — build entry points.
 - `lean/` — a Lake package (`lakefile.toml`, `lean-toolchain` pinned to `leanprover/lean4:v4.32.2`) depending on
@@ -38,9 +38,9 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
 ## Building the docs
 
 **Always build locally before reporting a change to `src/` (`.rst` files, `conf.py`, `lean_sphinx.py`, or the
-publish workflow) as done.** Run `make clean html` (and `make latexpdf` if the change could affect the PDF) from
+publish workflow) as done.** Run `make clean html` from
 `src/`, so the user can check real output rather than take a diff on faith. Report warnings/errors, and open the
-built `build/html/index.html` (and PDF, if built) for the user to inspect.
+built `build/html/index.html` for the user to inspect.
 
 From `lean/` (first, and whenever mathlib4/Lean code changes):
 
@@ -62,8 +62,7 @@ make install-deps
 ```
 
 Publishing to `gh-pages` is automated via [.github/workflows/publish.yml](.github/workflows/publish.yml): on
-every push to `master`, CI sets up Lean + mathlib4, runs `leantest`, builds the HTML site (and a PDF,
-best-effort), assembles it with `slides/` into `_site/`, and deploys that to the `gh-pages` branch using
+every push to `master`, CI sets up Lean + mathlib4, runs `leantest`, builds the HTML site (no PDF in CI), assembles it with `slides/` into `_site/`, and deploys that to the `gh-pages` branch using
 `peaceiris/actions-gh-pages`. No manual copy step is needed.
 
 There are two extra custom Sphinx builders defined in `lean_sphinx.py`, invoked the same way as `html`:
