@@ -232,6 +232,8 @@ and <code class="docutils literal notranslate"><span class="pre">y</span></code>
 </tr>
 </tbody>
 </table>
+<p>Note that divisibility, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#8739;</span> <span class="pre">b</span></code>, is itself an existential statement (<code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">k,</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">k</span></code>),
+so both <code class="docutils literal notranslate"><span class="pre">obtain</span></code> and <code class="docutils literal notranslate"><span class="pre">use</span></code> work on it as well.</p>
 <p>Finally, we know enough Lean tactics to start doing some fun stuff.</p>
 <section id="barber-paradox">
 <h3><span class="section-number">2.3.1. </span>Barber paradox<a class="headerlink" href="#barber-paradox" title="Link to this heading">&#182;</a></h3>
@@ -240,7 +242,7 @@ The claim is that in a certain town there is a (male) barber that shaves all the
 Prove that this is a contradiction.
 Here are some <a class="reference internal" href="hint_1_barber_paradox.html"><span class="doc">hints</span></a> if you get stuck.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--BEGIN--%0A%0A--%20--------------------------------------------------------------------------%0A--%0A--%20%60%60by_cases%60%60%0A--%0A--%20%20%20If%20%60%60P%60%60%20is%20a%20proposition%2C%20then%20%60%60by_cases%20hp%20%3A%20P%60%60%20creates%20two%20goals%2C%0A--%20%20%20%20%20the%20first%20with%20a%20hypothesis%20%60%60hp%20%3A%20P%60%60%20and%0A--%20%20%20%20%20second%20with%20a%20hypothesis%20%60%60hp%20%3A%20%C2%AC%20P%60%60.%0A--%0A--%20Delete%20the%20%60%60sorry%60%60%20below%20and%20replace%20them%20with%20a%20legitimate%20proof.%0A--%0A--%20--------------------------------------------------------------------------%0A%0A--%20men%20is%20a%20type.%0A--%20x%20%3A%20men%20means%20x%20is%20a%20man%20in%20the%20town%0A--%20shaves%20x%20y%20is%20inhabited%20if%20x%20shaves%20y%0A%0Avariable%20(men%20%3A%20Type)%20(barber%20%3A%20men)%0Avariable%20(shaves%20%3A%20men%20%E2%86%92%20men%20%E2%86%92%20Prop)%0A%0Aexample%20%3A%20%C2%AC%20(%E2%88%80%20x%20%3A%20men%2C%20shaves%20barber%20x%20%E2%86%94%20%C2%AC%20shaves%20x%20x)%20%3A%3D%20by%0A%20%20sorry%0A--END--" target="_blank" tryitfile="../examples/day2/unnamed_230.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--BEGIN--%0A%0A--%20--------------------------------------------------------------------------%0A--%0A--%20%60%60by_cases%60%60%0A--%0A--%20%20%20If%20%60%60P%60%60%20is%20a%20proposition%2C%20then%20%60%60by_cases%20hp%20%3A%20P%60%60%20creates%20two%20goals%2C%0A--%20%20%20%20%20the%20first%20with%20a%20hypothesis%20%60%60hp%20%3A%20P%60%60%20and%0A--%20%20%20%20%20second%20with%20a%20hypothesis%20%60%60hp%20%3A%20%C2%AC%20P%60%60.%0A--%0A--%20Delete%20the%20%60%60sorry%60%60%20below%20and%20replace%20them%20with%20a%20legitimate%20proof.%0A--%0A--%20--------------------------------------------------------------------------%0A%0A--%20men%20is%20a%20type.%0A--%20x%20%3A%20men%20means%20x%20is%20a%20man%20in%20the%20town%0A--%20shaves%20x%20y%20is%20inhabited%20if%20x%20shaves%20y%0A%0Avariable%20(men%20%3A%20Type)%20(barber%20%3A%20men)%0Avariable%20(shaves%20%3A%20men%20%E2%86%92%20men%20%E2%86%92%20Prop)%0A%0Aexample%20%3A%20%C2%AC%20(%E2%88%80%20x%20%3A%20men%2C%20shaves%20barber%20x%20%E2%86%94%20%C2%AC%20shaves%20x%20x)%20%3A%3D%20by%0A%20%20sorry%0A--END--" target="_blank" tryitfile="../examples/day2/unnamed_233.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c1">-- --------------------------------------------------------------------------</span>
 <span class="c1">--</span>
 <span class="c1">-- ``by_cases``</span>
@@ -312,7 +314,7 @@ We say that <code class="docutils literal notranslate"><span class="pre">x</span
 <p>Show that if a relation is symmetric, transitive, and connected,
 then it is also reflexive.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Avariable%20(X%20%3A%20Type)%0A%0Atheorem%20reflexive_of_symmetric_transitive_and_connected%0A%20%20%20%20(r%20%3A%20X%20%E2%86%92%20X%20%E2%86%92%20Prop)%0A%20%20%20%20(h_symm%20%3A%20%E2%88%80%20x%20y%20%3A%20X%2C%20r%20x%20y%20%E2%86%92%20r%20y%20x)%0A%20%20%20%20(h_trans%20%3A%20%E2%88%80%20x%20y%20z%20%3A%20X%2C%20r%20x%20y%20%E2%86%92%20r%20y%20z%20%E2%86%92%20r%20x%20z)%0A%20%20%20%20(h_connected%20%3A%20%E2%88%80%20x%2C%20%E2%88%83%20y%2C%20r%20x%20y)%20%3A%0A%20%20%20%20(%E2%88%80%20x%20%3A%20X%2C%20r%20x%20x)%20%3A%3D%20by%0A%20%20sorry" target="_blank" tryitfile="../examples/day2/unnamed_313.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0Avariable%20(X%20%3A%20Type)%0A%0Atheorem%20reflexive_of_symmetric_transitive_and_connected%0A%20%20%20%20(r%20%3A%20X%20%E2%86%92%20X%20%E2%86%92%20Prop)%0A%20%20%20%20(h_symm%20%3A%20%E2%88%80%20x%20y%20%3A%20X%2C%20r%20x%20y%20%E2%86%92%20r%20y%20x)%0A%20%20%20%20(h_trans%20%3A%20%E2%88%80%20x%20y%20z%20%3A%20X%2C%20r%20x%20y%20%E2%86%92%20r%20y%20z%20%E2%86%92%20r%20x%20z)%0A%20%20%20%20(h_connected%20%3A%20%E2%88%80%20x%2C%20%E2%88%83%20y%2C%20r%20x%20y)%20%3A%0A%20%20%20%20(%E2%88%80%20x%20%3A%20X%2C%20r%20x%20x)%20%3A%3D%20by%0A%20%20sorry" target="_blank" tryitfile="../examples/day2/unnamed_316.lean">
 try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
 
 <span class="kn">variable</span><span class="w"> </span><span class="o">(</span><span class="n">X</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span>
@@ -377,14 +379,21 @@ then <code class="docutils literal notranslate"><span class="pre">ring</span></c
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code> is Lean&#8217;s inequality solver.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code> is Lean&#8217;s solver for linear arithmetic over <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code>.
+It uses all the hypotheses in context and either closes the goal or fails.
+Unlike <code class="docutils literal notranslate"><span class="pre">linarith</span></code> it understands integers, so it knows things like <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">1</span> <span class="pre">&#8594;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span></code>
+and can handle <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> subtraction, <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> by numerals, and <code class="docutils literal notranslate"><span class="pre">&#8800;</span></code>.
+It cannot handle products of variables such as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code> is a very complex tactic that tries to use theorems from the mathlib library to close the goal.
 You should only ever use <code class="docutils literal notranslate"><span class="pre">simp</span></code> to <em>close a goal</em> because its behavior changes as more theorems get added to the library.</p></td>
 </tr>
 </tbody>
 </table>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--%20--------------------------------------------------------------------------%0A--%0A--%20%60%60norm_num%60%60%0A--%0A--%20%20%20Useful%20for%20arithmetic.%0A--%0A--%20%60%60ring%60%60%0A--%0A--%20%20%20Useful%20for%20basic%20algebra.%0A--%0A--%20%60%60linarith%60%60%0A--%0A--%20%20%20Useful%20for%20inequalities.%0A--%0A--%20%60%60simp%60%60%0A--%0A--%20%20%20Complex%20simplifier.%20Use%20only%20to%20close%20goals.%0A--%0A--%20Delete%20the%20%60%60sorry%60%60%20below%20and%20replace%20them%20with%20a%20legitimate%20proof.%0A--%0A--%20--------------------------------------------------------------------------%0A%0Aexample%20%3A%201%20%3E%200%20%3A%3D%20by%0A%20%20sorry%0A%0Aexample%20(m%20a%20b%20%3A%20%E2%84%95)%20%3A%20m%20%5E%202%20%2B%20(a%20%2B%20b)%20*%20m%20%2B%20a%20*%20b%20%3D%20(m%20%2B%20a)%20*%20(m%20%2B%20b)%20%3A%3D%20by%0A%20%20sorry%0A%0Aexample%20%3A%20101%20%E2%88%A3%202020%20%3A%3D%20by%0A%20%20sorry%0A%0A%0A%23check%20Nat.prime_def%0Aexample%20%3A%20Nat.Prime%20101%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20you%20will%20need%20the%20definition%0A--%20a%20%E2%88%A3%20b%20%3A%3D%20(%E2%88%83%20k%20%3A%20%E2%84%95%2C%20b%20%3D%20a%20*%20k)%0Aexample%20(m%20a%20b%20%3A%20%E2%84%95)%20%3A%20m%20%2B%20a%20%E2%88%A3%20m%20%5E%202%20%2B%20(a%20%2B%20b)%20*%20m%20%2B%20a%20*%20b%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20%60%60Nat.prime_def%60%60%20is%20a%20proof%20of%20%60%60Nat.Prime%20p%20%E2%86%94%20(2%20%E2%89%A4%20p%20%E2%88%A7%20...)%60%60.%0A--%20Its%20first%20component%20%60%60Nat.prime_def.1%60%60%20is%20the%20%60%60%E2%86%92%60%60%20direction%2C%0A--%20so%20try%20%60%60have%20h%20%3A%3D%20Nat.prime_def.1%20hp%60%60%20to%20get%20started%0Aexample%20(p%20%3A%20%E2%84%95)%20(hp%20%3A%20Nat.Prime%20p)%20%3A%20%C2%AC%20(p%20%3D%201)%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20if%20none%20of%20the%20simplifiers%20work%2C%20try%20doing%20%60%60contrapose!%60%60%0A--%20sometimes%20the%20simplifiers%20need%20a%20little%20help%0Aexample%20(n%20%3A%20%E2%84%95)%20%3A%200%20%3C%20n%20%E2%86%94%20n%20%E2%89%A0%200%20%3A%3D%20by%0A%20%20sorry" target="_blank" tryitfile="../examples/day2/unnamed_386.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://live.lean-lang.org/#code=import%20Mathlib.Tactic%0A%0A--%20--------------------------------------------------------------------------%0A--%0A--%20%60%60norm_num%60%60%0A--%0A--%20%20%20Useful%20for%20arithmetic.%0A--%0A--%20%60%60ring%60%60%0A--%0A--%20%20%20Useful%20for%20basic%20algebra.%0A--%0A--%20%60%60linarith%60%60%0A--%0A--%20%20%20Useful%20for%20inequalities.%0A--%0A--%20%60%60omega%60%60%0A--%0A--%20%20%20Useful%20for%20linear%20arithmetic%20over%20%60%60%E2%84%95%60%60%20and%20%60%60%E2%84%A4%60%60.%0A--%0A--%20%60%60simp%60%60%0A--%0A--%20%20%20Complex%20simplifier.%20Use%20only%20to%20close%20goals.%0A--%0A--%20Delete%20the%20%60%60sorry%60%60%20below%20and%20replace%20them%20with%20a%20legitimate%20proof.%0A--%0A--%20--------------------------------------------------------------------------%0A%0Aexample%20%3A%201%20%3E%200%20%3A%3D%20by%0A%20%20sorry%0A%0Aexample%20(m%20a%20b%20%3A%20%E2%84%95)%20%3A%20m%20%5E%202%20%2B%20(a%20%2B%20b)%20*%20m%20%2B%20a%20*%20b%20%3D%20(m%20%2B%20a)%20*%20(m%20%2B%20b)%20%3A%3D%20by%0A%20%20sorry%0A%0Aexample%20%3A%20101%20%E2%88%A3%202020%20%3A%3D%20by%0A%20%20sorry%0A%0A%0A%23check%20Nat.prime_def%0Aexample%20%3A%20Nat.Prime%20101%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20you%20will%20need%20the%20definition%0A--%20a%20%E2%88%A3%20b%20%3A%3D%20(%E2%88%83%20k%20%3A%20%E2%84%95%2C%20b%20%3D%20a%20*%20k)%0Aexample%20(m%20a%20b%20%3A%20%E2%84%95)%20%3A%20m%20%2B%20a%20%E2%88%A3%20m%20%5E%202%20%2B%20(a%20%2B%20b)%20*%20m%20%2B%20a%20*%20b%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20%60%60Nat.prime_def%60%60%20is%20a%20proof%20of%20%60%60Nat.Prime%20p%20%E2%86%94%20(2%20%E2%89%A4%20p%20%E2%88%A7%20...)%60%60.%0A--%20Its%20first%20component%20%60%60Nat.prime_def.1%60%60%20is%20the%20%60%60%E2%86%92%60%60%20direction%2C%0A--%20so%20try%20%60%60have%20h%20%3A%3D%20Nat.prime_def.1%20hp%60%60%20to%20get%20started%0Aexample%20(p%20%3A%20%E2%84%95)%20(hp%20%3A%20Nat.Prime%20p)%20%3A%20%C2%AC%20(p%20%3D%201)%20%3A%3D%20by%0A%20%20sorry%0A%0A--%20if%20none%20of%20the%20simplifiers%20work%2C%20try%20doing%20%60%60contrapose!%60%60%0A--%20sometimes%20the%20simplifiers%20need%20a%20little%20help%0Aexample%20(n%20%3A%20%E2%84%95)%20%3A%200%20%3C%20n%20%E2%86%94%20n%20%E2%89%A0%200%20%3A%3D%20by%0A%20%20sorry" target="_blank" tryitfile="../examples/day2/unnamed_396.lean">
 try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span><span class="bp">.</span><span class="n">Tactic</span>
 
 <span class="c1">-- --------------------------------------------------------------------------</span>
@@ -400,6 +409,10 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 <span class="c1">-- ``linarith``</span>
 <span class="c1">--</span>
 <span class="c1">--   Useful for inequalities.</span>
+<span class="c1">--</span>
+<span class="c1">-- ``omega``</span>
+<span class="c1">--</span>
+<span class="c1">--   Useful for linear arithmetic over ``&#8469;`` and ``&#8484;``.</span>
 <span class="c1">--</span>
 <span class="c1">-- ``simp``</span>
 <span class="c1">--</span>
@@ -441,6 +454,10 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 </pre></div>
 </div>
 </div></section>
+<section id="solutions">
+<h2><span class="section-number">2.5. </span>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">&#182;</a></h2>
+<p>Worked solutions to all of today&#8217;s exercises, in the order they appear above, are in <a class="extlink-solution reference external" href="https://github.com/apurvanakade/lean4-crash-course/blob/master/lean/CrashCourse/Solutions/Day2.lean">Day2.lean</a>.</p>
+</section>
 </section>
 
 
@@ -485,6 +502,7 @@ try it!</a></div><div class="highlight-lean4 notranslate"><div class="highlight"
 <li class="toctree-l2"><a class="reference internal" href="#and-or">2.2. And / Or</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#quantifiers">2.3. Quantifiers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#proving-trivial-statements">2.4. Proving &#8220;trivial&#8221; statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solutions">2.5. Solutions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="day3.html">3. Infinitely Many Primes</a></li>

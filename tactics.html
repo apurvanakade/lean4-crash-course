@@ -233,7 +233,14 @@ then <code class="docutils literal notranslate"><span class="pre">ring</span></c
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code> is Lean&#8217;s inequality solver.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code> is Lean&#8217;s solver for linear arithmetic over <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code>.
+It uses all the hypotheses in context and either closes the goal or fails.
+Unlike <code class="docutils literal notranslate"><span class="pre">linarith</span></code> it understands integers, so it knows things like <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">1</span> <span class="pre">&#8594;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span></code>
+and can handle <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> subtraction, <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> by numerals, and <code class="docutils literal notranslate"><span class="pre">&#8800;</span></code>.
+It cannot handle products of variables such as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">simp</span></code> is a very complex tactic that tries to use theorems from the mathlib library to close the goal.
 You should only ever use <code class="docutils literal notranslate"><span class="pre">simp</span></code> to <em>close a goal</em> because its behavior changes as more theorems get added to the library.</p></td>
 </tr>
@@ -272,6 +279,12 @@ and adds the hypothesis <code class="docutils literal notranslate"><span class="
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">norm_cast</span></code> tries to clear out coercions between types (e.g. <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8484;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8474;</span></code>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">norm_cast</span> <span class="pre">at</span> <span class="pre">hp</span></code> tries to clear out coercions in the hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">push_cast</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">push_cast</span></code> does the opposite of <code class="docutils literal notranslate"><span class="pre">norm_cast</span></code>: it pushes coercions towards the variables,
+e.g. it rewrites <code class="docutils literal notranslate"><span class="pre">&#8593;(a</span> <span class="pre">+</span> <span class="pre">b)</span></code> as <code class="docutils literal notranslate"><span class="pre">&#8593;a</span> <span class="pre">+</span> <span class="pre">&#8593;b</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">push_cast</span> <span class="pre">at</span> <span class="pre">hp</span></code> does the same at the hypothesis <code class="docutils literal notranslate"><span class="pre">hp</span></code>.</p>
 </td>
 </tr>
 </tbody>

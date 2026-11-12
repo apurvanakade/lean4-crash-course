@@ -6,7 +6,7 @@ Additional Problems for Practice
 
 The five days above are the whole course, but here are a few extra problems that never made it into
 the schedule. They're independent of each other and of the daily material, so pick whichever looks fun.
-Full worked solutions are linked in the sidebar under "Solutions on GitHub".
+Worked solutions to all of them, in the order they appear here, are in :solution:`AdditionalProblems.lean`.
 
 Induction & recursion practice
 ================================
