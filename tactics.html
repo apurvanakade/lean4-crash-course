@@ -231,7 +231,9 @@ then <code class="docutils literal notranslate"><span class="pre">ring</span></c
 </td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code> is Lean&#8217;s inequality solver.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">linarith</span></code> is Lean&#8217;s inequality solver.
+It uses the hypotheses in context to prove goals that follow from them by adding up linear (in)equalities.
+It cannot handle products of variables such as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">omega</span></code> is Lean&#8217;s solver for linear arithmetic over <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code>.
