@@ -183,6 +183,8 @@ Proving "trivial" statements
 
   * - ``linarith``
     - ``linarith`` is Lean's inequality solver.
+      It uses the hypotheses in context to prove goals that follow from them by adding up linear (in)equalities.
+      It cannot handle products of variables such as ``x * y``.
 
   * - ``omega``
     - ``omega`` is Lean's solver for linear arithmetic over ``ℕ`` and ``ℤ``.
