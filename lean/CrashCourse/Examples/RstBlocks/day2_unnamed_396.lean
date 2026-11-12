@@ -14,6 +14,10 @@ import Mathlib.Tactic
 --
 --   Useful for inequalities.
 --
+-- ``omega``
+--
+--   Useful for linear arithmetic over ``ℕ`` and ``ℤ``.
+--
 -- ``simp``
 --
 --   Complex simplifier. Use only to close goals.

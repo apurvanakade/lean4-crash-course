@@ -23,8 +23,8 @@ lemma cancellation_lemma {k m n : ℕ}
     (hmn : 2 * (m * k) ^ 2 = (n * k) ^ 2) :
     2 * m ^ 2 = n ^ 2 := by
   apply Nat.eq_of_mul_eq_mul_right hk_pos
-  ring_nf
-  ring_nf at hmn
-  linarith [hmn]
+  calc 2 * m ^ 2 * k ^ 2 = 2 * (m * k) ^ 2 := by ring
+    _ = (n * k) ^ 2 := hmn
+    _ = n ^ 2 * k ^ 2 := by ring
 
 --END--

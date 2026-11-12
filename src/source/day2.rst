@@ -218,6 +218,9 @@ If you have a term ``hp : ∃ x : X, P x`` then from this you can extract a witn
       and ``y`` is a term of type ``X``, then
       ``use y`` changes the target to ``P y`` and tries to close the goal.
 
+Note that divisibility, ``a ∣ b``, is itself an existential statement (``∃ k, b = a * k``),
+so both ``obtain`` and ``use`` work on it as well.
+
 Finally, we know enough Lean tactics to start doing some fun stuff.
 
 Barber paradox
@@ -379,6 +382,13 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
   * - ``linarith``
     - ``linarith`` is Lean's inequality solver.
 
+  * - ``omega``
+    - ``omega`` is Lean's solver for linear arithmetic over ``ℕ`` and ``ℤ``.
+      It uses all the hypotheses in context and either closes the goal or fails.
+      Unlike ``linarith`` it understands integers, so it knows things like ``x < 1 → x = 0``
+      and can handle ``ℕ`` subtraction, ``/`` and ``%`` by numerals, and ``≠``.
+      It cannot handle products of variables such as ``x * y``.
+
   * - ``simp``
     - ``simp`` is a very complex tactic that tries to use theorems from the mathlib library to close the goal.
       You should only ever use ``simp`` to *close a goal* because its behavior changes as more theorems get added to the library.
@@ -400,6 +410,10 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
   -- ``linarith``
   --
   --   Useful for inequalities.
+  --
+  -- ``omega``
+  --
+  --   Useful for linear arithmetic over ``ℕ`` and ``ℤ``.
   --
   -- ``simp``
   --
@@ -441,3 +455,8 @@ Fortunately, there are tactics in Lean for proving trivial proofs such as these.
 
 
 
+
+Solutions
+=========
+
+Worked solutions to all of today's exercises, in the order they appear above, are in :solution:`Day2.lean`.

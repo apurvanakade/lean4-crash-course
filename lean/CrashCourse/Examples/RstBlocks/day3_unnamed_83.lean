@@ -17,6 +17,7 @@ variable (X Y Z : Type)
 variable (f : X → Y) (g : Y → Z)
 
 -- Surjective (f : X → Y) := ∀ y, ∃ x, f x = y
+-- Function.comp_apply : (g ∘ f) x = g (f x)
 
 example
     (hf : Surjective f)

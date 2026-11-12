@@ -184,6 +184,13 @@ Proving "trivial" statements
   * - ``linarith``
     - ``linarith`` is Lean's inequality solver.
 
+  * - ``omega``
+    - ``omega`` is Lean's solver for linear arithmetic over ``ℕ`` and ``ℤ``.
+      It uses all the hypotheses in context and either closes the goal or fails.
+      Unlike ``linarith`` it understands integers, so it knows things like ``x < 1 → x = 0``
+      and can handle ``ℕ`` subtraction, ``/`` and ``%`` by numerals, and ``≠``.
+      It cannot handle products of variables such as ``x * y``.
+
   * - ``simp``
     - ``simp`` is a very complex tactic that tries to use theorems from the mathlib library to close the goal.
       You should only ever use ``simp`` to *close a goal* because its behavior changes as more theorems get added to the library.
@@ -222,3 +229,9 @@ Equality
     - ``norm_cast`` tries to clear out coercions between types (e.g. ``ℕ → ℤ`` or ``ℕ → ℚ``).
 
       ``norm_cast at hp`` tries to clear out coercions in the hypothesis ``hp``.
+
+  * - ``push_cast``
+    - ``push_cast`` does the opposite of ``norm_cast``: it pushes coercions towards the variables,
+      e.g. it rewrites ``↑(a + b)`` as ``↑a + ↑b``.
+
+      ``push_cast at hp`` does the same at the hypothesis ``hp``.

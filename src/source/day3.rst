@@ -101,6 +101,7 @@ In type theory, for every function ``f`` we can define a corresponding propositi
   variable (f : X → Y) (g : Y → Z)
 
   -- Surjective (f : X → Y) := ∀ y, ∃ x, f x = y
+  -- Function.comp_apply : (g ∘ f) x = g (f x)
 
   example
       (hf : Surjective f)
@@ -183,6 +184,7 @@ We'll need the following definitions and theorems from the library.
   * ``m ∣ n := ∃ k : ℕ, n = m * k``
   * ``Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)``
   * ``Nat.Prime.one_lt : p.Prime → 1 < p``
+  * ``Nat.Prime.not_dvd_one : p.Prime → ¬ p ∣ 1``
 
 **Factorials**
   * ``n ! := Nat.factorial n``
@@ -229,6 +231,7 @@ Whenever you need to remember what ``p`` actually is, use ``hp_def`` (for exampl
   -- m ∣ n := ∃ k : ℕ, n = m * k
   -- Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
   -- Nat.Prime.one_lt : p.Prime → 1 < p
+  -- Nat.Prime.not_dvd_one : p.Prime → ¬ p ∣ 1
   --
   -- n ! := Nat.factorial n
   -- Nat.factorial_pos : ∀ (n : ℕ), 0 < n !
@@ -260,3 +263,8 @@ So theorem proving in Lean often involves the following steps:
 * Break the theorem into small lemmas so that you can use the simplifiers more frequently.
 
 The hope is that one day we won’t have to do this and a theorem proving AI will eliminate the difference between human proofs and machine proofs.
+
+Solutions
+=========
+
+Worked solutions to all of today's exercises, in the order they appear above, are in :solution:`Day3.lean`.

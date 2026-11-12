@@ -34,7 +34,11 @@
 extensions = ['sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
     'lean_sphinx',
-    'sphinx.ext.todo']
+    'sphinx.ext.todo',
+    'sphinx.ext.extlinks']
+
+# ``:solution:`Day1.lean``` links to a worked-solutions file on GitHub.
+extlinks = {'solution': ('https://github.com/apurvanakade/lean4-crash-course/blob/master/lean/CrashCourse/Solutions/%s', '%s')}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

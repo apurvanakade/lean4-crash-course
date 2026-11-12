@@ -54,6 +54,12 @@ The tactic for getting rid of coercions is ``norm_cast`` which will reduce the a
 
       ``norm_cast at hp`` tries to clear out coercions at the hypothesis ``hp``.
 
+  * - ``push_cast``
+    - ``push_cast`` does the opposite of ``norm_cast``: it pushes coercions towards the variables,
+      e.g. it rewrites ``↑(a + b)`` as ``↑a + ↑b``.
+
+      ``push_cast at hp`` does the same at the hypothesis ``hp``.
+
 
 .. code:: lean4
 
@@ -80,9 +86,10 @@ The tactic for getting rid of coercions is ``norm_cast`` which will reduce the a
   -- Rat.mul_self_den : ∀ (q : ℚ), (q * q).den = q.den * q.den
   -- Rat.mul_self_num : ∀ (q : ℚ), (q * q).num = q.num * q.num
   -- Int.natAbs_mul_self' : ∀ (a : ℤ), ↑(a.natAbs) * ↑(a.natAbs) = a * a
+  -- mul_one : ∀ (a : ℤ), a * 1 = a
   -- Rat.den_nz : ∀ (q : ℚ), q.den ≠ 0
 
-  -- Use ``simp at hp`` (or, interactively, ``simp? at hp``) to commute
+  -- Use ``push_cast at clear_denom`` to commute
   -- products with coercions. See the goal window!
 
   theorem sqrt2_irrational :
@@ -165,12 +172,16 @@ you'll see the code that proves ``ℤ`` is an instance of several type classes.
 
   lemma mul_comm_of_cyclic
       {G : Type*}
-      [hc : CyclicGroup G]
-      (g : G) :
+      [hc : CyclicGroup G] :
       ∀ a b : G, a * b = b * a := by
     have has_generator := hc.has_generator
     sorry
 
+
+Solutions
+=========
+
+Worked solutions to all of today's exercises, in the order they appear above, are in :solution:`Day5.lean`.
 
 Final remarks
 =================

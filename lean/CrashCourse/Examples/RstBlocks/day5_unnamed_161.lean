@@ -10,8 +10,7 @@ class CyclicGroup (G : Type*) extends Group G where
 
 lemma mul_comm_of_cyclic
     {G : Type*}
-    [hc : CyclicGroup G]
-    (g : G) :
+    [hc : CyclicGroup G] :
     ∀ a b : G, a * b = b * a := by
   have has_generator := hc.has_generator
   sorry

@@ -8,6 +8,7 @@ theorem dvd_sub_one {p a : ℕ} : (p ∣ a) → (p ∣ a + 1) → (p ∣ 1) := b
 -- m ∣ n := ∃ k : ℕ, n = m * k
 -- Nat.prime_def : p.Prime ↔ 2 ≤ p ∧ (∀ (m : ℕ), m ∣ p → m = 1 ∨ m = p)
 -- Nat.Prime.one_lt : p.Prime → 1 < p
+-- Nat.Prime.not_dvd_one : p.Prime → ¬ p ∣ 1
 --
 -- n ! := Nat.factorial n
 -- Nat.factorial_pos : ∀ (n : ℕ), 0 < n !

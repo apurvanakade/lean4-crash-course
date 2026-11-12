@@ -381,6 +381,11 @@ For the following exercises, you only require ``exfalso``, ``push Not``, and ``c
   --END--
 
 
+Solutions
+=========
+
+Worked solutions to all of today's exercises, in the order they appear above, are in :solution:`Day1.lean`.
+
 Final Remarks
 ===============
 

@@ -21,9 +21,10 @@ lemma den_2 : (2 : ℚ).den = 1 := by
 -- Rat.mul_self_den : ∀ (q : ℚ), (q * q).den = q.den * q.den
 -- Rat.mul_self_num : ∀ (q : ℚ), (q * q).num = q.num * q.num
 -- Int.natAbs_mul_self' : ∀ (a : ℤ), ↑(a.natAbs) * ↑(a.natAbs) = a * a
+-- mul_one : ∀ (a : ℤ), a * 1 = a
 -- Rat.den_nz : ∀ (q : ℚ), q.den ≠ 0
 
--- Use ``simp at hp`` (or, interactively, ``simp? at hp``) to commute
+-- Use ``push_cast at clear_denom`` to commute
 -- products with coercions. See the goal window!
 
 theorem sqrt2_irrational :
