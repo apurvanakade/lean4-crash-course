@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>More tactics &#8212; Lean at MC 2020 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=c1284d73" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Glossary of tactics" href="tactics.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="more-tactics">
+<span id="tactics-extra"></span><h1>More tactics<a class="headerlink" href="#more-tactics" title="Link to this heading">&#182;</a></h1>
+<p>These tactics are not needed for the exercises in the course,
+but you will see them all the time in mathlib and in other people&#8217;s Lean code.
+(The tactics needed for the exercises are in the <a class="reference internal" href="tactics.html"><span class="doc">Glossary of tactics</span></a>.)</p>
+<section id="introducing-and-breaking-up-hypotheses">
+<h2>Introducing and breaking up hypotheses<a class="headerlink" href="#introducing-and-breaking-up-hypotheses" title="Link to this heading">&#182;</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#rintro">rintro</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rintro</span></code> is <code class="docutils literal notranslate"><span class="pre">intro</span></code> followed by <code class="docutils literal notranslate"><span class="pre">obtain</span></code>:
+it introduces a hypothesis and breaks it up in one step.</p>
+<p>If the target is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8743;</span> <span class="pre">Q</span> <span class="pre">&#8594;</span> <span class="pre">R</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">rintro</span> <span class="pre">&#10216;hp,</span> <span class="pre">hq&#10217;</span></code> introduces <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">hq</span> <span class="pre">:</span> <span class="pre">Q</span></code>.</p>
+<p>If the target is <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8744;</span> <span class="pre">Q</span> <span class="pre">&#8594;</span> <span class="pre">R</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">rintro</span> <span class="pre">(hp</span> <span class="pre">|</span> <span class="pre">hq)</span></code> creates two goals, one with <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> and one with <code class="docutils literal notranslate"><span class="pre">hq</span> <span class="pre">:</span> <span class="pre">Q</span></code>.</p>
+<p>If the target is <code class="docutils literal notranslate"><span class="pre">(&#8707;</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">P</span> <span class="pre">x)</span> <span class="pre">&#8594;</span> <span class="pre">R</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">rintro</span> <span class="pre">&#10216;x,</span> <span class="pre">hx&#10217;</span></code> introduces <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">hx</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">x</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#rcases">rcases</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rcases</span></code> is the tactic <code class="docutils literal notranslate"><span class="pre">obtain</span></code> is built on: <code class="docutils literal notranslate"><span class="pre">rcases</span> <span class="pre">hpq</span> <span class="pre">with</span> <span class="pre">&#10216;hp,</span> <span class="pre">hq&#10217;</span></code> does the same as
+<code class="docutils literal notranslate"><span class="pre">obtain</span> <span class="pre">&#10216;hp,</span> <span class="pre">hq&#10217;</span> <span class="pre">:=</span> <span class="pre">hpq</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#cases">cases</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cases</span></code> breaks up a hypothesis like <code class="docutils literal notranslate"><span class="pre">obtain</span></code>, but names the cases explicitly.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">hpq</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">&#8744;</span> <span class="pre">Q</span></code> then</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">cases</span><span class="w"> </span><span class="n">hpq</span><span class="w"> </span><span class="k">with</span>
+<span class="bp">|</span><span class="w"> </span><span class="n">inl</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="bp">...</span>
+<span class="bp">|</span><span class="w"> </span><span class="n">inr</span><span class="w"> </span><span class="n">hq</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="bp">...</span>
+</pre></div>
+</div>
+<p>creates the two goals with <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">hq</span> <span class="pre">:</span> <span class="pre">Q</span></code>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Cases.html">induction&#8217;</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">induction'</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">k</span> <span class="pre">ih</span></code> is a shorter way to do induction on <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">:</span> <span class="pre">&#8469;</span></code>:
+it produces the base case, and the inductive step with <code class="docutils literal notranslate"><span class="pre">ih</span></code> the statement for <code class="docutils literal notranslate"><span class="pre">k</span></code>
+and the target the statement for <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">+</span> <span class="pre">1</span></code>.
+(<code class="docutils literal notranslate"><span class="pre">induction</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">|</span> <span class="pre">zero</span> <span class="pre">=&gt;</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">succ</span> <span class="pre">k</span> <span class="pre">ih</span> <span class="pre">=&gt;</span> <span class="pre">...</span></code> does the same.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#specialize">specialize</a></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">hp</span></code> is a term of type <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">X,</span> <span class="pre">P</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">:</span> <span class="pre">X</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">specialize</span> <span class="pre">hp</span> <span class="pre">y</span></code> <em>replaces</em> <code class="docutils literal notranslate"><span class="pre">hp</span></code> by <code class="docutils literal notranslate"><span class="pre">hp</span> <span class="pre">:</span> <span class="pre">P</span> <span class="pre">y</span></code>.
+(Compare <code class="docutils literal notranslate"><span class="pre">have</span> <span class="pre">hpy</span> <span class="pre">:=</span> <span class="pre">hp</span> <span class="pre">y</span></code>, which keeps <code class="docutils literal notranslate"><span class="pre">hp</span></code>.)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#refine">refine</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">refine</span></code> is like <code class="docutils literal notranslate"><span class="pre">exact</span></code> but lets you leave holes <code class="docutils literal notranslate"><span class="pre">?_</span></code> in the term.
+Each hole becomes a new goal.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">refine</span> <span class="pre">&#10216;?_,</span> <span class="pre">?_&#10217;</span></code> splits a goal <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">&#8743;</span> <span class="pre">Q</span></code> into two goals,
+and <code class="docutils literal notranslate"><span class="pre">refine</span> <span class="pre">&#10216;y,</span> <span class="pre">?_&#10217;</span></code> turns the goal <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code> into <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">y</span></code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="writing-proofs-on-paper">
+<h2>Writing proofs on paper<a class="headerlink" href="#writing-proofs-on-paper" title="Link to this heading">&#182;</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#calc">calc</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">calc</span></code> lets you write a chain of equalities or inequalities,
+with a justification for each step.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">calc</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">h1</span><span class="o">]</span>
+<span class="w">  </span><span class="n">_</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">ring</span>
+<span class="w">  </span><span class="n">_</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">h2</span>
+</pre></div>
+</div>
+<p>This proves <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#8804;</span> <span class="pre">d</span></code>.
+Mathematically, this is exactly how you would write the chain on paper.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/ByContra.html">by_contra!</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">by_contra!</span></code> is <code class="docutils literal notranslate"><span class="pre">by_contra</span></code> followed by pushing the negation through the new hypothesis.</p>
+<p>If the target is <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code>, then <code class="docutils literal notranslate"><span class="pre">by_contra!</span> <span class="pre">h</span></code> gives <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">&#172;</span> <span class="pre">P</span> <span class="pre">x</span></code>
+(rather than <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code>).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="closing-goals">
+<h2>Closing goals<a class="headerlink" href="#closing-goals" title="Link to this heading">&#182;</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#simpa">simpa</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simpa</span> <span class="pre">using</span> <span class="pre">h</span></code> simplifies both the target and the term <code class="docutils literal notranslate"><span class="pre">h</span></code>
+and then closes the goal if the results match.
+It is the safe way to use <code class="docutils literal notranslate"><span class="pre">simp</span></code> on a goal you have not yet fully reduced.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Aesop/Frontend/Tactic.html">aesop</a></p></td>
+<td><p>A general-purpose proof search tool.
+It combines <code class="docutils literal notranslate"><span class="pre">simp</span></code>, <code class="docutils literal notranslate"><span class="pre">intro</span></code>, <code class="docutils literal notranslate"><span class="pre">constructor</span></code>, <code class="docutils literal notranslate"><span class="pre">obtain</span></code> and more,
+and is often able to close goals that only need a few routine steps.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Tauto.html">tauto</a></p></td>
+<td><p>Closes goals that follow from propositional logic alone
+(<code class="docutils literal notranslate"><span class="pre">&#8743;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#8744;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#172;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#8594;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#8596;</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/SplitIfs.html">split_ifs</a></p></td>
+<td><p>Splits every <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">then</span> <span class="pre">...</span> <span class="pre">else</span> <span class="pre">...</span></code> in the target into cases,
+adding the condition (or its negation) as a hypothesis.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rewriting-and-comparing-parts">
+<h2>Rewriting and comparing parts<a class="headerlink" href="#rewriting-and-comparing-parts" title="Link to this heading">&#182;</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/SimpRw.html">simp_rw</a></p></td>
+<td><p>Like <code class="docutils literal notranslate"><span class="pre">rw</span></code>, but repeats and also works under binders such as <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">...</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">...</span></code>.
+<code class="docutils literal notranslate"><span class="pre">rw</span></code> fails there.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#ext">ext</a></p></td>
+<td><p>To prove two functions or sets are equal, <code class="docutils literal notranslate"><span class="pre">ext</span> <span class="pre">x</span></code> reduces to showing they agree on an arbitrary <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+For sets, the goal <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">t</span></code> becomes <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8596;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Init/NotationExtra.html">funext</a></p></td>
+<td><p>To prove two functions are equal, <code class="docutils literal notranslate"><span class="pre">funext</span> <span class="pre">x</span></code> reduces to showing
+<code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span> <span class="pre">x</span></code> for an arbitrary <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/ApplyFun.html">apply_fun</a></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> then <code class="docutils literal notranslate"><span class="pre">apply_fun</span> <span class="pre">f</span> <span class="pre">at</span> <span class="pre">h</span></code> changes <code class="docutils literal notranslate"><span class="pre">h</span></code> to <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">f</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">b</span></code>.
+<code class="docutils literal notranslate"><span class="pre">apply_fun</span> <span class="pre">f</span></code> on the goal <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> changes it to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">b</span></code>
+(you will then need to know <code class="docutils literal notranslate"><span class="pre">f</span></code> is injective).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Convert.html">convert</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">convert</span> <span class="pre">h</span></code> closes the goal using <code class="docutils literal notranslate"><span class="pre">h</span></code> when the type of <code class="docutils literal notranslate"><span class="pre">h</span></code> is <em>almost</em> the target:
+it leaves a new goal for each place where they differ.
+<code class="docutils literal notranslate"><span class="pre">convert</span> <span class="pre">h</span> <span class="pre">using</span> <span class="pre">2</span></code> limits how deep it looks for differences.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#congr">congr</a></p></td>
+<td><p>If the goal is <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">b</span></code>, then <code class="docutils literal notranslate"><span class="pre">congr</span></code> reduces it to <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code>.
+More generally, it compares the two sides piece by piece
+and leaves a goal for each place where they differ.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/GCongr/Core.html">gcongr</a></p></td>
+<td><p>The same idea for inequalities:
+if the goal is <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">&#8804;</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c</span></code>, or <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">a</span> <span class="pre">&#8804;</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">b</span></code> with <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&#8804;</span> <span class="pre">x</span></code>,
+then <code class="docutils literal notranslate"><span class="pre">gcongr</span></code> reduces it to <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#8804;</span> <span class="pre">b</span></code>.
+Side goals such as <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&#8804;</span> <span class="pre">x</span></code> are tried with <code class="docutils literal notranslate"><span class="pre">positivity</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="finding-lemmas">
+<h2>Finding lemmas<a class="headerlink" href="#finding-lemmas" title="Link to this heading">&#182;</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 90.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#exact___">exact?</a></p></td>
+<td><p>Searches mathlib for a lemma that closes the goal and tells you what it found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#apply___">apply?</a></p></td>
+<td><p>Same, but also suggests lemmas that only make progress on the goal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#rw___">rw?</a></p></td>
+<td><p>Suggests rewrites that apply to the current goal.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="tactics.html" title="Previous document">Glossary of tactics</a>
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Lean at MC 2020</a></h1>
+
+
+
+
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="day1.html">1. Logic in Lean - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2.html">2. Logic in Lean - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day3.html">3. Infinitely Many Primes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day4.html">4. Sqrt 2 is irrational</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day5.html">5. Bits &amp; Pieces</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="additional_problems.html">Additional Problems for Practice</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">Pretty Symbols in Lean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tactics.html">Glossary of tactics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">More tactics</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/apurvanakade/lean4-crash-course/tree/master/lean/CrashCourse/Solutions">Solutions on GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://live.lean-lang.org/">Lean Live Editor</a></li>
+    
+    <li class="toctree-l1"><a href="https://leanprover-community.github.io/mathlib4_docs/">Lean Documentation</a></li>
+    
+    <li class="toctree-l1"><a href="https://leanprover-community.github.io/">Leanprover Community</a></li>
+    
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2020, Apurva Nakade, Jalex Stark.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/tactics_extra.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

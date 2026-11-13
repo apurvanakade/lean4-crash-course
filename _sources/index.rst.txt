@@ -25,6 +25,7 @@ Lean at MC 2020
 
    symbols
    tactics
+   tactics_extra
 
    
 

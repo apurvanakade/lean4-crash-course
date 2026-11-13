@@ -50,6 +50,14 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>&#8704;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\forall</span></code></p></td>
+<td><p>for all quantifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#8707;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\exists</span></code></p></td>
+<td><p>there exists quantifier</p></td>
+</tr>
 <tr class="row-even"><td><p>&#8594;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\to</span></code></p></td>
 <td><p>function or implies</p></td>
@@ -57,14 +65,6 @@
 <tr class="row-odd"><td><p>&#8596;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\iff</span></code></p></td>
 <td><p>if and only if</p></td>
-</tr>
-<tr class="row-even"><td><p>&#8592;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">\l</span></code></p></td>
-<td><p>used by the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic</p></td>
-</tr>
-<tr class="row-odd"><td><p>&#172;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">\not</span></code></p></td>
-<td><p>negation operator</p></td>
 </tr>
 <tr class="row-even"><td><p>&#8743;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\and</span></code></p></td>
@@ -74,33 +74,77 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">\or</span></code></p></td>
 <td><p>or operator</p></td>
 </tr>
-<tr class="row-even"><td><p>&#8707;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">\exists</span></code></p></td>
-<td><p>there exists quantifier</p></td>
+<tr class="row-even"><td><p>&#172;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\not</span></code></p></td>
+<td><p>negation operator</p></td>
 </tr>
-<tr class="row-odd"><td><p>&#8704;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">\forall</span></code></p></td>
-<td><p>for all quantifier</p></td>
+<tr class="row-odd"><td><p>&#8800;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\ne</span></code></p></td>
+<td><p>not equal to</p></td>
+</tr>
+<tr class="row-even"><td><p>&#8804;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\le</span></code></p></td>
+<td><p>less than or equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#8805;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\ge</span></code></p></td>
+<td><p>greater than or equal to</p></td>
 </tr>
 <tr class="row-even"><td><p>&#8739;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\mid</span></code></p></td>
 <td><p>divisibility <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>&#8469;</p></td>
+<tr class="row-odd"><td><p>&#8712;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\in</span></code></p></td>
+<td><p>is an element of</p></td>
+</tr>
+<tr class="row-even"><td><p>&#8469;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\nat</span></code></p></td>
 <td><p>type of natural numbers</p></td>
 </tr>
-<tr class="row-even"><td><p>&#8484;</p></td>
+<tr class="row-odd"><td><p>&#8484;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\int</span></code></p></td>
 <td><p>type of integers</p></td>
 </tr>
-<tr class="row-odd"><td><p>&#8728;</p></td>
+<tr class="row-even"><td><p>&#8474;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\Q</span></code></p></td>
+<td><p>type of rational numbers</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#8477;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\R</span></code></p></td>
+<td><p>type of real numbers</p></td>
+</tr>
+<tr class="row-even"><td><p>&#8593;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u</span></code></p></td>
+<td><p>coercion from one type to another (e.g. <code class="docutils literal notranslate"><span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8484;</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#10216; &#10217;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\langle</span></code> <code class="docutils literal notranslate"><span class="pre">\rangle</span></code></p></td>
+<td><p>angle brackets, used by <code class="docutils literal notranslate"><span class="pre">obtain</span></code>, <code class="docutils literal notranslate"><span class="pre">use</span></code>, <code class="docutils literal notranslate"><span class="pre">refine</span></code> and for pairs of terms (also <code class="docutils literal notranslate"><span class="pre">\&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">\&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.</span></code> followed by a space</p></td>
+<td><p>focuses on the first goal: the tactics indented after it must close it</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#8592;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\l</span></code></p></td>
+<td><p>used by the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic (also <code class="docutils literal notranslate"><span class="pre">\leftarrow</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>&#8728;</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">\circ</span></code></p></td>
 <td><p>composition of functions</p></td>
 </tr>
-<tr class="row-even"><td><p>&#8800;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">\ne</span></code></p></td>
-<td><p>not equal to</p></td>
+<tr class="row-odd"><td><p>&#8721;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\sum</span></code></p></td>
+<td><p>sum over a range</p></td>
+</tr>
+<tr class="row-even"><td><p>&#8315;&#185;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\inv</span></code></p></td>
+<td><p>multiplicative inverse</p></td>
+</tr>
+<tr class="row-odd"><td><p>&#945;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\a</span></code></p></td>
+<td><p>Greek letter alpha, often used as a name for a type (<code class="docutils literal notranslate"><span class="pre">\b</span></code> gives &#946;, and so on)</p></td>
 </tr>
 </tbody>
 </table>
@@ -161,6 +205,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Pretty Symbols in Lean</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tactics.html">Glossary of tactics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tactics_extra.html">More tactics</a></li>
 </ul>
 
 

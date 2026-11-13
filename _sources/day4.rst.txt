@@ -157,8 +157,9 @@ Prove (*) assuming m and n are coprime.
 
   theorem sqrt2_irrational' :
       ¬ ∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m.Coprime n := by
-    rintro ⟨m, n, hmn, h_cop⟩
-    -- rintro lets you destructure the hypothesis as you introduce it
+    intro hex
+    obtain ⟨m, n, hmn, h_cop⟩ := hex
+    -- obtain lets you destructure the hypothesis ``hex``
     -- you get the brackets by typing ``\langle`` and ``\rangle``
     sorry
 
@@ -238,7 +239,8 @@ Prove (*) assuming m ≠ 0
   theorem wlog_coprime :
       (∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m ≠ 0) →
       (∃ (m' n' : ℕ), 2 * m' ^ 2 = n' ^ 2 ∧ m'.Coprime n') := by
-    rintro ⟨m, n, hmn, hme0⟩
+    intro hex
+    obtain ⟨m, n, hmn, hme0⟩ := hex
     set k := m.gcd n with hk
     -- might be useful to declutter
     -- you can replace all the ``m.gcd n`` with ``k`` using ``rw [← hk]`` if needed
