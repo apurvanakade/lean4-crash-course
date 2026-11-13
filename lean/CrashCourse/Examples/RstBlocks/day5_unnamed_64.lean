@@ -29,6 +29,7 @@ lemma den_2 : (2 : ℚ).den = 1 := by
 
 theorem sqrt2_irrational :
     ¬ (∃ q : ℚ, 2 = q * q) := by
-  rintro ⟨q, key⟩
+  intro hex
+  obtain ⟨q, key⟩ := hex
   have clear_denom := Rat.eq_iff_mul_eq_mul.mp key
   sorry

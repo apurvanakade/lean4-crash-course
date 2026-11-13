@@ -34,7 +34,8 @@ lemma division_lemma_m {m n : ℕ}
 
 theorem sqrt2_irrational' :
     ¬ ∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m.Coprime n := by
-  rintro ⟨m, n, hmn, h_cop⟩
+  intro hex
+  obtain ⟨m, n, hmn, h_cop⟩ := hex
   -- `2` divides both `m` and `n`, hence their gcd, which is `1`.
   have h2m := division_lemma_m hmn
   have h2n := division_lemma_n hmn
@@ -65,7 +66,8 @@ lemma cancellation_lemma {k m n : ℕ}
 theorem wlog_coprime :
     (∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m ≠ 0) →
     (∃ (m' n' : ℕ), 2 * m' ^ 2 = n' ^ 2 ∧ m'.Coprime n') := by
-  rintro ⟨m, n, hmn, hme0⟩
+  intro hex
+  obtain ⟨m, n, hmn, hme0⟩ := hex
   set k := m.gcd n with hk
   -- `k > 0`, since `m > 0`.
   have hm_pos : 0 < m := ne_zero_ge_zero hme0

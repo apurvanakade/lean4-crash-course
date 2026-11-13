@@ -24,7 +24,8 @@ lemma mul_comm_of_cyclic
 -- The exercise's `ℕ` statement, from the result of day 4.
 theorem sqrt2_irrational_nat :
     ¬ ∃ (m n : ℕ), 2 * (m * m) = (n * n) ∧ m ≠ 0 := by
-  rintro ⟨m, n, h, hm⟩
+  intro hex
+  obtain ⟨m, n, h, hm⟩ := hex
   apply Day4.sqrt2_irrational''
   exact ⟨m, n, by rw [pow_two, pow_two]; exact h, hm⟩
 
@@ -36,7 +37,8 @@ lemma den_2 : (2 : ℚ).den = 1 := by
 
 theorem sqrt2_irrational :
     ¬ (∃ q : ℚ, 2 = q * q) := by
-  rintro ⟨q, key⟩
+  intro hex
+  obtain ⟨q, key⟩ := hex
   -- Clear denominators in `2 = q * q`.
   have clear_denom := Rat.eq_iff_mul_eq_mul.mp key
   rw [den_2, num_2, Rat.mul_self_den, Rat.mul_self_num] at clear_denom
@@ -54,7 +56,8 @@ theorem sqrt2_irrational :
 
 theorem sqrt2_int : ¬ (∃ m n : ℤ, m ≠ 0 ∧ 2 * m ^ 2 = n ^ 2) := by
   -- Unpack the witnesses `m, n : ℤ` and the hypotheses about them.
-  rintro ⟨m, n, hm, hmn⟩
+  intro hex
+  obtain ⟨m, n, hm, hmn⟩ := hex
   -- We'll derive a contradiction with the `ℕ` version.
   apply Day4.sqrt2_irrational''
   -- Use `|m|` and `|n|` as witnesses; `|m| ≠ 0` follows from `m ≠ 0`.
@@ -68,7 +71,8 @@ theorem sqrt2_int : ¬ (∃ m n : ℤ, m ≠ 0 ∧ 2 * m ^ 2 = n ^ 2) := by
   norm_cast at hmn
 
 example : ¬ (∃ q : ℚ, 2 = q * q) := by
-  rintro ⟨q, key⟩
+  intro hex
+  obtain ⟨q, key⟩ := hex
   -- Cross-multiplying `2 = q * q` gives an equation of numerators/denominators.
   have h := Rat.eq_iff_mul_eq_mul.mp key
   rw [den_2, num_2, Rat.mul_self_den, Rat.mul_self_num] at h

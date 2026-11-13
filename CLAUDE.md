@@ -20,9 +20,10 @@ This repo (despite its name) contains **"Lean at MC2020"**, a **Lean 4** crash c
 ## Repo layout (master branch)
 
 - `src/source/*.rst` — the course content, one file per day (`day1.rst` … `day5.rst`) plus standalone
-  `introduction.rst`, `symbols.rst`, `tactics.rst`, and per-exercise `hint_*.rst` files.
+  `introduction.rst`, `symbols.rst`, `tactics.rst` (tactics used in the course), `tactics_extra.rst` (common tactics not used in the course), and per-exercise `hint_*.rst` files.
 - `src/source/conf.py` — Sphinx config; registers the custom `lean_sphinx` extension and the navbar links
   (Solutions on GitHub, Lean Live Editor, Lean Documentation).
+- `src/source/_static/custom.css` — extra styling (keeps the tactic-name links in the glossary tables on one line).
 - `src/lean_sphinx.py` — custom Sphinx extension/builder for this project (see below).
 - `src/Makefile`, `src/html-make.sh` — build entry points.
 - `lean/` — a Lake package (`lakefile.toml`, `lean-toolchain` pinned to `leanprover/lean4:v4.32.2`) depending on

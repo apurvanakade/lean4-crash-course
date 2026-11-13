@@ -25,8 +25,9 @@ lemma division_lemma_m {m n : ℕ}
 
 theorem sqrt2_irrational' :
     ¬ ∃ (m n : ℕ), 2 * m ^ 2 = n ^ 2 ∧ m.Coprime n := by
-  rintro ⟨m, n, hmn, h_cop⟩
-  -- rintro lets you destructure the hypothesis as you introduce it
+  intro hex
+  obtain ⟨m, n, hmn, h_cop⟩ := hex
+  -- obtain lets you destructure the hypothesis ``hex``
   -- you get the brackets by typing ``\langle`` and ``\rangle``
   sorry
 

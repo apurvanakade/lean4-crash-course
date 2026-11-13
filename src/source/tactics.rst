@@ -4,6 +4,9 @@
 Glossary of tactics
 *********************
 
+Tactics that are not used in the course but are common in practice are in the
+:doc:`More tactics<tactics_extra>`.
+
 Implications in Lean
 ======================
 
@@ -11,7 +14,7 @@ Implications in Lean
    :widths: 20 80
    :header-rows: 0
 
-   * - ``exact``
+   * - `exact <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#exact>`__
      - If
        ``P`` is the target of the current goal
        and ``hp`` is a term of type ``P``,
@@ -19,7 +22,7 @@ Implications in Lean
 
        Mathematically, this saying "this is *exactly* what we were required to prove".
 
-   * - ``intro``
+   * - `intro <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#intro>`__
      - If the target of the current goal is a function ``P → Q``,
        then ``intro hp`` will produce a hypothesis
        ``hp : P`` and change the target to  ``Q``.
@@ -31,14 +34,18 @@ Implications in Lean
    :widths: 20 80
    :header-rows: 0
 
-   * - ``have``
+   * - `have <https://leanprover-community.github.io/mathlib4_docs/Init/Tactics.html>`__
      - ``have`` is used to create intermediate variables.
 
        If ``f`` is a term of type ``P → Q`` and
        ``hp`` is a term of type ``P``, then
        ``have hq := f hp`` creates the hypothesis ``hq : Q`` .
 
-   * - ``apply``
+       ``have hp : P`` creates a new goal with target ``P`` and
+       adds ``hp : P`` as a hypothesis to the original goal.
+       Use this when you know the type of the term you want but not (yet) the term itself.
+
+   * - `apply <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#apply>`__
      - ``apply`` is used for backward reasoning.
 
        If the target of the current goal is ``Q`` and
@@ -54,27 +61,27 @@ Proof by contradiction
   :widths: 10 90
   :header-rows: 0
 
-  * - ``exfalso``
+  * - `exfalso <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#exfalso>`__
     - Changes the target of the current goal to ``False``.
 
       The name derives from `"ex falso, quodlibet" <https://en.wikipedia.org/wiki/Principle_of_explosion>`__ which translates to "from contradiction, anything".
       You should use this tactic when there are contradictory hypotheses present.
 
-  * - ``by_cases``
+  * - `by_cases <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#by_cases>`__
     - If ``P : Prop``, then ``by_cases hp : P`` creates two goals,
       the first with a hypothesis ``hp : P`` and second with a hypothesis ``hp : ¬ P``.
 
       Mathematically, this is saying either ``P`` is true or ``P`` is false.
       ``by_cases`` is the most direct application of the law of excluded middle.
 
-  * - ``by_contra``
+  * - `by_contra <https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Init.html>`__
     - If the target of the current goal is  ``Q``,
       then ``by_contra`` changes the target to  ``False`` and
       adds ``hnq : ¬ Q`` as a hypothesis.
 
       Mathematically, this is proof by contradiction.
 
-  * - ``push Not``
+  * - `push Not <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Push.html>`__
     - ``push Not`` simplifies negations in the target.
 
       For example, if the target of the current goal is ``¬ ¬ P``, then
@@ -82,7 +89,7 @@ Proof by contradiction
 
       You can also push negations across a hypothesis ``hp : P`` using ``push Not at hp``.
 
-  * - ``contrapose!``
+  * - `contrapose! <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Contrapose.html>`__
     - If the target of the current goal is  ``P → Q``,
       then ``contrapose!`` changes the target to  ``¬ Q → ¬ P``.
 
@@ -101,7 +108,7 @@ And / Or
   :widths: 10 90
   :header-rows: 0
 
-  * - ``obtain``
+  * - `obtain <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#obtain>`__
     - ``obtain`` is a general tactic that breaks a complicated term into simpler ones.
 
       If ``hpq`` is a term of type ``P ∧ Q``, then
@@ -113,7 +120,7 @@ And / Or
       If ``hpq`` is a term of type ``P ∨ Q``, then
       ``obtain hp | hq := hpq`` creates two goals and adds the hypothesis ``hp : P`` in one and ``hq : Q`` in the other.
 
-  * - ``constructor``
+  * - `constructor <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#constructor>`__
     - ``constructor`` is a general tactic that breaks a complicated goal into simpler ones.
 
       If the target of the current goal is ``P ∧ Q``, then
@@ -122,11 +129,11 @@ And / Or
       If the target of the current goal is ``P ↔ Q``, then
       ``constructor`` breaks up the goal into two goals with targets ``P → Q`` and ``Q → P``.
 
-  * - ``left``
+  * - `left <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#left>`__
     - If the target of the current goal is ``P ∨ Q``, then
       ``left`` changes the target to ``P``.
 
-  * - ``right``
+  * - `right <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#right>`__
     - If the target of the current goal is ``P ∨ Q``, then
       ``right`` changes the target to ``Q``.
 
@@ -137,12 +144,12 @@ Quantifiers
   :widths: 10 90
   :header-rows: 0
 
-  * - ``have``
+  * - `have <https://leanprover-community.github.io/mathlib4_docs/Init/Tactics.html>`__
     - If ``hp`` is a term of type ``∀ x : X, P x`` and
       ``y`` is a term of type ``X`` then
       ``have hpy := hp y`` creates a hypothesis ``hpy : P y``.
 
-  * - ``intro``
+  * - `intro <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#intro>`__
     - If the target of the current goal is ``∀ x : X, P x``, then
       ``intro x`` creates a hypothesis ``x : X`` and
       changes the target to ``P x``.
@@ -151,12 +158,12 @@ Quantifiers
   :widths: 10 90
   :header-rows: 0
 
-  * - ``obtain``
+  * - `obtain <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#obtain>`__
     - If ``hp`` is a term of type ``∃ x : X, P x``, then
       ``obtain ⟨x, key⟩ := hp`` breaks it into
       ``x : X`` and ``key : P x``.
 
-  * - ``use``
+  * - `use <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Use.html>`__
     - If the target of the current goal is ``∃ x : X, P x``
       and ``y`` is a term of type ``X``, then
       ``use y`` changes the target to ``P y`` and tries to close the goal.
@@ -168,32 +175,34 @@ Proving "trivial" statements
   :widths: 10 90
   :header-rows: 0
 
-  * - ``norm_num``
+  * - `norm_num <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/NormNum/Core.html>`__
     - ``norm_num`` is Lean’s calculator. If the target has a proof that involves *only* numbers and arithmetic operations,
       then ``norm_num`` will close this goal.
 
       If ``hp : P`` is an assumption then ``norm_num at hp`` tries to simplify ``hp`` using basic arithmetic operations.
 
-  * - ``ring``
+      ``norm_num [h1, h2]`` also uses the hypotheses or lemmas ``h1``, ``h2`` as rewriting rules.
+
+  * - `ring <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Ring/RingNF.html>`__
     - ``ring`` is Lean's symbolic manipulator.
       If the target has a proof that involves *only* algebraic operations,
       then ``ring`` will close the goal.
 
       If ``hp : P`` is an assumption then ``ring at hp`` tries to simplify ``hp`` using basic algebraic operations.
 
-  * - ``linarith``
+  * - `linarith <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Linarith/Frontend.html>`__
     - ``linarith`` is Lean's inequality solver.
       It uses the hypotheses in context to prove goals that follow from them by adding up linear (in)equalities.
       It cannot handle products of variables such as ``x * y``.
 
-  * - ``omega``
+  * - `omega <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#omega>`__
     - ``omega`` is Lean's solver for linear arithmetic over ``ℕ`` and ``ℤ``.
       It uses all the hypotheses in context and either closes the goal or fails.
       Unlike ``linarith`` it understands integers, so it knows things like ``x < 1 → x = 0``
       and can handle ``ℕ`` subtraction, ``/`` and ``%`` by numerals, and ``≠``.
       It cannot handle products of variables such as ``x * y``.
 
-  * - ``simp``
+  * - `simp <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#simp>`__
     - ``simp`` is a very complex tactic that tries to use theorems from the mathlib library to close the goal.
       You should only ever use ``simp`` to *close a goal* because its behavior changes as more theorems get added to the library.
 
@@ -205,7 +214,7 @@ Equality
   :widths: 10 90
   :header-rows: 0
 
-  * - ``rw``
+  * - `rw <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#rw>`__
     - If ``f`` is a term of type ``P = Q`` (or ``P ↔ Q``), then
 
         ``rw [f]`` searches for ``P`` in the target and replaces it with ``Q``.
@@ -220,19 +229,35 @@ Equality
 
       Mathematically, this is saying because ``P = Q``, we can replace ``P`` with ``Q`` (or the other way around).
 
-  * - ``set``
+  * - `symm <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#symm>`__
+    - If the target of the current goal is ``P = Q``, then
+      ``symm`` changes the target to ``Q = P``.
+
+  * - `unfold <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#unfold>`__
+    - ``unfold f`` replaces ``f`` in the target by its definition.
+      ``unfold f at hp`` does the same in the hypothesis ``hp``.
+
+      For example, ``unfold Function.Surjective`` turns ``Surjective f``
+      into ``∀ y, ∃ x, f x = y``.
+
+  * - `induction <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#induction>`__
+    - If ``n : ℕ`` then ``induction n with | zero => ... | succ k ih => ...``
+      splits the goal into the base case ``n = 0`` and the inductive step,
+      where ``ih`` is the statement for ``k`` and the target is the statement for ``k + 1``.
+
+  * - `set <https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Set.html>`__
     - ``set x := e with hx`` introduces a new name ``x`` for the expression ``e``,
       replaces every ``e`` in the target and the hypotheses with ``x``,
       and adds the hypothesis ``hx : x = e``.
 
       Mathematically, this is saying "let ``x`` denote ``e``".
 
-  * - ``norm_cast``
+  * - `norm_cast <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#norm_cast>`__
     - ``norm_cast`` tries to clear out coercions between types (e.g. ``ℕ → ℤ`` or ``ℕ → ℚ``).
 
       ``norm_cast at hp`` tries to clear out coercions in the hypothesis ``hp``.
 
-  * - ``push_cast``
+  * - `push_cast <https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#push_cast>`__
     - ``push_cast`` does the opposite of ``norm_cast``: it pushes coercions towards the variables,
       e.g. it rewrites ``↑(a + b)`` as ``↑a + ↑b``.
 

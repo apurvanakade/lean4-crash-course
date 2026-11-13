@@ -1,0 +1,7 @@
+/* Tactic names in the first column of the glossary tables are links:
+   keep them on one line and in monospace, like the code literals around them. */
+table.docutils td:first-child > p > a.reference.external {
+    white-space: nowrap;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9em;
+}
